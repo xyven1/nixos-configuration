@@ -1,0 +1,3 @@
+[submodule "dotfiles/nvim"]
+	path = dotfiles/nvim
+	url = https://github.com/Xyven1/neovim-config
