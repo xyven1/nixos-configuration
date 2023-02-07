@@ -53,6 +53,12 @@
 						./hosts/wsl 
 					];
 				};
+				hyperv = nixpkgs.lib.nixosSystem {
+					specialArgs = { inherit inputs outputs; };
+					modules =  (builtins.attrValues nixosModules) ++ defaultModules ++ [ 
+						./hosts/hyperv 
+					];
+				};
 			};
 
 			homeConfigurations = {
