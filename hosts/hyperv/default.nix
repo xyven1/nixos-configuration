@@ -27,6 +27,7 @@ boot.loader.efi.canTouchEfiVariables = true;
 
   networking = {
     hostName = "hyperv";
+    hostId = "0c18df12";
   };
 
   services = {
