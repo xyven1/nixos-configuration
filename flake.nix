@@ -10,7 +10,7 @@
 		neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 		neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
 	};
-	output = {
+	outputs = 
 		{ self,
 		nixpkgs,
 		nixpkgs-unstable,
@@ -24,13 +24,16 @@
 			inherit (self) outputs;
 			forAllSystems = nixpkgs.lib.genAttrs flake-utils.lib.defaultSystems;
 			forAllPkgs = f: forAllSystems (sys: f nixpkgs.legacyPackages.${sys});
+			defaultModules = [
+				home-manager.nixosModules.home-manager
+			];
 		in
-		{
+		rec {
 			nixosModules = import ./modules/nixos;
 			homeManagerModules = import ./modules/home-manager;
 			templates = import ./templates;
 
-			overlays = import ./overlays { inherit inputs outputs; };
+			overlays = import ./overlay { inherit inputs outputs; };
 
 			devShells = forAllSystems (system: {
 				default = nixpkgs.legacyPackages.${system}.callPackage ./shell.nix { };
@@ -61,6 +64,5 @@
 					];
 				};
 			};
-		}
-	};
+		};
 }

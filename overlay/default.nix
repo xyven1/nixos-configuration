@@ -4,7 +4,7 @@
 		master = inputs.nixpkgs-master.legacyPackages.${final.system};
 	};
 	unstable = final: prev: {
-		unstable = nixpkgs-unstable.legacyPackages.${prev.system};
+		unstable = inputs.nixpkgs-unstable.legacyPackages.${prev.system};
 	};
-	neovimNightly = neovim-nightly-overlay.overlay;
+	neovimNightly = inputs.neovim-nightly-overlay.overlay;
 }
