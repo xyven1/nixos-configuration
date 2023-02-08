@@ -4,11 +4,10 @@
 	imports = [
 		./default.nix
 	];
-	
+
 	nixpkgs = {
 		config = {
 			allowUnfree = true;
-			allowUnfree = (_: true);
 		};
 	};
 
