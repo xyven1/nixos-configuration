@@ -23,27 +23,23 @@
 		let
 			inherit (self) outputs;
 			forAllSystems = nixpkgs.lib.genAttrs flake-utils.lib.defaultSystems;
-			forAllPkgs = f: forAllSystems (sys: f nixpkgs.legacyPackages.${sys});
 			defaultModules = [
 				home-manager.nixosModules.home-manager
 			];
 		in
 		rec {
+			overlays = import ./overlay { inherit inputs outputs; };
 			nixosModules = import ./modules/nixos;
 			homeManagerModules = import ./modules/home-manager;
-			templates = import ./templates;
 
-			overlays = import ./overlay { inherit inputs outputs; };
+			packages = forAllSystems (system:
+				let pkgs = nixpkgs.legacyPackages.${system};
+				in import ./pkgs { inherit pkgs; }
+			);
 
-			devShells = forAllSystems (system: {
-				default = nixpkgs.legacyPackages.${system}.callPackage ./shell.nix { };
-			});
-
-			legacyPackages = forAllSystems (system:
-				import inputs.nixpkgs {
-					inherit system;
-					overlays = builtins.attrValues overlays;
-				}
+			devShells = forAllSystems (system:
+				let pkgs = nixpkgs.legacyPackages.${system};
+				in import ./shell.nix { inherit pkgs; }
 			);
 
 			nixosConfigurations = {
@@ -62,11 +58,11 @@
 			};
 
 			homeConfigurations = {
-				wsl = home-manager.lib.homeManagerConfiguration {
-					pkgs = legacyPackages.x86_64-linux;
+				"xyven@hyperv" = home-manager.lib.homeManagerConfiguration {
+					pkgs = nixpkgs.legacyPackages.x86_64-linux;
 					extraSpecialArgs = { inherit inputs outputs; };
 					modules = (builtins.attrValues homeManagerModules) ++ [
-						./home/wsl.nix 
+						./home/hyperv.nix 
 					];
 				};
 			};
