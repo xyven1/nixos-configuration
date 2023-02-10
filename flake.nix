@@ -9,6 +9,8 @@
 		home-manager.inputs.nixpkgs.follows = "nixpkgs";
 		neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 		neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
+		disko.url = "github:nix-community/disko";
+		disko.inputs.nixpkgs.follows = "nixpkgs";
 	};
 	outputs = 
 		{ self,
@@ -18,6 +20,7 @@
 		flake-utils,
 		home-manager,
 		neovim-nightly-overlay,
+		disko,
 		... 
 		}@inputs:
 		let
@@ -25,6 +28,7 @@
 			forAllSystems = nixpkgs.lib.genAttrs flake-utils.lib.defaultSystems;
 			defaultModules = [
 				home-manager.nixosModules.home-manager
+				disko.nixosModules.disko	
 			];
 		in
 		rec {
@@ -45,14 +49,20 @@
 			nixosConfigurations = {
 				wsl = nixpkgs.lib.nixosSystem {
 					specialArgs = { inherit inputs outputs; };
-					modules =  (builtins.attrValues nixosModules) ++ defaultModules ++ [ 
+					modules = (builtins.attrValues nixosModules) ++ defaultModules ++ [ 
 						./hosts/wsl 
 					];
 				};
 				hyperv = nixpkgs.lib.nixosSystem {
 					specialArgs = { inherit inputs outputs; };
-					modules =  (builtins.attrValues nixosModules) ++ defaultModules ++ [ 
+					modules = (builtins.attrValues nixosModules) ++ defaultModules ++ [ 
 						./hosts/hyperv 
+					];
+				};
+				laptop = nixpkgs.lib.nixosSystem {
+					specialArgs = { inherit inputs outputs; };
+					modules = (builtins.attrValues nixosModules) ++ defaultModules ++ [
+						./hosts/laptop
 					];
 				};
 			};
