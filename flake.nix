@@ -75,6 +75,13 @@
 						./home/hyperv.nix 
 					];
 				};
+				"xyven@laptop" = home-manager.lib.homeManagerConfiguration {
+					pkgs = nixpkgs.legacyPackages.x86_64-linux;
+					extraSpecialArgs = { inherit inputs outputs; };
+					modules = (builtins.attrValues homeManagerModules) ++ [
+						./home/laptop.nix 
+					];
+				};
 			};
 		};
 }
