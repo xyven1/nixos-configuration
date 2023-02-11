@@ -5,31 +5,32 @@
 		nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 		nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 		flake-utils.url = "github:numtide/flake-utils";
+    rust-overlay.url = "github:oxalica/rust-overlay";
+
 		home-manager.url = "github:nix-community/home-manager/release-22.11";
 		home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
 		neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 		neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
 		disko.url = "github:nix-community/disko";
 		disko.inputs.nixpkgs.follows = "nixpkgs";
 	};
-	outputs = 
+	outputs =
 		{ self,
 		nixpkgs,
 		nixpkgs-unstable,
 		nixos-hardware,
+    rust-overlay,
 		flake-utils,
 		home-manager,
 		neovim-nightly-overlay,
 		disko,
-		... 
+		...
 		}@inputs:
 		let
 			inherit (self) outputs;
 			forAllSystems = nixpkgs.lib.genAttrs flake-utils.lib.defaultSystems;
-			defaultModules = [
-				home-manager.nixosModules.home-manager
-				disko.nixosModules.disko	
-			];
 		in
 		rec {
 			overlays = import ./overlay { inherit inputs outputs; };
@@ -49,21 +50,15 @@
 			nixosConfigurations = {
 				wsl = nixpkgs.lib.nixosSystem {
 					specialArgs = { inherit inputs outputs; };
-					modules = (builtins.attrValues nixosModules) ++ defaultModules ++ [ 
-						./hosts/wsl 
-					];
+					modules = [ ./hosts/wsl ];
 				};
 				hyperv = nixpkgs.lib.nixosSystem {
 					specialArgs = { inherit inputs outputs; };
-					modules = (builtins.attrValues nixosModules) ++ defaultModules ++ [ 
-						./hosts/hyperv 
-					];
+					modules = [ ./hosts/hyperv ];
 				};
 				laptop = nixpkgs.lib.nixosSystem {
 					specialArgs = { inherit inputs outputs; };
-					modules = (builtins.attrValues nixosModules) ++ defaultModules ++ [
-						./hosts/laptop
-					];
+					modules = [ ./hosts/laptop ];
 				};
 			};
 
@@ -71,15 +66,15 @@
 				"xyven@hyperv" = home-manager.lib.homeManagerConfiguration {
 					pkgs = nixpkgs.legacyPackages.x86_64-linux;
 					extraSpecialArgs = { inherit inputs outputs; };
-					modules = (builtins.attrValues homeManagerModules) ++ [
-						./home/hyperv.nix 
+					modules = [
+						./home/hyperv.nix
 					];
 				};
 				"xyven@laptop" = home-manager.lib.homeManagerConfiguration {
 					pkgs = nixpkgs.legacyPackages.x86_64-linux;
 					extraSpecialArgs = { inherit inputs outputs; };
-					modules = (builtins.attrValues homeManagerModules) ++ [
-						./home/laptop.nix 
+					modules = [
+						./home/xyven/laptop.nix
 					];
 				};
 			};

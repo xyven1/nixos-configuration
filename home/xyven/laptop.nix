@@ -3,6 +3,7 @@
 {
 	imports = [
 		./default.nix
+    ./config/font.nix
 	];
 
 	nixpkgs = {

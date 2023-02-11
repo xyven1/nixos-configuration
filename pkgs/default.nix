@@ -1,3 +1,3 @@
-{ pkgs ? (import ../nixpkgs.nix) { } }: {
+{ pkgs }: {
   # example = pkgs.callPackage ./example { };
 }

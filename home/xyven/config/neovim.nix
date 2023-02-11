@@ -10,9 +10,13 @@
     vimAlias = true;
     viAlias = true;
 
-    extraPackages = with pkgs; [
-      ripgrep
-      fzf
+    extraPackages = [
+      pkgs.ripgrep
+      pkgs.fzf
+      pkgs.gcc
+      pkgs.cargo
+      pkgs.rustc
+      pkgs.rust-bin.selectLatestNightlyWith (toolchain: toolchain.default)
     ];
   };
 
