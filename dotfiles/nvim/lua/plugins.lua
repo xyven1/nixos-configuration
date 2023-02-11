@@ -107,7 +107,7 @@ require("lazy").setup({
   { 'arkav/lualine-lsp-progress' },
   { 'rcarriga/nvim-dap-ui',
     keys = {
-      { "<F4>", require("dapui").toggle },
+      { "<F4>", function() require("dapui").toggle() end },
     },
     config = true },
   { 'akinsho/bufferline.nvim',
@@ -207,9 +207,11 @@ require("lazy").setup({
   { 'kazhala/close-buffers.nvim', config = true },
   { 'numToStr/Comment.nvim', config = true },
   { 'andweeb/presence.nvim' },
-  { 'Shatur/neovim-session-manager', opts = {
-    autoload_mode = require('session_manager.config').AutoloadMode.Disabled,
-  } },
+  { 'Shatur/neovim-session-manager', config = function()
+    require'session_manager'.setup {
+      autoload_mode = require('session_manager.config').AutoloadMode.Disabled,
+    }
+  end },
   { 'smjonas/inc-rename.nvim', config = true },
   { 'windwp/nvim-autopairs', opts = {
     disable_filetype = { "telescopeprompt" },

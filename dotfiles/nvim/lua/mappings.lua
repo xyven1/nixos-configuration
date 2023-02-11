@@ -168,8 +168,8 @@ map("n", "go", "<cmd>Lspsaga outline<CR>")
 map("n", "K", "<cmd>Lspsaga hover_doc<CR>")
 
 -- Call hierarchy
-map("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
-map("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
+map("n", "<Leader>gic", "<cmd>Lspsaga incoming_calls<CR>")
+map("n", "<Leader>goc", "<cmd>Lspsaga outgoing_calls<CR>")
 
 -- Floating terminal
 map({ "n", "t" }, "<A-d>", "<cmd>Lspsaga term_toggle<CR>")

@@ -1,1 +1,3 @@
-{}
+{
+  systemConfig = import ./systemConfig;
+}
