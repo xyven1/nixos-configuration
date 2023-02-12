@@ -24,6 +24,11 @@
     networkmanager.enable = true;
   };
 
+  systemConfig.home-manager = {
+    enable = true;
+    hostName = "laptop";
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 

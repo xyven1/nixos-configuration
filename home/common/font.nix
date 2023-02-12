@@ -1,13 +1,13 @@
 { pkgs, ... }: {
-fontProfiles = {
-  enable = true;
-  monospace = {
-    family = "JetBrains Nerd Font";
-    package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+  fontProfiles = {
+    enable = true;
+    monospace = {
+      family = "JetBrains Nerd Font";
+      package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
+    };
+    regular = {
+      family = "Fira Sans";
+      package = pkgs.fira;
+    };
   };
-  regular = {
-    family = "Fira Sans";
-    package = pkgs.fira;
-  };
-};
 }

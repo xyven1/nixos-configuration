@@ -10,12 +10,13 @@
     vimAlias = true;
     viAlias = true;
 
-    extraPackages = [
-      pkgs.ripgrep
-      pkgs.fzf
-      pkgs.gcc
-      pkgs.rust-bin.beta.latest.default
-      pkgs.gitui
+    extraPackages = with pkgs; [
+      ripgrep
+      fzf
+      gcc
+      nodejs
+      rust-bin.beta.latest.default
+      gitui
     ];
   };
 

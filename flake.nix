@@ -29,7 +29,7 @@
 			inherit (self) outputs;
 			forAllSystems = nixpkgs.lib.genAttrs flake-utils.lib.defaultSystems;
 		in
-		rec {
+		{
 			overlays = import ./overlay { inherit inputs outputs; };
 			nixosModules = import ./modules/nixos;
 			homeManagerModules = import ./modules/home-manager;
