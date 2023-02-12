@@ -11,7 +11,7 @@
 		neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 		neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
     neovim-config = {
-      flake =false;
+      flake = false;
       url = "github:Xyven1/neovim-config";
     };
 
