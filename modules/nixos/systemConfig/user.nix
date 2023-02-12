@@ -25,9 +25,6 @@ in
       # extraSpecialArgs = { inherit inputs; };
       # sharedModules = builtins.attrValues outputs.homeManagerModules;
 
-      # for each user in cgf.users, import the home.nix file using the following example
-      # users."${user}" = import ../../../home/${user}/${cfg.home-manager.home}.nix;
-      # if the path does not exists for cfg.home-manager.home, use the default value generic
       users = builtins.listToAttrs (builtins.map (user:
       let
         home = if builtins.pathExists ../../../home/${user}/${cfg.home-manager.hostName}.nix then cfg.home-manager.hostName else "generic";
