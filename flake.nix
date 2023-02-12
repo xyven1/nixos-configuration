@@ -2,8 +2,6 @@
 	description = "Xyven's NixOS config";
 	inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
-		nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-		nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 		flake-utils.url = "github:numtide/flake-utils";
     rust-overlay.url = "github:oxalica/rust-overlay";
 
@@ -12,6 +10,10 @@
 
 		neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 		neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    neovim-config = {
+      flake =false;
+      url = "github:Xyven1/neovim-config";
+    };
 
 		disko.url = "github:nix-community/disko";
 		disko.inputs.nixpkgs.follows = "nixpkgs";
@@ -19,13 +21,8 @@
 	outputs =
 		{ self,
 		nixpkgs,
-		nixpkgs-unstable,
-		nixos-hardware,
-    rust-overlay,
 		flake-utils,
 		home-manager,
-		neovim-nightly-overlay,
-		disko,
 		...
 		}@inputs:
 		let

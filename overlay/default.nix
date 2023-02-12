@@ -4,4 +4,5 @@
 
 	neovimNightly = inputs.neovim-nightly-overlay.overlay;
 
-} ++ [inputs.rust-overlay.overlay.default];
+  rust-overlay = inputs.rust-overlay.overlays.default;
+}

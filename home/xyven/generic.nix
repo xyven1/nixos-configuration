@@ -2,7 +2,8 @@
 
 {
   imports = [
-    ./config/neovim.nix
+    ../common/neovim.nix
+    ../common/font.nix
   ] ++ (builtins.attrValues outputs.homeManagerModules);
 
   nixpkgs = {

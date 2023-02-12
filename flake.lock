@@ -103,6 +103,22 @@
         "type": "github"
       }
     },
+    "neovim-config": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1675839893,
+        "narHash": "sha256-mak0oCC76/4yz7zNKJToae8hWzc58ReLQH0YP9Yfojw=",
+        "owner": "Xyven1",
+        "repo": "neovim-config",
+        "rev": "1b3ef93a65724d48d8c20cd8cbc1cb9e55a542c5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Xyven1",
+        "repo": "neovim-config",
+        "type": "github"
+      }
+    },
     "neovim-flake": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -149,22 +165,6 @@
         "type": "github"
       }
     },
-    "nixos-hardware": {
-      "locked": {
-        "lastModified": 1675785029,
-        "narHash": "sha256-EoD3Wgqc0XWkBCwUrAxCIZett64jN/SEPPpXX2mCmrE=",
-        "owner": "NixOS",
-        "repo": "nixos-hardware",
-        "rev": "16b6928ec622fd2356a80c0a9359eb350a94227d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "master",
-        "repo": "nixos-hardware",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1675757258,
@@ -177,22 +177,6 @@
       "original": {
         "owner": "NixOS",
         "ref": "nixos-22.11",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-unstable": {
-      "locked": {
-        "lastModified": 1675763311,
-        "narHash": "sha256-bz0Q2H3mxsF1CUfk26Sl9Uzi8/HFjGFD/moZHz1HebU=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "fab09085df1b60d6a0870c8a89ce26d5a4a708c2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -218,10 +202,9 @@
         "disko": "disko",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "neovim-config": "neovim-config",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
-        "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable",
         "rust-overlay": "rust-overlay"
       }
     },

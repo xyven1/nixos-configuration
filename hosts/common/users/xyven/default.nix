@@ -9,7 +9,7 @@ in
       "wheel"
       "networkmanager"
     ];
-    packages = with pkgs; [
-    ];
+    packages = with pkgs; [ home-manager ];
   };
+  home-manager.users.xyven = import home/${config.networking.hostName}.nix;
 }

@@ -2,7 +2,7 @@
 fontProfiles = {
   enable = true;
   monospace = {
-    family = "FiraCode Nerd Font";
+    family = "JetBrains Nerd Font";
     package = pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; };
   };
   regular = {

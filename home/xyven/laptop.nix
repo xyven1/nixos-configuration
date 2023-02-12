@@ -2,8 +2,7 @@
 
 {
 	imports = [
-		./default.nix
-    ./config/font.nix
+		./generic.nix
 	];
 
 	nixpkgs = {
@@ -15,8 +14,10 @@
 	home = {
 		username = "xyven";
 		homeDirectory = "/home/xyven";
+    packages = with pkgs; [
+      firefox
+    ];
 	};
-
 
 	programs.home-manager.enable = true;
 	programs.git.enable = true;

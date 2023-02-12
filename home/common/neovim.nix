@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
   home.sessionVariables = {
@@ -14,16 +14,15 @@
       pkgs.ripgrep
       pkgs.fzf
       pkgs.gcc
-      pkgs.cargo
-      pkgs.rustc
-      pkgs.rust-bin.selectLatestNightlyWith (toolchain: toolchain.default)
+      pkgs.rust-bin.beta.latest.default
+      pkgs.gitui
     ];
   };
 
   home.file = {
     ".config/nvim" = {
       recursive = true;
-      source = ../../dotfiles/nvim;
+      source = inputs.neovim-config;
     };
   };
 }
