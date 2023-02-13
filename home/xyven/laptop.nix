@@ -12,6 +12,7 @@
       fzf
       gitui
       ripgrep
+      discord
     ];
 	};
   programs = {

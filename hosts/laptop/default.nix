@@ -8,6 +8,8 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      # ./disko.nix
+      ./biometrics.nix
 
       ../common/global
       ../common/users/xyven
