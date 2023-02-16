@@ -17,12 +17,15 @@
     ];
 
   # Setup keyfile
-  boot.initrd.secrets = {
-    "/crypto_keyfile.bin" = null;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_zen;
+    initrd.secrets = {
+      "/crypto_keyfile.bin" = null;
+    };
   };
 
   networking = {
-    hostName = "nixos"; # Define your hostname.
+    hostName = "festus"; # Define your hostname.
     networkmanager.enable = true;
   };
 
@@ -44,6 +47,13 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
+  # powerManagement.powertop.enable = true;
+  services.tlp.enable = true;
+  services.power-profiles-daemon.enable = false;
+
+  # enable propprietary nvidia drivers
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   system.stateVersion = "22.11"; # Did you read the comment?
 }

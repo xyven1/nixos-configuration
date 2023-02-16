@@ -5,14 +5,24 @@
 		./generic.nix
 	];
 
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = (_: true);
+    };
+  };
+
 	home = {
     packages = with pkgs; [
-      firefox
       wezterm
       fzf
       gitui
       ripgrep
       discord
+      tlpui
+      spotify-tui
+      spotify
+      google-chrome
     ];
 	};
   programs = {
