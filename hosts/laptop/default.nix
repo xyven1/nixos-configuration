@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       # ./disko.nix
       ./biometrics.nix
+      ./nvidia.nix
 
       ../common/global
       ../common/users/xyven
@@ -51,9 +52,6 @@
   # powerManagement.powertop.enable = true;
   services.tlp.enable = true;
   services.power-profiles-daemon.enable = false;
-
-  # enable propprietary nvidia drivers
-  # services.xserver.videoDrivers = [ "nvidia" ];
 
   system.stateVersion = "22.11"; # Did you read the comment?
 }
