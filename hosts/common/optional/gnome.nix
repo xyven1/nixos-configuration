@@ -6,8 +6,13 @@
     xkbVariant = "";
     xkbOptions = "caps:swapescape";
     displayManager.gdm.enable = true;
+    displayManager.gdm.wayland = false;
     desktopManager.gnome.enable = true;
   };
+  environment.systemPackages = with pkgs; [
+    gnome.gnome-tweaks
+  ];
+  programs.dconf.enable = true;
   environment.gnome.excludePackages = with pkgs.gnome; [
     cheese      # photo booth
     epiphany    # web browser

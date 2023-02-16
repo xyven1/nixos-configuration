@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
 	imports = [
@@ -20,11 +20,45 @@
       ripgrep
       discord
       tlpui
+      wpi-wireless-install
       spotify-tui
       spotify
+      spotify-tray
       google-chrome
+      gnomeExtensions.spotify-tray
     ];
 	};
+
+  home.file = {
+    ".local/background/" = {
+      recursive = true;
+      source = inputs.backgrounds;
+    };
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/applications/terminal" = {
+      exec = "wezterm";
+    };
+    "org/gnome/desktop/wm/preferences" = {
+      button-layout = "appmenu:minimize,maximize,close";
+    };
+    "org/gnome/shell" = {
+      favorite-apps = [
+        "google-chrome.desktop"
+        "org.wezfurlong.wezterm.desktop"
+      ];
+      disable-user-extensions = false;
+      enabled-extensions = [
+        "sp-tray@sp-tray.esenliyim.github.com"
+      ];
+    };
+    "org/gnome/desktop/background" = {
+      picture-uri = "file:///home/xyven/.local/background/forest.jpg";
+      picture-uri-dark = "file:///home/xyven/.local/background/forest.jpg";
+    };
+  };
+
   programs = {
     bash = {
       enable = true;

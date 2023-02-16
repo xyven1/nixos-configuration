@@ -53,7 +53,7 @@
   services.power-profiles-daemon.enable = false;
 
   # enable propprietary nvidia drivers
-  services.xserver.videoDrivers = [ "nvidia" ];
+  # services.xserver.videoDrivers = [ "nvidia" ];
 
   system.stateVersion = "22.11"; # Did you read the comment?
 }

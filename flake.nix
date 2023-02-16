@@ -15,6 +15,11 @@
       url = "github:Xyven1/neovim-config";
     };
 
+    backgrounds = {
+      flake = false;
+      url = "github:Xyven1/nixos-backgrounds";
+    };
+
 		disko.url = "github:nix-community/disko";
 		disko.inputs.nixpkgs.follows = "nixpkgs";
 	};

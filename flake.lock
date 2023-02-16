@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "backgrounds": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1676532891,
+        "narHash": "sha256-Qtev8WxPyWVyhKvGLgabJ3IJyLNFX7D1oH0dc3fCC6c=",
+        "owner": "Xyven1",
+        "repo": "nixos-backgrounds",
+        "rev": "54e1826e745349d8909009e9cdd339898c8a5e21",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Xyven1",
+        "repo": "nixos-backgrounds",
+        "type": "github"
+      }
+    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -199,6 +215,7 @@
     },
     "root": {
       "inputs": {
+        "backgrounds": "backgrounds",
         "disko": "disko",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
