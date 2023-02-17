@@ -37,7 +37,7 @@
   };
 
   dconf.settings = {
-    "org/gnome/desktop/applications/terminal" = {
+    "org/gnome/desktop/default-applications/terminal" = {
       exec = "wezterm";
     };
     "org/gnome/desktop/wm/preferences" = {

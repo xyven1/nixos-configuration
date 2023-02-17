@@ -4,6 +4,7 @@
   imports = [
     ../common/neovim.nix
     ../common/font.nix
+    ../common/wezterm
   ] ++ (builtins.attrValues outputs.homeManagerModules);
 
   nixpkgs = {
