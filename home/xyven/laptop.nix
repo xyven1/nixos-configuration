@@ -20,12 +20,13 @@
       ripgrep
       discord
       tlpui
-      wpi-wireless-install
-      spotify-tui
+      wpi-wireless-install # for installing wifi certs
       spotify
-      spotify-tray
+      spotify-tray # shows current track and controls in notification area
+      gnomeExtensions.spotify-tray # shows current track in tray
+      spotify-tui # useful just for quick access to spotify while in the terminal
+      ncspot # use ncspot for fully terminal based spotify experience
       google-chrome
-      gnomeExtensions.spotify-tray
     ];
 	};
 
@@ -38,7 +39,7 @@
 
   dconf.settings = {
     "org/gnome/desktop/default-applications/terminal" = {
-      exec = "wezterm";
+      exec = "/etc/profiles/per-user/xyven/bin/wezterm";
     };
     "org/gnome/desktop/wm/preferences" = {
       button-layout = "appmenu:minimize,maximize,close";

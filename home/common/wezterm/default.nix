@@ -1,7 +1,7 @@
 { inputs, config, pkgs, ... }:
 {
   home.sessionVariables = {
-    TERMINAL = "wezterm";
+    TERMINAL = "${config.home.profileDirectory}/bin/wezterm";
   };
 
   programs.wezterm = {
@@ -9,7 +9,7 @@
   };
 
   home.file = {
-    ".config/wezterm/" = {
+    ".config/wezterm" = {
       recursive = true;
       source = ./config;
     };
