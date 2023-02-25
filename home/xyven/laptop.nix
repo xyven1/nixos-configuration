@@ -10,6 +10,14 @@
       allowUnfree = true;
       allowUnfreePredicate = (_: true);
     };
+    overlays = [
+      (self: super: {
+        spotify-player = super.spotify-player.override {
+          withImage = true;
+          withLyrics = true;
+        };
+      })
+    ];
   };
 
 	home = {
@@ -24,7 +32,7 @@
       spotify
       spotify-tray # shows current track and controls in notification area
       gnomeExtensions.spotify-tray # shows current track in tray
-      spotify-tui # useful just for quick access to spotify while in the terminal
+      spotify-player # useful just for quick access to spotify while in the terminal
       ncspot # use ncspot for fully terminal based spotify experience
       google-chrome
     ];

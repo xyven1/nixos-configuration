@@ -1,5 +1,6 @@
-{ pkgs }: {
+{ pkgs }: with pkgs; {
   # example = pkgs.callPackage ./example { };
-  tlpui = pkgs.python3Packages.callPackage ./tlpui.nix { };
-  wpi-wireless-install = pkgs.callPackage ./wpi-wireless-install { };
+  tlpui = python3Packages.callPackage ./tlpui.nix { };
+  spotify-player = callPackage ./spotify-player.nix { };
+  wpi-wireless-install = callPackage ./wpi-wireless-install { };
 }
