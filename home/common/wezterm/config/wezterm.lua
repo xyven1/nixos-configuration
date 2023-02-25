@@ -21,7 +21,6 @@ local config = {
     top = 0,
     bottom = 0,
   },
-  enable_wayland = true,
 };
 
 return merge_tables(
