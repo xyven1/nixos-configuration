@@ -50,7 +50,17 @@
   };
 
   # powerManagement.powertop.enable = true;
-  services.tlp.enable = true;
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      CPU_HWP_ON_AC = "performance";
+      CPU_BOOST_ON_AC = 1;
+      CPU_HWP_DYN_BOOST_ON_AC = 1;
+      ENERGY_PERF_POLICY_ON_AC = "performance";
+    };
+  };
   services.power-profiles-daemon.enable = false;
 
   system.stateVersion = "22.11"; # Did you read the comment?
