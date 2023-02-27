@@ -33,21 +33,16 @@
 		let
 			inherit (self) outputs;
 			forAllSystems = nixpkgs.lib.genAttrs flake-utils.lib.defaultSystems;
+      forAllPkgs = f: forAllSystems (system: f nixpkgs.legacyPackages.${system});
 		in
 		{
 			overlays = import ./overlay { inherit inputs outputs; };
 			nixosModules = import ./modules/nixos;
 			homeManagerModules = import ./modules/home-manager;
 
-			packages = forAllSystems (system:
-				let pkgs = nixpkgs.legacyPackages.${system};
-				in import ./pkgs { inherit pkgs; }
-			);
-
-			devShells = forAllSystems (system:
-				let pkgs = nixpkgs.legacyPackages.${system};
-				in import ./shell.nix { inherit pkgs; }
-			);
+			packages = forAllPkgs (pkgs: import ./pkgs { inherit pkgs; });
+			devShells = forAllPkgs (pkgs: import ./shell.nix { inherit pkgs; });
+      formatter = forAllPkgs (pkgs: pkgs.nixpkgs-fmt);
 
 			nixosConfigurations = {
 				wsl = nixpkgs.lib.nixosSystem {
