@@ -9,7 +9,7 @@
     desktopManager.gnome.enable = true;
   };
   environment.systemPackages = with pkgs; [
-    gnome.gnome-tweaks
+    gnome.gnome-session
   ];
   programs.dconf.enable = true;
   environment.gnome.excludePackages = with pkgs.gnome; [

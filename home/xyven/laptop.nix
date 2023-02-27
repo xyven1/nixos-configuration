@@ -6,7 +6,7 @@
   ];
 
   nixpkgs = {
-    config = {
+      config = {
       allowUnfree = true;
       allowUnfreePredicate = (_: true);
     };
@@ -75,10 +75,11 @@
     bash = {
       enable = true;
       shellAliases = {
-        rebuild = "sudo nixos-rebuild switch --flake .#laptop";
-        "rebuild-home" = "home-manager switch --flake .#xyven@laptop";
-        "nvim-update" = "nix flake lock --update-input neovim-nightly-overlay --update-input neovim-config && rebuild-home";
-        "nvim-update-config" = "nix flake lock --update-input neovim-config && rebuild-home";
+        "cd-conf" = "cd /home/xyven/code/nixos-configuration";
+        rebuild = "pushd . && cd-conf && sudo nixos-rebuild switch --flake .#laptop && popd";
+        "rebuild-home" = "pushd . && cd-conf && home-manager switch --flake .#xyven@laptop && popd";
+        "nvim-update" = "pushd . && cd-conf && nix flake lock --update-input neovim-nightly-overlay --update-input neovim-config && rebuild-home && popd";
+        "nvim-update-config" = "pushd . && cd-conf && nix flake lock --update-input neovim-config && rebuild-home && popd";
       };
     };
     wezterm = {

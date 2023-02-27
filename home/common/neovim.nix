@@ -17,6 +17,7 @@
       nodejs
       rust-bin.beta.latest.default
       gitui
+      nixpkgs-fmt
     ];
   };
 
