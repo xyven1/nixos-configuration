@@ -3,6 +3,7 @@
     inputs.home-manager.nixosModules.home-manager
     inputs.disko.nixosModules.disko
     ./locale.nix
+    ./sops.nix
   ] ++ (builtins.attrValues outputs.nixosModules);
 
   home-manager = {

@@ -1,9 +1,9 @@
 { pkgs, inputs, ... }:
 
 {
-	imports = [
-		./generic.nix
-	];
+  imports = [
+    ./generic.nix
+  ];
 
   nixpkgs = {
     config = {
@@ -20,7 +20,7 @@
     ];
   };
 
-	home = {
+  home = {
     packages = with pkgs; [
       wezterm
       fzf

@@ -7,7 +7,7 @@
 , dbus
 , alsa-lib
 
-# customizations
+  # customizations
 , withStreaming ? true
 , withAudioBackend ? "rodio"
 , withMediaControl ? true
@@ -45,11 +45,11 @@ rustPlatform.buildRustPackage rec {
   buildInputs = [ ]
     ++ lib.optionals stdenv.isLinux [ openssl dbus alsa-lib ];
   meta = with lib;
-  {
-    description = "A fast, easy to use, and configurable terminal music player";
-    homepage = "https://github.com/aome510/spotify-player";
-    license = licenses.mit;
-    maintainers = with maintainers; [ dit7ya Xyven1 ];
-    mainProgram = "spotify_player";
-  };
+    {
+      description = "A fast, easy to use, and configurable terminal music player";
+      homepage = "https://github.com/aome510/spotify-player";
+      license = licenses.mit;
+      maintainers = with maintainers; [ dit7ya Xyven1 ];
+      mainProgram = "spotify_player";
+    };
 }

@@ -14,55 +14,63 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   fileSystems."/" =
-    { device = "/dev/sdd";
+    {
+      device = "/dev/sdd";
       fsType = "ext4";
     };
 
   fileSystems."/usr/lib/wsl/drivers" =
-    { device = "drivers";
+    {
+      device = "drivers";
       fsType = "9p";
     };
 
   fileSystems."/usr/lib/wsl/lib" =
-    { device = "none";
+    {
+      device = "none";
       fsType = "overlay";
     };
 
   fileSystems."/mnt/wsl" =
-    { device = "none";
+    {
+      device = "none";
       fsType = "tmpfs";
     };
 
   fileSystems."/mnt/wslg" =
-    { device = "none";
+    {
+      device = "none";
       fsType = "tmpfs";
     };
 
   fileSystems."/mnt/wslg/distro" =
-    { device = "";
+    {
+      device = "";
       fsType = "none";
       options = [ "bind" ];
     };
 
   fileSystems."/mnt/wslg/doc" =
-    { device = "none";
+    {
+      device = "none";
       fsType = "overlay";
     };
 
   fileSystems."/tmp/.X11-unix" =
-    { device = "/mnt/wslg/.X11-unix";
+    {
+      device = "/mnt/wslg/.X11-unix";
       fsType = "none";
       options = [ "bind" ];
     };
 
   fileSystems."/mnt/c" =
-    { device = "drvfs";
+    {
+      device = "drvfs";
       fsType = "9p";
     };
 
   swapDevices =
-    [ { device = "/dev/sdb"; }
-    ];
+    [{ device = "/dev/sdb"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

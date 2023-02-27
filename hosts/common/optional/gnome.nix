@@ -1,4 +1,4 @@
-{ pkgs, ...}:
+{ pkgs, ... }:
 {
   services.xserver = {
     enable = true;
@@ -13,16 +13,24 @@
   ];
   programs.dconf.enable = true;
   environment.gnome.excludePackages = with pkgs.gnome; [
-    cheese      # photo booth
-    epiphany    # web browser
-    gedit       # text editor
+    cheese # photo booth
+    epiphany # web browser
+    gedit # text editor
     simple-scan # scanner
-    yelp        # help browser
-    evince      # document viewer
+    yelp # help browser
+    evince # document viewer
     file-roller # archive manager
-    geary       # email client
+    geary # email client
 
-    gnome-calculator gnome-calendar gnome-characters gnome-clocks gnome-contacts gnome-maps gnome-music gnome-weather gnome-terminal
+    gnome-calculator
+    gnome-calendar
+    gnome-characters
+    gnome-clocks
+    gnome-contacts
+    gnome-maps
+    gnome-music
+    gnome-weather
+    gnome-terminal
 
     pkgs.gnome-text-editor
     pkgs.gnome-photos

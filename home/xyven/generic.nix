@@ -1,4 +1,4 @@
-{ outputs, inputs, lib, pkgs, ...}:
+{ outputs, inputs, lib, pkgs, ... }:
 
 {
   imports = [
@@ -32,6 +32,6 @@
     homeDirectory = "/home/xyven";
   };
 
-	home.stateVersion = "22.11";
+  home.stateVersion = "22.11";
 }
 

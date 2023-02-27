@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot = {
@@ -23,14 +24,16 @@
   };
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/91c87923-a783-417f-9a8c-e17427821374";
+    {
+      device = "/dev/disk/by-uuid/91c87923-a783-417f-9a8c-e17427821374";
       fsType = "ext4";
     };
 
   boot.initrd.luks.devices."luks-292534a5-d4ac-4073-b51c-cc20415bc6f1".device = "/dev/disk/by-uuid/292534a5-d4ac-4073-b51c-cc20415bc6f1";
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/3A59-6482";
+    {
+      device = "/dev/disk/by-uuid/3A59-6482";
       fsType = "vfat";
     };
 

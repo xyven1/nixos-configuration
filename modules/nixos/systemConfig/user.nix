@@ -6,7 +6,7 @@ in
 {
   options.systemConfig = {
     users = lib.mkOption {
-      default = [];
+      default = [ ];
       type = lib.types.listOf lib.types.str;
     };
     home-manager = {
@@ -25,24 +25,28 @@ in
       # extraSpecialArgs = { inherit inputs; };
       # sharedModules = builtins.attrValues outputs.homeManagerModules;
 
-      users = builtins.listToAttrs (builtins.map (user:
-      let
-        home = if builtins.pathExists ../../../home/${user}/${cfg.home-manager.hostName}.nix then cfg.home-manager.hostName else "generic";
-      in
-      {
-        name = user;
-        value = import ../../../home/${user}/${home}.nix;
-      }) cfg.users);
+      users = builtins.listToAttrs (builtins.map
+        (user:
+          let
+            home = if builtins.pathExists ../../../home/${user}/${cfg.home-manager.hostName}.nix then cfg.home-manager.hostName else "generic";
+          in
+          {
+            name = user;
+            value = import ../../../home/${user}/${home}.nix;
+          })
+        cfg.users);
     };
     users = {
-      users = builtins.listToAttrs (builtins.map (user: {
-        name = user;
-        value = {
-          isNormalUser = true;
-          extraGroups = lib.mkDefault [ "wheel" "networkmanager" ];
-          packages = with pkgs; [ home-manager ];
-        };
-      }) cfg.users);
+      users = builtins.listToAttrs (builtins.map
+        (user: {
+          name = user;
+          value = {
+            isNormalUser = true;
+            extraGroups = lib.mkDefault [ "wheel" "networkmanager" ];
+            packages = with pkgs; [ home-manager ];
+          };
+        })
+        cfg.users);
     };
   };
 }
