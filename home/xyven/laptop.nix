@@ -36,7 +36,10 @@
       ncspot # use ncspot for fully terminal based spotify experience
       google-chrome
     ];
-	};
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+    };
+  };
 
   home.file = {
     ".local/background/" = {
