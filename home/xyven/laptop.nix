@@ -6,7 +6,7 @@
   ];
 
   nixpkgs = {
-      config = {
+    config = {
       allowUnfree = true;
       allowUnfreePredicate = (_: true);
     };
@@ -35,6 +35,8 @@
       spotify-player # useful just for quick access to spotify while in the terminal
       ncspot # use ncspot for fully terminal based spotify experience
       google-chrome
+
+      unstable.lua-language-server
     ];
     sessionVariables = {
       NIXOS_OZONE_WL = "1";

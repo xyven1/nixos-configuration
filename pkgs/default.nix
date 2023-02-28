@@ -1,4 +1,4 @@
-{ pkgs }: with pkgs; {
+{ pkgs ? import <nixpkgs> { } }: with pkgs; {
   # example = pkgs.callPackage ./example { };
   tlpui = python3Packages.callPackage ./tlpui.nix { };
   spotify-player = callPackage ./spotify-player.nix { };

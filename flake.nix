@@ -2,6 +2,7 @@
   description = "Xyven's NixOS config";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     rust-overlay.url = "github:oxalica/rust-overlay";
 
@@ -38,7 +39,7 @@
       forAllPkgs = f: forAllSystems (system: f nixpkgs.legacyPackages.${system});
     in
     {
-      overlays = import ./overlay { inherit inputs outputs; };
+      overlays = import ./overlay { inherit inputs; };
       nixosModules = import ./modules/nixos;
       homeManagerModules = import ./modules/home-manager;
 
