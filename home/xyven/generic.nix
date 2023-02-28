@@ -5,6 +5,8 @@
     ../common/neovim.nix
     ../common/font.nix
     ../common/wezterm
+    ../common/fish.nix
+    ../common/starship.nix
   ] ++ (builtins.attrValues outputs.homeManagerModules);
 
   nixpkgs = {

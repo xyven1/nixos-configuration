@@ -5,4 +5,7 @@ in
   systemConfig = {
     users = [ "xyven" ];
   };
+  users.users.xyven = {
+    shell = pkgs.fish;
+  };
 }
