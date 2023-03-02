@@ -32,10 +32,10 @@
       spotify
       spotify-tray # shows current track and controls in notification area
       gnomeExtensions.spotify-tray # shows current track in tray
-      spotify-player # useful just for quick access to spotify while in the terminal
-      ncspot # use ncspot for fully terminal based spotify experience
+      spotify-player # terminal spotify client
       google-chrome
-      wl-clipboard
+      wl-clipboard # for clip board support in neovim
+      libsForQt5.okular # pdf editor
 
       unstable.lua-language-server
     ];
