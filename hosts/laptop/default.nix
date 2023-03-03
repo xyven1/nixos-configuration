@@ -64,5 +64,10 @@
   };
   services.power-profiles-daemon.enable = false;
 
+  services.xserver.displayManager.autoLogin = {
+    enable = true;
+    user = "xyven";
+  };
+
   system.stateVersion = "22.11"; # Did you read the comment?
 }
