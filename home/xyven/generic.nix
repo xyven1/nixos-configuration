@@ -3,8 +3,6 @@
 {
   imports = [
     ../common/neovim.nix
-    ../common/font.nix
-    ../common/wezterm
     ../common/fish.nix
     ../common/starship.nix
   ] ++ (builtins.attrValues outputs.homeManagerModules);
@@ -13,6 +11,7 @@
     overlays = builtins.attrValues outputs.overlays;
     config = {
       allowUnfree = true;
+      allowUnfreePredicate = (_: true);
     };
   };
 

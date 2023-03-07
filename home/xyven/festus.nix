@@ -3,13 +3,11 @@
 {
   imports = [
     ./generic.nix
+    ../common/font.nix
+    ../common/wezterm
   ];
 
   nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = (_: true);
-    };
     overlays = [
       (self: super: {
         spotify-player = super.spotify-player.override {
