@@ -9,5 +9,5 @@ in
     packages = with pkgs; [ home-manager ];
   };
 
-  home-manager.users.xyven = import ../../../home/xyven/${config.networking.hostName}.nix;
+  home-manager.users.xyven = import ../../../../home/xyven/${config.networking.hostName}.nix;
 }
