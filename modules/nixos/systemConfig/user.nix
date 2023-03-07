@@ -42,7 +42,7 @@ in
           name = user;
           value = {
             isNormalUser = true;
-            extraGroups = lib.mkDefault [ "wheel" "networkmanager" ];
+            extraGroups = lib.mkDefault [ ];
             packages = with pkgs; [ home-manager ];
           };
         })

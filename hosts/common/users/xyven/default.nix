@@ -2,10 +2,12 @@
 let ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in
 {
-  systemConfig = {
-    users = [ "xyven" ];
-  };
   users.users.xyven = {
+    isNormalUser = true;
     shell = pkgs.fish;
+    extraGroups = [ "wheel" "networkmanager" ];
+    packages = with pkgs; [ home-manager ];
   };
+
+  home-manager.users.xyven = import ../../../home/xyven/${config.networking.hostName}.nix;
 }
