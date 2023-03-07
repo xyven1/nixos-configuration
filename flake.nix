@@ -56,9 +56,13 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ ./hosts/hyperv ];
         };
-        laptop = nixpkgs.lib.nixosSystem {
+        festus = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/laptop ];
+          modules = [ ./hosts/festus ];
+        };
+        ockham = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/ockham ];
         };
       };
 
@@ -70,11 +74,18 @@
             ./home/hyperv.nix
           ];
         };
-        "xyven@laptop" = home-manager.lib.homeManagerConfiguration {
+        "xyven@festus" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
-            ./home/xyven/laptop.nix
+            ./home/xyven/festus.nix
+          ];
+        };
+        "xyven@ockham" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [
+            ./home/xyven/ockham.nix
           ];
         };
       };
