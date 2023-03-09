@@ -2,12 +2,10 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./disko.nix { disks = [ "/dev/sda" ] };
     ../common/global
     ../common/users/xyven
   ];
-  disko.devices = pkgs.callPackage ./disko.nix {
-    disks = [ "/dev/sda" ];
-  };
   
   users.users.xyven = {
     openssh.authorizedKeys.keys = [
