@@ -25,7 +25,11 @@
 
   programs = {
     home-manager.enable = true;
-    git.enable = true;
+    git = {
+      enable = true;
+      userName = "xyven1";
+      userEmail = "git@xyven.dev";
+    };
   };
 
   home = {
