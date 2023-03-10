@@ -21,6 +21,8 @@
       url = "github:Xyven1/nixos-backgrounds";
     };
 
+    home-management.url = "github:Xyven1/home-management";
+
     sops-nix.url = "github:Mic92/sops-nix";
 
     disko.url = "github:nix-community/disko";
