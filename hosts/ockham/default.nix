@@ -23,10 +23,18 @@ in
   boot.loader.systemd-boot.graceful = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    passwordAuthentication = false;
+    kbdInteractiveAuthentication = false;
+  };
   services.homeManagement.enable = true;
 
+  # attempts to get ssh agent started and key added
   programs.ssh.startAgent = true;
+  environment.systemPackages = with pkgs; [
+    ssh-agents
+  ];
 
   networking = {
     hostName = "ockham";

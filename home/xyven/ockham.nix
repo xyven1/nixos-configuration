@@ -9,6 +9,7 @@
       fzf
       gitui
       ripgrep
+      fish-ssh-agent
 
       unstable.lua-language-server
     ];
