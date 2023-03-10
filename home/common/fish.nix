@@ -14,6 +14,7 @@
       nb = "nix build";
       nbn = "nix build nixpkgs#";
       nf = "nix flake";
+      nu = "nix flake lock --update-input";
 
       nr = "nixos-rebuild --flake .";
       nrs = "nixos-rebuild --flake . switch";
