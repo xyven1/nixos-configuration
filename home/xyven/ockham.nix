@@ -21,5 +21,8 @@
       "nvim-update" = "env -C /etc/nixos/ nix flake lock --update-input neovim-nightly-overlay --update-input neovim-config && rebuild-home";
       "nvim-update-config" = "env -C /etc/nixos/ nix flake lock --update-input neovim-config && rebuild-home";
     };
+    plugins = [
+      { name = "fish-ssh-agent"; src = pkgs.fish-ssh-agent; }
+    ];
   };
 }
