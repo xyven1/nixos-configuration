@@ -30,12 +30,6 @@ in
   };
   services.homeManagement.enable = true;
 
-  # attempts to get ssh agent started and key added
-  programs.ssh.startAgent = true;
-  environment.systemPackages = with pkgs; [
-    ssh-agents
-  ];
-
   networking = {
     hostName = "ockham";
     networkmanager.enable = true;
