@@ -44,13 +44,13 @@
 
   programs.fish = {
     shellAliases = {
-      "cd-conf" = "cd /home/xyven/code/nixos-configuration";
+      "cd-conf" = "cd /etc/nixos";
     };
     functions = {
-      rb = "env -C /home/xyven/code/nixos-configuration sudo nixos-rebuild switch --flake .#festus";
-      rbh = "env -C /home/xyven/code/nixos-configuration home-manager switch --flake .#xyven@festus";
-      "nvim-update" = "env -C /home/xyven/code/nixos-configuration nix flake lock --update-input neovim-nightly-overlay --update-input neovim-config && rebuild-home";
-      "nvim-update-config" = "env -C /home/xyven/code/nixos-configuration nix flake lock --update-input neovim-config && rebuild-home";
+      rb = "env -C /etc/nixos/ sudo nixos-rebuild switch --flake .#festus";
+      rbh = "env -C /etc/nixos home-manager switch --flake .#xyven@festus";
+      "nvim-update" = "env -C /etc/nixos nix flake lock --update-input neovim-nightly-overlay --update-input neovim-config && rebuild-home";
+      "nvim-update-config" = "env -C /etc/nixos nix flake lock --update-input neovim-config && rebuild-home";
     };
   };
 
