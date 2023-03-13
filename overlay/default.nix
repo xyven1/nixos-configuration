@@ -1,7 +1,13 @@
 { inputs }:
 {
   unstable = final: prev: {
-    unstable = inputs.nixpkgs-unstable.legacyPackages.${prev.system};
+    unstable = import inputs.nixpkgs-unstable {
+      system = prev.system;
+      config = {
+        allowUnfree = true;
+        allowUnfreePredicate = (_: true);
+      };
+    };
   };
 
   additions = final: _prev: import ../pkgs { pkgs = final; };
