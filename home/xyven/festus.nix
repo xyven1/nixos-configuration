@@ -34,7 +34,10 @@
       google-chrome
       wl-clipboard # for clip board support in neovim
       libsForQt5.okular # pdf editor
+      libreoffice-qt
 
+      jetbrains.idea-ultimate
+      unstable.jdk17
       unstable.lua-language-server
     ];
     sessionVariables = {
