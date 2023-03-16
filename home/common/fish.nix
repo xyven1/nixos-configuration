@@ -1,9 +1,12 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   programs.nix-index = {
     enable = true;
     enableFishIntegration = true;
   };
+  home.packages = [
+    pkgs.any-nix-shell
+  ];
   programs.fish = {
     enable = true;
     shellAbbrs = {
@@ -30,5 +33,11 @@
     functions = {
       fish_greeting = "";
     };
+    interactiveShellInit = ''
+      any-nix-shell fish --info-right | source
+    '';
+    shellInit = ''
+      ${if config.home.sessionVariables?EDITOR then "set -x EDITOR ${config.home.sessionVariables.EDITOR}" else ""}
+    '';
   };
 }
