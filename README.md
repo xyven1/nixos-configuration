@@ -1,6 +1,6 @@
 # My NixOS configuration
 
-## Installation is split into two categories
+## Installation
 1. Create installation media, and boot into nix installer.
 2. Cancel installer if using gui.
 3. Clone this repo using `git clone https://github.com/xyven1/nixos-configuration.git`
