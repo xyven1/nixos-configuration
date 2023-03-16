@@ -36,9 +36,15 @@
       libsForQt5.okular # pdf editor
       libreoffice-qt
 
+      #general dev
+      unstable.lua-language-server
+
+      #soft eng
       jetbrains.idea-ultimate
       unstable.jdk17
-      unstable.lua-language-server
+
+      #distributed
+      unstable.vagrant
     ];
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
