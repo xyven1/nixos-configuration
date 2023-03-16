@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ lib, pkgs, config, ... }:
 {
   programs.nix-index = {
     enable = true;
@@ -36,8 +36,8 @@
     interactiveShellInit = ''
       any-nix-shell fish --info-right | source
     '';
-    shellInit = ''
-      ${if config.home.sessionVariables?EDITOR then "set -x EDITOR ${config.home.sessionVariables.EDITOR}" else ""}
+    shellInit = let sv = config.home.sessionVariables; in ''
+      ${lib.optionalString sv?EDITOR "set -x EDITOR ${sv.EDITOR}"}
     '';
   };
 }
