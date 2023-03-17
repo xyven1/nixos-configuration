@@ -9,6 +9,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./accelerated-video.nix
       # ./disko.nix
       ./biometrics.nix
       ./nvidia.nix
