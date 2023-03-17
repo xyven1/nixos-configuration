@@ -22,11 +22,9 @@
         style = "bold green";
       };
       shlvl = {
-        format = "[$shlvl]($style) ";
-        # style = "bold cyan";
-        # threshold = 2;
-        # repeat = true;
-        # disabled = false;
+        style = "bold cyan";
+        symbol = " ";
+        disabled = false;
       };
       cmd_duration = {
         format = "took [$duration]($style) ";

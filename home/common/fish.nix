@@ -34,7 +34,7 @@
       fish_greeting = "";
     };
     interactiveShellInit = ''
-      any-nix-shell fish --info-right | source
+      any-nix-shell fish | source
     '';
     shellInit = let sv = config.home.sessionVariables; in ''
       ${lib.optionalString (sv?EDITOR) "set -x EDITOR ${sv.EDITOR}"}
