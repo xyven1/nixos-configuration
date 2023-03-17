@@ -37,7 +37,7 @@
       any-nix-shell fish --info-right | source
     '';
     shellInit = let sv = config.home.sessionVariables; in ''
-      ${lib.optionalString sv?EDITOR "set -x EDITOR ${sv.EDITOR}"}
+      ${lib.optionalString (sv?EDITOR) "set -x EDITOR ${sv.EDITOR}"}
     '';
   };
 }
