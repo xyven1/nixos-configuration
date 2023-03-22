@@ -5,6 +5,7 @@
     ../common/neovim.nix
     ../common/fish.nix
     ../common/starship.nix
+    ../common/direnv.nix
   ] ++ (builtins.attrValues outputs.homeManagerModules);
 
   nixpkgs = {
