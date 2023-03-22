@@ -27,6 +27,7 @@
       "/crypto_keyfile.bin" = null;
     };
   };
+  services.xserver.displayManager.gdm.wayland = false;
 
   networking = {
     hostName = "festus"; # Define your hostname.
