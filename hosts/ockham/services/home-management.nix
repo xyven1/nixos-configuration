@@ -29,6 +29,8 @@ in
     systemd.services.homeManagement = {
       description = "Home management daemon";
       wantedBy = [ "multi-user.target" ];
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
       path = [ pkgs.nodejs ];
 
       serviceConfig = {
