@@ -17,7 +17,10 @@ in
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE9OUNpoctlB+kygCCqcP/YRPDzGcykblU5TKUnfKhY+ (none)"
     ];
+    extraGroups = [ "libvirtd" ];
   };
+
+  virtualisation.libvirtd.enable = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.graceful = true;
