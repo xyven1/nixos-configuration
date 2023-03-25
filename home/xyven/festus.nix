@@ -24,21 +24,50 @@
       fzf
       gitui
       ripgrep
-      discord
+      scc
       tlpui
       wpi-wireless-install # for installing wifi certs
       spotify
       spotify-tray # shows current track and controls in notification area
       gnomeExtensions.spotify-tray # shows current track in tray
       spotify-player # terminal spotify client
-      google-chrome
-      wl-clipboard # for clip board support in neovim
+      # wl-clipboard # for clip board support in neovim
+      xclip
       libsForQt5.okular # pdf editor
+      libreoffice-qt
 
+      # unfree
+      slack
+      google-chrome
+      discord
+      unstable.parsec-bin
+
+      #general dev
       unstable.lua-language-server
+
+      #soft eng
+      unstable.jetbrains.idea-ultimate
+      unstable.jdk17
+      scenebuilder19
+
+      #distributed
+      unstable.vagrant
+      unstable.gnomeExtensions.gnome-vagrant-indicator # shows vagrant status in tray
     ];
     sessionVariables = {
-      NIXOS_OZONE_WL = "1";
+      # NIXOS_OZONE_WL = "1";
+    };
+  };
+
+  programs.fish = {
+    shellAliases = {
+      "cd-conf" = "cd /etc/nixos";
+    };
+    functions = {
+      rb = "env -C /etc/nixos/ sudo nixos-rebuild switch --flake .#festus";
+      rbh = "env -C /etc/nixos home-manager switch --flake .#xyven@festus";
+      "nvim-update" = "env -C /etc/nixos nix flake lock --update-input neovim-nightly-overlay --update-input neovim-config && rebuild-home";
+      "nvim-update-config" = "env -C /etc/nixos nix flake lock --update-input neovim-config && rebuild-home";
     };
   };
 
@@ -64,6 +93,7 @@
       disable-user-extensions = false;
       enabled-extensions = [
         "sp-tray@sp-tray.esenliyim.github.com"
+        "gnome-vagrant-indicator@gnome-shell-exstensions.fffilo.github.com"
       ];
     };
     "org/gnome/desktop/background" = {

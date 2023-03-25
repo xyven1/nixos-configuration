@@ -9,6 +9,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./accelerated-video.nix
       # ./disko.nix
       ./biometrics.nix
       ./nvidia.nix
@@ -26,11 +27,14 @@
       "/crypto_keyfile.bin" = null;
     };
   };
+  services.xserver.displayManager.gdm.wayland = false;
 
   networking = {
     hostName = "festus"; # Define your hostname.
     networkmanager.enable = true;
   };
+
+  virtualisation.libvirtd.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

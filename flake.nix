@@ -50,14 +50,6 @@
       formatter = forAllPkgs (pkgs: pkgs.nixpkgs-fmt);
 
       nixosConfigurations = {
-        wsl = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/wsl ];
-        };
-        hyperv = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/hyperv ];
-        };
         festus = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [ ./hosts/festus ];
@@ -69,13 +61,6 @@
       };
 
       homeConfigurations = {
-        "xyven@hyperv" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            ./home/hyperv.nix
-          ];
-        };
         "xyven@festus" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
