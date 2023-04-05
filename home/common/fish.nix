@@ -35,6 +35,8 @@
     };
     interactiveShellInit = ''
       any-nix-shell fish | source
+      fish_vi_key_bindings
+      fish_vi_cursor
     '';
     shellInit = let sv = config.home.sessionVariables; in ''
       ${lib.optionalString (sv?EDITOR) "set -x EDITOR ${sv.EDITOR}"}

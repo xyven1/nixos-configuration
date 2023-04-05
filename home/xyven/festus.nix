@@ -5,6 +5,7 @@
     ./generic.nix
     ../common/font.nix
     ../common/wezterm
+    # ../common/hyprland.nix
   ];
 
   nixpkgs = {
@@ -40,34 +41,39 @@
       slack
       google-chrome
       discord
+      zoom-us
       unstable.parsec-bin
 
       #general dev
       unstable.lua-language-server
 
       #soft eng
-      unstable.jetbrains.idea-ultimate
+      jetbrains.idea-ultimate
+      unstable.nodejs-19_x # for github copilot in intellij
       unstable.jdk17
       scenebuilder19
 
       #distributed
       unstable.vagrant
       unstable.gnomeExtensions.gnome-vagrant-indicator # shows vagrant status in tray
+
+      #id2050
+      zotero
     ];
     sessionVariables = {
-      # NIXOS_OZONE_WL = "1";
+      NIXOS_OZONE_WL = "1";
     };
   };
 
   programs.fish = {
-    shellAliases = {
-      "cd-conf" = "cd /etc/nixos";
-    };
     functions = {
       rb = "env -C /etc/nixos/ sudo nixos-rebuild switch --flake .#festus";
       rbh = "env -C /etc/nixos home-manager switch --flake .#xyven@festus";
       "nvim-update" = "env -C /etc/nixos nix flake lock --update-input neovim-nightly-overlay --update-input neovim-config && rebuild-home";
       "nvim-update-config" = "env -C /etc/nixos nix flake lock --update-input neovim-config && rebuild-home";
+    };
+    shellAbbrs = {
+      "conf" = "/etc/nixos";
     };
   };
 

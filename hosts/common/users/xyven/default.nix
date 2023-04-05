@@ -5,9 +5,19 @@ in
   users.users.xyven = {
     isNormalUser = true;
     shell = pkgs.fish;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ] ++ ifTheyExist [
+      "docker"
+      "libvirtd"
+    ];
     packages = with pkgs; [ home-manager ];
   };
-
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+      inherit pkgs;
+    };
+  };
   home-manager.users.xyven = import ../../../../home/xyven/${config.networking.hostName}.nix;
 }

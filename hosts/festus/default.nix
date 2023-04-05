@@ -13,11 +13,13 @@
       # ./disko.nix
       ./biometrics.nix
       ./nvidia.nix
+      # ./wiregaurd.nix
 
       ../common/global
       ../common/users/xyven
       ../common/optional/gnome.nix
       ../common/optional/fish.nix
+      # ../common/optional/hyprland.nix
     ];
 
   # Setup keyfile
@@ -27,7 +29,6 @@
       "/crypto_keyfile.bin" = null;
     };
   };
-  services.xserver.displayManager.gdm.wayland = false;
 
   networking = {
     hostName = "festus"; # Define your hostname.
@@ -35,6 +36,7 @@
   };
 
   virtualisation.libvirtd.enable = true;
+  virtualisation.docker.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -63,11 +65,6 @@
     };
   };
   services.power-profiles-daemon.enable = false;
-
-  services.xserver.displayManager.autoLogin = {
-    enable = true;
-    user = "xyven";
-  };
 
   system.stateVersion = "22.11"; # Did you read the comment?
 }
