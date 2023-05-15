@@ -12,7 +12,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs-unstable";
     neovim-config = {
       flake = false;
       url = "github:Xyven1/neovim-config";

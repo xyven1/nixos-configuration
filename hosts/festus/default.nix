@@ -12,7 +12,7 @@
       ./accelerated-video.nix
       # ./disko.nix
       ./biometrics.nix
-      ./nvidia.nix
+      # ./nvidia.nix
       # ./wiregaurd.nix
 
       ../common/global

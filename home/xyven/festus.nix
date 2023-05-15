@@ -16,46 +16,49 @@
           withLyrics = true;
         };
       })
+      # (self: super: {
+      #   openjdk = super.unstable.jdk17.override {
+      #     enableJavaFX = true;
+      #   };
+      # })
     ];
   };
 
   home = {
-    packages = with pkgs; [
-      wezterm
+    packages = with pkgs.unstable; [
       fzf
       gitui
       ripgrep
       scc
-      tlpui
-      wpi-wireless-install # for installing wifi certs
+      pkgs.tlpui
+      pkgs.wpi-wireless-install # for installing wifi certs
       spotify
       spotify-tray # shows current track and controls in notification area
       gnomeExtensions.spotify-tray # shows current track in tray
       spotify-player # terminal spotify client
-      # wl-clipboard # for clip board support in neovim
-      xclip
+      wl-clipboard # for clip board support in neovim
       libsForQt5.okular # pdf editor
       libreoffice-qt
+      vscode
 
       # unfree
       slack
       google-chrome
       discord
       zoom-us
-      unstable.parsec-bin
+      parsec-bin
+      plex-media-player
 
       #general dev
-      unstable.lua-language-server
+      lua-language-server
 
       #soft eng
-      jetbrains.idea-ultimate
-      unstable.nodejs-19_x # for github copilot in intellij
-      unstable.jdk17
-      scenebuilder19
+      # jetbrains.idea-ultimate
+      # openjdk
 
       #distributed
-      unstable.vagrant
-      unstable.gnomeExtensions.gnome-vagrant-indicator # shows vagrant status in tray
+      vagrant
+      gnomeExtensions.gnome-vagrant-indicator # shows vagrant status in tray
 
       #id2050
       zotero
@@ -69,8 +72,8 @@
     functions = {
       rb = "env -C /etc/nixos/ sudo nixos-rebuild switch --flake .#festus";
       rbh = "env -C /etc/nixos home-manager switch --flake .#xyven@festus";
-      "nvim-update" = "env -C /etc/nixos nix flake lock --update-input neovim-nightly-overlay --update-input neovim-config && rebuild-home";
-      "nvim-update-config" = "env -C /etc/nixos nix flake lock --update-input neovim-config && rebuild-home";
+      "nvim-update" = "env -C /etc/nixos nix flake lock --update-input neovim-nightly-overlay --update-input neovim-config && rbh";
+      "nvim-update-config" = "env -C /etc/nixos nix flake lock --update-input neovim-config && rbh";
     };
     shellAbbrs = {
       "conf" = "/etc/nixos";
