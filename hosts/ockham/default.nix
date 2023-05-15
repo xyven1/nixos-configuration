@@ -15,12 +15,18 @@ in
 
   users.users.xyven = {
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE9OUNpoctlB+kygCCqcP/YRPDzGcykblU5TKUnfKhY+ (none)"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE9OUNpoctlB+kygCCqcP/YRPDzGcykblU5TKUnfKhY+ blake@gretchen"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDqKxEMH57VYdc6hCe25uBkok0KeArgwARqOs1Dw1UBu xyven@festus"
     ];
     extraGroups = [ "libvirtd" ];
   };
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation = {
+    libvirtd.enable = true;
+    docker.enable = true;
+  };
+  security.polkit.enable = true;
+  networking.firewall.allowedTCPPorts = [ 54321 ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.graceful = true;
@@ -35,7 +41,12 @@ in
 
   networking = {
     hostName = "ockham";
-    networkmanager.enable = true;
+    interfaces.eno1.ipv4.addresses = [{
+      address = "10.200.10.4";
+      prefixLength = 24;
+    }];
+    defaultGateway = "10.200.10.1";
+    nameservers = [ "10.200.10.1" "1.1.1.1" ];
   };
 
   system.stateVersion = "22.11";
