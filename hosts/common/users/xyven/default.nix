@@ -7,8 +7,8 @@ in
     shell = pkgs.fish;
     extraGroups = [
       "wheel"
-      "networkmanager"
     ] ++ ifTheyExist [
+      "networkmanager"
       "docker"
       "libvirtd"
     ];
