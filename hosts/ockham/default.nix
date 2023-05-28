@@ -1,5 +1,5 @@
 { pkgs, ... }:
-let disks = [ "/dev/sda" ];
+let disks = [ "/dev/nvme0n1" ];
 in
 {
   imports = [
