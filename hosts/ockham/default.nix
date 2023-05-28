@@ -5,13 +5,12 @@ in
   imports = [
     ./hardware-configuration.nix
     ./services
-
+    (import ./disko.nix {
+      disks = disks;
+    })
     ../common/global
     ../common/users/xyven
   ];
-  disko.devices = import ./disko.nix {
-    disks = disks;
-  };
 
   users.users.xyven = {
     openssh.authorizedKeys.keys = [
