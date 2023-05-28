@@ -72,11 +72,6 @@
     functions = {
       rb = "env -C /etc/nixos/ sudo nixos-rebuild switch --flake .#festus";
       rbh = "env -C /etc/nixos home-manager switch --flake .#xyven@festus";
-      "nvim-update" = "env -C /etc/nixos nix flake lock --update-input neovim-nightly-overlay --update-input neovim-config && rbh";
-      "nvim-update-config" = "env -C /etc/nixos nix flake lock --update-input neovim-config && rbh";
-    };
-    shellAbbrs = {
-      "conf" = "/etc/nixos";
     };
   };
 

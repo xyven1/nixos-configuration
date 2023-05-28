@@ -29,6 +29,8 @@
       v = "nvim";
       vi = "nvim";
       vim = "nvim";
+
+      conf = "/etc/nixos";
     };
     functions = {
       fish_greeting = "";
@@ -39,6 +41,8 @@
           end
         end
       '';
+      "nvim-update" = "env -C /etc/nixos/ nix flake lock --update-input neovim-nightly-overlay --update-input neovim-config && rbh";
+      "nvim-update-config" = "env -C /etc/nixos/ nix flake lock --update-input neovim-config && rbh";
       interactiveShellInit = ''
         any-nix-shell fish | source
         fish_vi_key_bindings
