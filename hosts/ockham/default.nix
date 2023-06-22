@@ -1,17 +1,16 @@
 { pkgs, ... }:
-let disks = [ "/dev/sda" ];
+let disks = [ "/dev/nvme0n1" ];
 in
 {
   imports = [
     ./hardware-configuration.nix
     ./services
-
+    (import ./disko.nix {
+      disks = disks;
+    })
     ../common/global
     ../common/users/xyven
   ];
-  disko.devices = import ./disko.nix {
-    disks = disks;
-  };
 
   users.users.xyven = {
     openssh.authorizedKeys.keys = [
