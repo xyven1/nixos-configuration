@@ -14,13 +14,9 @@
         spotify-player-latest = super.spotify-player.override {
           withImage = true;
           withLyrics = true;
+          withDaemon = true;
         };
       })
-      # (self: super: {
-      #   openjdk = super.unstable.jdk17.override {
-      #     enableJavaFX = true;
-      #   };
-      # })
     ];
   };
 
@@ -32,7 +28,7 @@
       scc
       pkgs.tlpui
       pkgs.wpi-wireless-install # for installing wifi certs
-      spotify
+      pkgs.spotify
       spotify-tray # shows current track and controls in notification area
       gnomeExtensions.spotify-tray # shows current track in tray
       pkgs.spotify-player-latest # terminal spotify client
@@ -40,6 +36,8 @@
       libsForQt5.okular # pdf editor
       libreoffice-qt
       vscode
+      vagrant
+      zotero
 
       # unfree
       slack
@@ -51,17 +49,6 @@
 
       #general dev
       lua-language-server
-
-      #soft eng
-      # jetbrains.idea-ultimate
-      # openjdk
-
-      #distributed
-      vagrant
-      gnomeExtensions.gnome-vagrant-indicator # shows vagrant status in tray
-
-      #id2050
-      zotero
     ];
     sessionVariables = {
       NIXOS_OZONE_WL = "1";

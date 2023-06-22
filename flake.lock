@@ -631,11 +631,11 @@
     "neovim-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1683747973,
-        "narHash": "sha256-4YPrLiWjKjMEdoywAEXMhqWd4aNWSvAkwsWwAzK2UUo=",
+        "lastModified": 1684521912,
+        "narHash": "sha256-PfOb/9aTgdQd97r144DQ3w348ABQv0Y1q0HKZFJmejw=",
         "owner": "Xyven1",
         "repo": "neovim-config",
-        "rev": "a541f7f6899b36ed191f2bf701f364931f02b74f",
+        "rev": "a475f32f33cbc379bb3b2c0e2c2d99c590503300",
         "type": "github"
       },
       "original": {
