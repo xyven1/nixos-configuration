@@ -15,6 +15,7 @@
 , withImage ? false
 , withNotify ? false
 , withSixel ? false
+, withDaemon ? false
 }:
 
 rustPlatform.buildRustPackage rec {
@@ -39,7 +40,8 @@ rustPlatform.buildRustPackage rec {
     ++ lib.optionals withLyrics [ "lyric-finder" ]
     ++ lib.optionals withImage [ "image" ]
     ++ lib.optionals withNotify [ "notify" ]
-    ++ lib.optionals withSixel [ "sixel" ];
+    ++ lib.optionals withSixel [ "sixel" ]
+    ++ lib.optionals withDaemon [ "daemon" ];
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ ]
