@@ -18,6 +18,8 @@
       url = "github:Xyven1/neovim-config";
     };
 
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
+
     backgrounds = {
       flake = false;
       url = "github:Xyven1/nixos-backgrounds";

@@ -1,8 +1,9 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 let disks = [ "/dev/nvme0n1" ];
 in
 {
   imports = [
+    inputs.vscode-server.nixosModules.default
     ./hardware-configuration.nix
     ./services
     (import ./disko.nix {
@@ -41,13 +42,14 @@ in
     kbdInteractiveAuthentication = false;
   };
   services.homeManagement.enable = true;
+  services.vscode-server.enable = true;
 
   networking = {
     hostName = "ockham";
-    interfaces.eno1.ipv4.addresses = [{
-      address = "10.200.10.4";
-      prefixLength = 24;
-    }];
+    interfaces.eno1.ipv4.addresses = [
+      { address = "10.200.10.4"; prefixLength = 24; }
+      # { address = "10.200.70.2"; prefixLength = 24; }
+    ];
     defaultGateway = "10.200.10.1";
     nameservers = [ "10.200.10.1" "1.1.1.1" ];
   };
