@@ -5,12 +5,14 @@ in
   imports = [
     inputs.vscode-server.nixosModules.default
     ./hardware-configuration.nix
+    ./nvidia.nix
     ./services
     (import ./disko.nix {
       disks = disks;
     })
     ../common/global
     ../common/users/xyven
+    ../common/optional/fish.nix
   ];
 
   users.users.xyven = {
@@ -22,34 +24,35 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.opengl.enable = true;
-
-  virtualisation = {
-    libvirtd.enable = true;
-    docker.enable = true;
-  };
   security.polkit.enable = true;
-  networking.firewall.allowedTCPPorts = [ 54321 ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.graceful = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    systemd-boot.graceful = true;
+    efi.canTouchEfiVariables = true;
+  };
 
   services.openssh = {
     enable = true;
-    passwordAuthentication = false;
-    kbdInteractiveAuthentication = false;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+    };
   };
-  services.homeManagement.enable = true;
-  services.vscode-server.enable = true;
+  services = {
+    homeManagement.enable = true;
+    vscode-server.enable = true;
+  };
 
   networking = {
     hostName = "ockham";
-    interfaces.eno1.ipv4.addresses = [
-      { address = "10.200.10.4"; prefixLength = 24; }
-      # { address = "10.200.70.2"; prefixLength = 24; }
-    ];
+    interfaces.eno1 = {
+      useDHCP = false;
+      ipv4.addresses = [
+        { address = "10.200.10.4"; prefixLength = 24; }
+        # { address = "10.200.70.2"; prefixLength = 24; }
+      ];
+    };
     defaultGateway = "10.200.10.1";
     nameservers = [ "10.200.10.1" "1.1.1.1" ];
   };

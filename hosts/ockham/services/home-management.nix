@@ -42,14 +42,14 @@ in
       wantedBy = [ "multi-user.target" ];
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
-      path = [ pkgs.nodejs ];
+      path = [ pkgs.nodejs_18 ];
 
       serviceConfig = {
         User = username;
-        WorkingDirectory = "${inputs.home-management.packages.x86_64-linux.home-management-server}/lib/node_modules/home-management-server";
+        WorkingDirectory = "${inputs.home-management.packages.x86_64-linux.home-management}/lib/node_modules/.bin";
         Restart = "on-failure";
-        Environment = [ "SERVER_PORT=43434" "DIST_PATH=${inputs.home-management.packages.x86_64-linux.home-management}/lib/node_modules/home-management/dist" ];
-        ExecStart = "${inputs.home-management.packages.x86_64-linux.home-management-server}/bin/home-management-server";
+        Environment = [ "SERVER_PORT=43434" ];
+        ExecStart = "${inputs.home-management.packages.x86_64-linux.home-management}/lib/node_modules/.bin/home-management-server";
       };
       preStart = ''
       '';
