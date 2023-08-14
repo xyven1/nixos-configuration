@@ -40,8 +40,8 @@ in
     systemd.services.homeManagement = {
       description = "Home management daemon";
       wantedBy = [ "multi-user.target" ];
-      after = [ "network-online.target" ];
-      wants = [ "network-online.target" ];
+      after = [ "network.target" ];
+      wants = [ "network.target" ];
       path = [ pkgs.nodejs_18 ];
 
       serviceConfig = {
