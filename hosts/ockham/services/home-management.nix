@@ -24,7 +24,6 @@ in
     };
     users.groups.${username} = { };
 
-    networking.firewall.allowedTCPPorts = [ 8080 8443 43434 ];
     networking.firewall.allowedUDPPortRanges = [
       { from = 3475; to = 3478; }
       { from = 5223; to = 5228; }
@@ -35,7 +34,9 @@ in
       { from = 5223; to = 5228; }
       { from = 8445; to = 8663; }
     ];
-    networking.firewall.enable = mkForce false;
+    services.avahi = {
+      enable = true;
+    };
 
     systemd.services.homeManagement = {
       description = "Home management daemon";
@@ -54,7 +55,5 @@ in
       preStart = ''
       '';
     };
-
   };
-
 }

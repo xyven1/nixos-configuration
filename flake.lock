@@ -448,11 +448,11 @@
         "dream2nix": "dream2nix"
       },
       "locked": {
-        "lastModified": 1691549321,
-        "narHash": "sha256-xKcSJefPlmHv6+lD7MLp/0r9vwVbRXTJLQMGMuiyA1M=",
+        "lastModified": 1692070916,
+        "narHash": "sha256-VqhqCZZPllYQ6ZlqCbuk0GejdNCSkXz7x6G5ZjA8DTk=",
         "owner": "Xyven1",
         "repo": "home-management",
-        "rev": "69360523a7fa83039ced88664d506d4b50072ec8",
+        "rev": "404c9b69812591fa6e7a1a1e1c7889b2df9b09a3",
         "type": "github"
       },
       "original": {
