@@ -51,13 +51,15 @@ in
   networking = {
     useDHCP = lib.mkForce false;
     hostName = "ockham";
-    interfaces.eno1 = {
-      ipv4.addresses = [
-        { address = "10.200.10.4"; prefixLength = 24; }
-        # { address = "10.200.70.2"; prefixLength = 24; }
-      ];
+    interfaces.eno1.ipv4.addresses = [
+      { address = "10.200.10.4"; prefixLength = 24; }
+    ];
+    vlans = {
+      vlan20 = { interface = "eno1"; id = 20; };
     };
-
+    interfaces.vlan20.ipv4.addresses = [
+      { address = "10.200.70.2"; prefixLength = 24; }
+    ];
     defaultGateway = "10.200.10.1";
     nameservers = [ "10.200.10.1" "1.1.1.1" ];
   };
