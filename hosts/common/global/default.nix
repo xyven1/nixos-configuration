@@ -2,6 +2,7 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.disko.nixosModules.disko
+    inputs.flake-utils-plus.nixosModules.autoGenFromInputs
     ./locale.nix
     ./sops.nix
     ./nix.nix
