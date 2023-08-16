@@ -22,9 +22,6 @@
 
   home = {
     packages = with pkgs.unstable; [
-      fzf
-      gitui
-      ripgrep
       scc
       pkgs.tlpui
       pkgs.wpi-wireless-install # for installing wifi certs

@@ -31,12 +31,27 @@
       userName = "xyven1";
       userEmail = "git@xyven.dev";
     };
+    exa = {
+      enable = true;
+      enableAliases = true;
+      icons = true;
+      git = true;
+    };
+    fzf.enable = true;
+    gitui.enable = true;
   };
 
   home = {
     username = "xyven";
     homeDirectory = "/home/xyven";
+    sessionVariables = {
+      NIX_AUTO_RUN = "1";
+    };
+    packages = with pkgs; [
+      ripgrep
+    ];
   };
+
 
   home.stateVersion = "22.11";
 }

@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ lib, pkgs, inputs, ... }:
 
 {
   imports = [
@@ -6,9 +6,6 @@
   ];
   home = {
     packages = with pkgs; [
-      fzf
-      gitui
-      ripgrep
       unstable.vagrant
 
       unstable.lua-language-server
