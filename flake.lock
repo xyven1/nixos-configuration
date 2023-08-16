@@ -448,11 +448,11 @@
         "dream2nix": "dream2nix"
       },
       "locked": {
-        "lastModified": 1692070916,
-        "narHash": "sha256-VqhqCZZPllYQ6ZlqCbuk0GejdNCSkXz7x6G5ZjA8DTk=",
+        "lastModified": 1692144843,
+        "narHash": "sha256-PFAyF7glx8Z7msV4Jegpi0312OHGIJqqSS2IXNUwc1E=",
         "owner": "Xyven1",
         "repo": "home-management",
-        "rev": "404c9b69812591fa6e7a1a1e1c7889b2df9b09a3",
+        "rev": "44ca2e957966844c0b8af0b22a062846be67c975",
         "type": "github"
       },
       "original": {
@@ -670,11 +670,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1688231357,
-        "narHash": "sha256-ZOn16X5jZ6X5ror58gOJAxPfFLAQhZJ6nOUeS4tfFwo=",
+        "lastModified": 1691990649,
+        "narHash": "sha256-gMbKOiX1HwClRP9lADaaV/lnZr93NEaOFe4ApDx/zd8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "645ff62e09d294a30de823cb568e9c6d68e92606",
+        "rev": "6e287913f7b1ef537c97aa301b67c34ea46b640f",
         "type": "github"
       },
       "original": {
