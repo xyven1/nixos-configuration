@@ -10,6 +10,11 @@
           proxyWebsockets = true;
           extraConfig = ''
             proxy_pass_request_headers      on;
+            add_header Last-Modified $date_gmt;
+            add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+            if_modified_since off;
+            expires off;
+            etag off;
           '';
         };
         forceSSL = true;
@@ -113,3 +118,4 @@
   #   };
   # };
 }
+
