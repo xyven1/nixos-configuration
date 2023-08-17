@@ -5,5 +5,6 @@
     ./unifi.nix
     ./minecraft.nix
     ./plex.nix
+    ./monitoring.nix
   ];
 }
