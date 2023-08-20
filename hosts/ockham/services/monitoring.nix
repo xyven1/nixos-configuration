@@ -14,6 +14,7 @@
       static_configs = [{
         targets = [ "localhost:${toString config.services.prometheus.exporters.node.port}" ];
       }];
+      scrape_interval = "15s";
     }];
   };
   services.grafana = {
