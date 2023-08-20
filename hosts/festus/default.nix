@@ -18,7 +18,6 @@
       ../common/global
       ../common/users/xyven
       ../common/optional/gnome.nix
-      ../common/optional/fish.nix
       # ../common/optional/hyprland.nix
     ];
 

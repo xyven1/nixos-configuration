@@ -12,7 +12,6 @@ in
     })
     ../common/global
     ../common/users/xyven
-    ../common/optional/fish.nix
   ];
 
   users.users.xyven = {

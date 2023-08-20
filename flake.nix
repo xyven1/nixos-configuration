@@ -32,6 +32,9 @@
 
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
+    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =
     { self
@@ -63,6 +66,10 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ ./hosts/ockham ];
         };
+        wsl = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/wsl ];
+        };
       };
 
       homeConfigurations = {
@@ -78,6 +85,13 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             ./home/xyven/ockham.nix
+          ];
+        };
+        "xyven@wsl" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [
+            ./home/xyven/wsl.nix
           ];
         };
       };
