@@ -2,9 +2,7 @@
   imports = [
     ../common/global
     ../common/users/xyven
-  ];
-  import = [
-    inputs.nixos-wsl.nixosModules.wsl
+    inputs.nixos-wsl.nixosModules.default
   ];
   wsl = {
     enable = true;
