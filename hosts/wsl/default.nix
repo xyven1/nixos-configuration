@@ -1,7 +1,10 @@
-{ pkgs, ... }: {
+{ inputs, pkgs, ... }: {
   imports = [
     ../common/global
     ../common/users/xyven
+  ];
+  import = [
+    inputs.nixos-wsl.nixosModules.wsl
   ];
   wsl = {
     enable = true;
