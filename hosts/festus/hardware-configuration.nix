@@ -11,7 +11,7 @@
 
   boot = {
     initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-    initrd.kernelModules = [ ];
+    initrd.kernelModules = [ "i915" ];
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
     loader = {
@@ -36,12 +36,11 @@
       device = "/dev/disk/by-uuid/3A59-6482";
       fsType = "vfat";
     };
+  hardware.enableRedistributableFirmware = true;
 
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  # high-resolution display
-  hardware.video.hidpi.enable = lib.mkDefault true;
 }
