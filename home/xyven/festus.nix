@@ -17,6 +17,11 @@
           withDaemon = true;
         };
       })
+      (self: super: {
+        google-chrome-wayland = super.unstable.google-chrome.override {
+          commandLineArgs = "--disable-features=WaylandFractionalScaleV1";
+        };
+      })
     ];
   };
 
@@ -38,7 +43,7 @@
 
       # unfree
       slack
-      google-chrome
+      pkgs.google-chrome-wayland
       discord
       zoom-us
       parsec-bin
