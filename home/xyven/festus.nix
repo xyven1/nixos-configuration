@@ -30,7 +30,7 @@
       scc
       pkgs.tlpui
       pkgs.wpi-wireless-install # for installing wifi certs
-      pkgs.spotify
+      spotify
       spotify-tray # shows current track and controls in notification area
       gnomeExtensions.spotify-tray # shows current track in tray
       pkgs.spotify-player-latest # terminal spotify client
