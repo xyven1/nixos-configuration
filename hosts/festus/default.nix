@@ -34,6 +34,8 @@
     networkmanager.enable = true;
   };
 
+  services.fwupd.enable = true;
+
   virtualisation.libvirtd.enable = true;
   virtualisation.docker.enable = true;
 
