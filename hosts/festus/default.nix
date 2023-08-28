@@ -36,6 +36,8 @@
 
   services.fwupd.enable = true;
 
+  services.fstrim.enable = true;
+
   virtualisation.libvirtd.enable = true;
   virtualisation.docker.enable = true;
 
