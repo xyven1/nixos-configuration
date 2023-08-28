@@ -5,12 +5,12 @@
     extraPackages = with pkgs; [
       intel-media-driver
       vaapiIntel
-      vaapiVdpau
+      # vaapiVdpau
       libvdpau-va-gl
     ];
   };
   environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "iHD";
+    # LIBVA_DRIVER_NAME = "iHD";
     VDPAU_DRIVER = "va_gl";
   };
 }
