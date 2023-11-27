@@ -11,13 +11,6 @@
   nixpkgs = {
     overlays = [
       (self: super: {
-        spotify-player-latest = super.spotify-player.override {
-          withImage = true;
-          withLyrics = true;
-          withDaemon = true;
-        };
-      })
-      (self: super: {
         google-chrome-wayland = super.unstable.google-chrome.override {
           commandLineArgs = "--disable-features=WaylandFractionalScaleV1";
         };
@@ -33,7 +26,7 @@
       spotify
       spotify-tray # shows current track and controls in notification area
       gnomeExtensions.spotify-tray # shows current track in tray
-      pkgs.spotify-player-latest # terminal spotify client
+      spotify-player # terminal spotify client
       wl-clipboard # for clip board support in neovim
       libsForQt5.okular # pdf editor
       libreoffice-qt
