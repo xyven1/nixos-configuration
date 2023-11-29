@@ -11,6 +11,12 @@
   nixpkgs = {
     overlays = [
       (self: super: {
+        spotify-player = super.unstable.spotify-player.override {
+          withSixel = false;
+          withNotify = false;
+        };
+      })
+      (self: super: {
         google-chrome-wayland = super.unstable.google-chrome.override {
           commandLineArgs = "--disable-features=WaylandFractionalScaleV1";
         };
@@ -26,7 +32,7 @@
       spotify
       spotify-tray # shows current track and controls in notification area
       gnomeExtensions.spotify-tray # shows current track in tray
-      spotify-player # terminal spotify client
+      pkgs.spotify-player # terminal spotify client
       wl-clipboard # for clip board support in neovim
       libsForQt5.okular # pdf editor
       libreoffice-qt
@@ -46,14 +52,24 @@
       lua-language-server
     ];
     sessionVariables = {
-      NIXOS_OZONE_WL = "1";
+      # NIXOS_OZONE_WL = "1";
     };
   };
+
+  # programs.sioyek = {
+  #   enable = true;
+  #   config = {
+  #     "default_dark" = "1";
+  #   };
+  # };
 
   programs.fish = {
     functions = {
       rb = "env -C /etc/nixos/ sudo nixos-rebuild switch --flake .#festus";
       rbh = "env -C /etc/nixos home-manager switch --flake .#xyven@festus";
+    };
+    shellAliases = {
+      sp = "spotify_player";
     };
   };
 
