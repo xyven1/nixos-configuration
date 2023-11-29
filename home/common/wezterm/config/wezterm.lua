@@ -14,6 +14,8 @@ local config = {
   keys = {
     { key = 'x', mods = 'CTRL', action = wezterm.action.DisableDefaultAssignment },
   },
+  -- underline_position = -8,
+  term = 'wezterm',
   hide_tab_bar_if_only_one_tab = true,
   window_padding = {
     left = 0,
