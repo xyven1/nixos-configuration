@@ -1,14 +1,17 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
-  home.sessionVariables = {
-    EDITOR = "${config.home.profileDirectory}/bin/nvim";
+  home = {
+    packages = with pkgs.unstable; [
+      neovide
+    ];
   };
 
   programs.neovim = {
     enable = true;
     vimAlias = true;
     viAlias = true;
+    defaultEditor = true;
 
     extraPackages = with pkgs; [
       ripgrep
