@@ -42,7 +42,10 @@
 
       # unfree
       slack
-      pkgs.google-chrome-wayland
+      obsidian
+      # pkgs.google-chrome-wayland
+      google-chrome
+      # firefox
       discord
       zoom-us
       parsec-bin
@@ -92,8 +95,10 @@
     };
     "org/gnome/shell" = {
       favorite-apps = [
-        "google-chrome.desktop"
         "org.wezfurlong.wezterm.desktop"
+        "google-chrome.desktop"
+        "obsidian.desktop"
+        "discord.desktop"
       ];
       disable-user-extensions = false;
       enabled-extensions = [
