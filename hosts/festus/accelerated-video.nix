@@ -4,13 +4,12 @@
     enable = true;
     extraPackages = with pkgs; [
       intel-media-driver
-      vaapiIntel
-      # vaapiVdpau
+      intel-vaapi-driver
       libvdpau-va-gl
     ];
   };
-  environment.sessionVariables = {
-    # LIBVA_DRIVER_NAME = "iHD";
+  environment.variables = {
+  #   LIBVA_DRIVER_NAME = "i915";
     VDPAU_DRIVER = "va_gl";
   };
 }

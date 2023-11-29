@@ -31,7 +31,7 @@
       userName = "xyven1";
       userEmail = "git@xyven.dev";
     };
-    exa = {
+    eza = {
       enable = true;
       enableAliases = true;
       icons = true;
