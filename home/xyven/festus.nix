@@ -59,12 +59,23 @@
     };
   };
 
-  # programs.sioyek = {
-  #   enable = true;
-  #   config = {
-  #     "default_dark" = "1";
-  #   };
-  # };
+  programs.sioyek = {
+    enable = true;
+    package = pkgs.unstable.sioyek;
+    config = {
+      "ui_font" = "JetBrainsMono Nerd Font";
+      # "status_bar_font_size" = "30";
+      # "font_size" = "30";
+      "default_dark_mode" = "1";
+      "inverted_horizontal_scrolling" = "1";
+      "super_fast_search" = "1";
+      "case_sensitive_search" = "0";
+      "custom_background_color" = ".2 .2 .2";
+      "custom_text_color" = ".9 .9 .9";
+      "custom_color_mode_empty_background_color" = ".1 .1 .1";
+      "custom_color_contrast" = "1";
+    };
+  };
 
   programs.fish = {
     functions = {
