@@ -32,6 +32,7 @@ in
     fsType = "ext4";
   };
 
+  nixpkgs.config.nvidia.acceptLicense = true;
   nixpkgs.config.allowUnfree = true;
 
   security.polkit.enable = true;
