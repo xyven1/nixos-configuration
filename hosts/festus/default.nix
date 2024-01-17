@@ -36,7 +36,7 @@
   };
 
 
-  nixpkgs.config.permittedinsecurepackages = [
+  nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
   services.fwupd.enable = true;

@@ -22,7 +22,7 @@
       })
     ];
   };
-  nixpkgs.config.permittedinsecurepackages = [
+  nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
 
