@@ -49,7 +49,6 @@
       forAllPkgs = f: forAllSystems (system: f nixpkgs.legacyPackages.${system});
     in
     {
-      overlays = import ./overlay { inherit inputs; };
       nixosModules = import ./modules/nixos;
       homeManagerModules = import ./modules/home-manager;
 

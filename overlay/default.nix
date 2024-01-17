@@ -1,12 +1,9 @@
-{ inputs }:
+{ inputs, config }:
 {
   unstable = final: prev: {
     unstable = import inputs.nixpkgs-unstable {
       system = prev.system;
-      config = {
-        allowUnfree = true;
-        allowUnfreePredicate = (_: true);
-      };
+      config = config.nixpkgs.config;
     };
   };
   jetbrains = (final: prev: {

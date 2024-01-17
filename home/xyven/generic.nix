@@ -1,4 +1,4 @@
-{ outputs, inputs, lib, pkgs, ... }:
+{ outputs, inputs, lib, pkgs, config, ... }:
 
 {
   imports = [
@@ -9,7 +9,7 @@
   ] ++ (builtins.attrValues outputs.homeManagerModules);
 
   nixpkgs = {
-    overlays = builtins.attrValues outputs.overlays;
+    overlays = builtins.attrValues (import ../../overlay { inherit inputs config; });
     config = {
       allowUnfree = true;
       allowUnfreePredicate = (_: true);

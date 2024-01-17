@@ -1,4 +1,4 @@
-{ lib, inputs, outputs, ... }: {
+{ lib, inputs, config, outputs, ... }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.disko.nixosModules.disko
@@ -14,9 +14,6 @@
   };
 
   nixpkgs = {
-    overlays = builtins.attrValues outputs.overlays;
-    config = {
-      allowUnfree = true;
-    };
+    overlays = builtins.attrValues (import ../../../overlay { inherit inputs config; });
   };
 }
