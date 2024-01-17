@@ -1,5 +1,4 @@
 { pkgs, inputs, config, lib, ... }:
-
 {
   imports = [
     ./generic.nix
@@ -23,6 +22,9 @@
       })
     ];
   };
+  nixpkgs.config.permittedinsecurepackages = [
+    "electron-25.9.0"
+  ];
 
   home = {
     packages = with pkgs.unstable; [
@@ -32,10 +34,12 @@
       spotify
       spotify-tray # shows current track and controls in notification area
       gnomeExtensions.spotify-tray # shows current track in tray
+      gnomeExtensions.paperwm # tiling window manager
       pkgs.spotify-player # terminal spotify client
       wl-clipboard # for clip board support in neovim
       libsForQt5.okular # pdf editor
       libreoffice-qt
+      thunderbird
       vscode
       vagrant
       zotero
@@ -104,6 +108,9 @@
     "org/gnome/desktop/peripherals/keyboard" = {
       delay = lib.hm.gvariant.mkUint32 225;
     };
+    "org/gnome/shell/extensions/paperwm" = {
+      "use-default-background" = true;
+    };
     "org/gnome/shell" = {
       favorite-apps = [
         "org.wezfurlong.wezterm.desktop"
@@ -115,6 +122,7 @@
       enabled-extensions = [
         "sp-tray@sp-tray.esenliyim.github.com"
         "gnome-vagrant-indicator@gnome-shell-exstensions.fffilo.github.com"
+        "paperwm@paperwm.github.com"
       ];
     };
     "org/gnome/desktop/background" = {

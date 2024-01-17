@@ -11,8 +11,9 @@
       ./hardware-configuration.nix
       ./accelerated-video.nix
       # ./disko.nix
-      ./biometrics.nix
-      ./nvidia-disable.nix
+      # ./biometrics.nix
+      ./nvidia.nix
+      # ./nvidia-disable.nix
       # ./wiregaurd.nix
 
       ../common/global
@@ -34,6 +35,10 @@
     networkmanager.enable = true;
   };
 
+
+  nixpkgs.config.permittedinsecurepackages = [
+    "electron-25.9.0"
+  ];
   services.fwupd.enable = true;
 
   services.fstrim.enable = true;
@@ -56,6 +61,7 @@
   };
 
   # powerManagement.powertop.enable = true;
+  services.thermald.enable = true;
   services.tlp = {
     enable = true;
     settings = {
