@@ -1,4 +1,4 @@
-{ pkgs, inputs, config, lib, ... }:
+{ pkgs, inputs, lib, ... }:
 {
   imports = [
     ./generic.nix
@@ -8,23 +8,24 @@
   ];
 
   nixpkgs = {
+    config.allowUnfree = true;
+    config.permittedInsecurePackages = [
+      "electron-25.9.0"
+    ];
     overlays = [
       (self: super: {
-        spotify-player = super.unstable.spotify-player.override {
+        spotify-player = super.pkgs.unstable.spotify-player.override {
           withSixel = false;
           withNotify = false;
         };
       })
       (self: super: {
-        google-chrome-wayland = super.unstable.google-chrome.override {
+        google-chrome-wayland = super.pkgs.unstable.google-chrome.override {
           commandLineArgs = "--disable-features=WaylandFractionalScaleV1";
         };
       })
     ];
   };
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
-  ];
 
   home = {
     packages = with pkgs.unstable; [

@@ -22,5 +22,4 @@ in
       inherit pkgs;
     };
   };
-  home-manager.users.xyven = import ../../../../home/xyven/${config.networking.hostName}.nix;
 }

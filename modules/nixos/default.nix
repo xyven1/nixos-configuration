@@ -1,1 +1,3 @@
-{ }
+{
+  nixpkgs = import ../nixpkgs.nix;
+}

@@ -6,15 +6,7 @@
     ../common/fish.nix
     ../common/starship.nix
     ../common/direnv.nix
-  ] ++ (builtins.attrValues outputs.homeManagerModules);
-
-  nixpkgs = {
-    overlays = builtins.attrValues (import ../../overlay { inherit inputs config; });
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = (_: true);
-    };
-  };
+  ];
 
   nix = {
     package = lib.mkDefault pkgs.nix;
