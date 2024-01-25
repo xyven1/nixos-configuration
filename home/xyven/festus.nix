@@ -29,7 +29,6 @@
 
   home = {
     packages = with pkgs.unstable; [
-
       scc
       pkgs.tlpui
       pkgs.wpi-wireless-install # for installing wifi certs
@@ -83,10 +82,6 @@
   };
 
   programs.fish = {
-    functions = {
-      rb = "env -C /etc/nixos/ sudo nixos-rebuild switch --flake .#festus";
-      rbh = "env -C /etc/nixos home-manager switch --flake .#xyven@festus";
-    };
     shellAliases = {
       sp = "spotify_player";
     };

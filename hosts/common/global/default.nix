@@ -1,4 +1,4 @@
-{ lib, inputs, config, outputs, hostname, ... }: {
+{ lib, inputs, config, outputs, hostname, pkgs, ... }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.disko.nixosModules.disko
@@ -8,6 +8,15 @@
     ./nix.nix
   ] ++ (builtins.attrValues outputs.nixosModules);
   # nixpkgs.config.useDefaultOverlays = true;
+  environment.systemPackages = [
+    pkgs.bash
+    (pkgs.writeScriptBin
+      "rb"
+      ''
+        #!/usr/bin/env bash
+        sudo nixos-rebuild switch "$@"
+      '')
+  ];
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
     sharedModules = builtins.attrValues outputs.homeManagerModules;

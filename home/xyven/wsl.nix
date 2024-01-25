@@ -1,4 +1,4 @@
-{ lib, pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -13,10 +13,6 @@
     ];
   };
   programs.fish = {
-    functions = {
-      rb = "env -C /etc/nixos/ sudo nixos-rebuild switch --flake .#wsl";
-      rbh = "env -C /etc/nixos/ home-manager switch --flake .#xyven@wsl";
-    };
     interactiveShellInit = ''
       eval (ssh-agent -c)
       ssh-add

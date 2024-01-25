@@ -1,5 +1,6 @@
 {
   fonts = import ./fonts.nix;
-  nixpkgs = import ../nixpkgs.nix;
+  nixpkgs-overlay = import ../nixpkgs-overlay.nix;
+  scripts = import ./scripts.nix;
 }
 
