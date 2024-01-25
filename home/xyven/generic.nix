@@ -40,7 +40,15 @@
       NIX_AUTO_RUN = "1";
     };
     packages = with pkgs; [
+      # basic utils
+      wget
+      unzip
+      zip
+      dnsutils
+      inetutils
       ripgrep
+      fzf
+      jq
     ];
   };
 

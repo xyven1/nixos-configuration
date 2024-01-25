@@ -29,6 +29,7 @@
 
   home = {
     packages = with pkgs.unstable; [
+
       scc
       pkgs.tlpui
       pkgs.wpi-wireless-install # for installing wifi certs
@@ -48,7 +49,6 @@
       # unfree
       slack
       obsidian
-      # pkgs.google-chrome-wayland
       google-chrome
       # firefox
       discord
