@@ -66,7 +66,7 @@
 
   programs.sioyek = {
     enable = true;
-    package = pkgs.unstable.sioyek;
+    package = pkgs.sioyek;
     config = {
       "ui_font" = "JetBrainsMono Nerd Font";
       # "status_bar_font_size" = "30";
