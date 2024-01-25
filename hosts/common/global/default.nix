@@ -39,15 +39,20 @@
           else
             null;
       in
-      builtins.listToAttrs (builtins.filter (v: v.value != null)
-        (builtins.map
-          (user: {
-            name = user;
-            value = import (getHomePath user);
-          })
-          (builtins.attrNames (lib.filterAttrs
-            (n: v: v.isNormalUser)
-            config.users.users)))
-      );
+      builtins.listToAttrs (builtins.map
+        (v: {
+          name = v.user;
+          value = import v.config_path;
+        })
+        (builtins.filter (v: v.config_path != null)
+          (builtins.map
+            (user: {
+              inherit user;
+              config_path = (getHomePath user);
+            })
+            (builtins.attrNames (lib.filterAttrs
+              (n: v: v.isNormalUser)
+              config.users.users)))
+        ));
   };
 }
