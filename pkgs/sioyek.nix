@@ -2,7 +2,6 @@
 , stdenv
 , installShellFiles
 , fetchFromGitHub
-, fetchurl
 , freetype
 , gumbo
 , harfbuzz
@@ -11,8 +10,6 @@
 , mupdf
 , openjpeg
 , qt3d
-, qwt
-, qtsvg
 , qtbase
 , qmake
 , qtspeech
@@ -21,7 +18,7 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "sioyek";
-  version = "development";
+  version = "unstable-2024-01-25";
 
   src = fetchFromGitHub {
     owner = "ahrm";
@@ -37,9 +34,7 @@ stdenv.mkDerivation (finalAttrs: {
     mujs
     mupdf
     openjpeg
-    # qwt
     qt3d
-    # qtsvg
     qtbase
     qtspeech
   ]
@@ -86,7 +81,7 @@ stdenv.mkDerivation (finalAttrs: {
     description = "A PDF viewer designed for research papers and technical books";
     changelog = "https://github.com/ahrm/sioyek/releases/tag/v${finalAttrs.version}";
     license = licenses.gpl3Only;
-    maintainers = with maintainers; [ podocarp ];
+    maintainers = with maintainers; [ podocarp xyven1 ];
     platforms = platforms.unix;
   };
 })
