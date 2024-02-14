@@ -22,13 +22,13 @@
       "locked": {
         "lastModified": 1676532891,
         "narHash": "sha256-Qtev8WxPyWVyhKvGLgabJ3IJyLNFX7D1oH0dc3fCC6c=",
-        "owner": "Xyven1",
+        "owner": "xyven1",
         "repo": "nixos-backgrounds",
         "rev": "54e1826e745349d8909009e9cdd339898c8a5e21",
         "type": "github"
       },
       "original": {
-        "owner": "Xyven1",
+        "owner": "xyven1",
         "repo": "nixos-backgrounds",
         "type": "github"
       }
@@ -465,13 +465,13 @@
       "locked": {
         "lastModified": 1700946707,
         "narHash": "sha256-WtYFWzoHVyilI7FUAgqMa7188nvMIAZR69ddjiswo84=",
-        "owner": "Xyven1",
+        "owner": "xyven1",
         "repo": "home-management",
         "rev": "60ba997a7eedd6da773a00791914a56b2f6ac4d1",
         "type": "github"
       },
       "original": {
-        "owner": "Xyven1",
+        "owner": "xyven1",
         "repo": "home-management",
         "type": "github"
       }
@@ -580,15 +580,15 @@
     "neovim-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1701890343,
-        "narHash": "sha256-QWX8wgNcN3WHkmbU0gOJY7cHYxdqi+YDWzS6uI6RPnk=",
-        "owner": "Xyven1",
+        "lastModified": 1707770729,
+        "narHash": "sha256-Ku9NPmbJWwCLUQmwCV/7KtNH/2Ot8bSVS9TV19tQvVw=",
+        "owner": "xyven1",
         "repo": "neovim-config",
-        "rev": "d1a3d1496f8f15b05903186b503e652e8e56e70d",
+        "rev": "848fc301bbc69bb6170a70796bf65c983358713f",
         "type": "github"
       },
       "original": {
-        "owner": "Xyven1",
+        "owner": "xyven1",
         "repo": "neovim-config",
         "type": "github"
       }
@@ -960,7 +960,7 @@
         "rust-overlay": "rust-overlay",
         "sops-nix": "sops-nix",
         "vscode-server": "vscode-server",
-        "wpi-wireless-install-local": "wpi-wireless-install-local"
+        "wpi-wireless-install": "wpi-wireless-install"
       }
     },
     "rust-overlay": {
@@ -1144,22 +1144,22 @@
         "type": "gitlab"
       }
     },
-    "wpi-wireless-install-local": {
+    "wpi-wireless-install": {
       "inputs": {
         "nixpkgs": "nixpkgs_9"
       },
       "locked": {
-        "lastModified": 1707934820,
-        "narHash": "sha256-0r9uX8XUaMKVd7JIPkJv2WF4rUk3+QkkCuw6ajfPzWY=",
-        "ref": "refs/heads/main",
-        "rev": "7d9333cea27db62aa10429bc33aa645b339846b4",
-        "revCount": 2,
-        "type": "git",
-        "url": "file:///home/xyven/code/wpi-wireless-install"
+        "lastModified": 1707944630,
+        "narHash": "sha256-1/MCEs9kqFNjMEmcSRIS1/r68nZbWtOtYTnjvJle8b4=",
+        "owner": "xyven1",
+        "repo": "wpi-wireless-install",
+        "rev": "7a21129103e513f6664f0f2297557a06048b62a8",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/xyven/code/wpi-wireless-install"
+        "owner": "xyven1",
+        "repo": "wpi-wireless-install",
+        "type": "github"
       }
     },
     "xdph": {
