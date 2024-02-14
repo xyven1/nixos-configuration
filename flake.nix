@@ -13,20 +13,22 @@
     hyprland.url = "github:hyprwm/Hyprland";
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
     neovim-config = {
       flake = false;
-      url = "github:Xyven1/neovim-config";
+      url = "github:xyven1/neovim-config";
     };
+
+    wpi-wireless-install.url = "github:xyven1/wpi-wireless-install";
 
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
     backgrounds = {
       flake = false;
-      url = "github:Xyven1/nixos-backgrounds";
+      url = "github:xyven1/nixos-backgrounds";
     };
 
-    home-management.url = "github:Xyven1/home-management";
+    home-management.url = "github:xyven1/home-management";
 
     sops-nix.url = "github:Mic92/sops-nix";
 

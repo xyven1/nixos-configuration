@@ -1,2 +1,0 @@
-__license__ = "MIT"
-
