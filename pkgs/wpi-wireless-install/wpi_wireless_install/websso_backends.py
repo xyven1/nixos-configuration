@@ -1,9 +1,9 @@
 from os import environ, getcwd, mkdir
 
-from pycompat import parse_qsl
+from wpi_wireless_install.pycompat import parse_qsl
 
-from detect import detect_executable, ExecutableNotFoundError, ExternalExecutionError, VERBOSE_DETECT
-from dbusproxies import GnomeShellProxy, GnomeShellScriptExecutionException, DBusException
+from wpi_wireless_install.detect import detect_executable, ExecutableNotFoundError, ExternalExecutionError, VERBOSE_DETECT
+from wpi_wireless_install.dbusproxies import GnomeShellProxy, GnomeShellScriptExecutionException, DBusException
 
 
 class WebSSOError(Exception):
@@ -80,7 +80,7 @@ class XWinInfoWindowScanner(AbstractWindowsScanner):
     def __init__(self):
         super(XWinInfoWindowScanner, self).__init__()
         try:
-            from x11 import WindowManager
+            from wpi_wireless_install.x11 import WindowManager
             self.window_manager = WindowManager()
         except ImportError:
             raise

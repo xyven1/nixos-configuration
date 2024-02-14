@@ -1,24 +1,25 @@
+import os
 import re
 import xml.etree.ElementTree as ET
 from locale import getdefaultlocale
 from subprocess import Popen, PIPE
 
-from pycompat import getargspec, urlopen, URLError
+from wpi_wireless_install.pycompat import getargspec, urlopen, URLError
 
 VERSION = '3.0.2'
 NAME    = 'JoinNow for Linux'
 
-from actions import ActionFactory, NoneAction, ActionError, InternalActionError
-from logger import function_logger
-from paladindefs import SW2_PALADIN_REPORT_HANDLER_CLOUD
-from reporter import PaladinCloudReporter
-from resourcemanager import load_resources
-from ui import ui, Buttons
+from wpi_wireless_install.actions import ActionFactory, NoneAction, ActionError, InternalActionError
+from wpi_wireless_install.logger import function_logger
+from wpi_wireless_install.paladindefs import SW2_PALADIN_REPORT_HANDLER_CLOUD
+from wpi_wireless_install.reporter import PaladinCloudReporter
+from wpi_wireless_install.resourcemanager import load_resources
+from wpi_wireless_install.ui import ui, Buttons
 
 
 class PaladinLinuxClient(object):
     """SecureW2 JoinNow Linux Client Implementation"""
-    CONFIG_FILE = 'SecureW2.cloudconfig'
+    CONFIG_FILE = os.path.join(os.path.split(__file__)[0], 'SecureW2.cloudconfig')
 
     def __init__(self):
         self.devicecfg       = None

@@ -5,7 +5,7 @@ from os import path, unlink, walk, mkfifo, getpid, rename
 from subprocess import check_call, CalledProcessError
 from tempfile import TemporaryFile, NamedTemporaryFile
 
-from detect import detect_executable, ExecutableNotFoundError, ExternalExecutionError
+from wpi_wireless_install.detect import detect_executable, ExecutableNotFoundError, ExternalExecutionError
 
 OPENSSL_CSR_CLIENT_CERT_CONFIG = """
 [req]

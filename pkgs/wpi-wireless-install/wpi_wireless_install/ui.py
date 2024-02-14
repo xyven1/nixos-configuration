@@ -1,6 +1,6 @@
 from getpass import getpass as _getpass
 
-from pycompat import _raw_input as __raw_input
+from wpi_wireless_install.pycompat import _raw_input as __raw_input
 
 _ui = None
 

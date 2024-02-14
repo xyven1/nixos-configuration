@@ -42,7 +42,7 @@ class MetaDataPRNGSecretStorage(object):
 
 class FreeDesktopSecretStorage(object):
     def __init__(self):
-        from dbusproxies import SecretsServiceProxy
+        from wpi_wireless_install.dbusproxies import SecretsServiceProxy
         self.service = SecretsServiceProxy()
 
     def generate_private_key_secret(self, certificate):
@@ -81,7 +81,7 @@ class FreeDesktopSecretStorage(object):
         dbuslogger.setLevel(logging.CRITICAL)
 
         try:
-            from dbusproxies import SecretsServiceProxy
+            from wpi_wireless_install.dbusproxies import SecretsServiceProxy
             secrets_service = SecretsServiceProxy()
             with secrets_service.session() as session:
                 collection = secrets_service.default_collection(session)

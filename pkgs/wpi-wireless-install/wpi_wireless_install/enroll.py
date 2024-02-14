@@ -3,8 +3,8 @@ from datetime import datetime
 from hashlib import sha1
 from os import getpid
 
-from enrollapi import Connector, ChallengeRequest, EnrollmentRequest, PasswordAuthentication, EnrollmentException
-from keystore import KeyStore, SoftwareStore, TPMEnhancedSoftwareStore, Certificate, PrivateKeyExists
+from wpi_wireless_install.enrollapi import Connector, ChallengeRequest, EnrollmentRequest, PasswordAuthentication, EnrollmentException
+from wpi_wireless_install.keystore import KeyStore, SoftwareStore, TPMEnhancedSoftwareStore, Certificate, PrivateKeyExists
 
 class TPMRequired(EnrollmentException):
     pass

@@ -34,12 +34,14 @@ def find_all_interpreters():
     return sorted(filter(lambda e: valid_interpreter(e), [ path + os.path.sep + filename for path in os.environ['PATH'].split(os.pathsep) for filename in safe_listdir(path) ]))
 
 def run():
+    # print current dir
+    print(os.getcwd())
     autodetecting = INTERPRETER_AUTODETECTION_FLAG in sys.argv
 
     try:
-        import logger
-        from logger import ConsoleLogger, FileLogger
-        from client import PaladinLinuxClient
+        import wpi_wireless_install.logger as logger
+        from wpi_wireless_install.logger import ConsoleLogger, FileLogger
+        from wpi_wireless_install.client import PaladinLinuxClient
 
     except ImportError as e:
         if autodetecting:

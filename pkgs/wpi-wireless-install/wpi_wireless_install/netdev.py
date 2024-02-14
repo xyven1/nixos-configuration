@@ -1,6 +1,6 @@
 from socket import socket, AF_INET, SOCK_DGRAM
 from fcntl import ioctl
-from memutils import int_val, ptr_val, cstr_val
+from wpi_wireless_install.memutils import int_val, ptr_val, cstr_val
 
 """
 

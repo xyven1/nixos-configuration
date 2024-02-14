@@ -7,16 +7,16 @@ from subprocess import Popen, PIPE, STDOUT, CalledProcessError
 from textwrap import wrap
 from time import sleep
 
-import websso
-from dbusproxies import NetworkManagerProxy
-from enroll import enroll, TPMRequired
-from enrollapi import ConnectorError, EnrollmentException
-from keystore import Certificate
-from paladindefs import *
-from reporter import PaladinCloudReporter
-from resourcemanager import load_resources
-from ui import Buttons
-from xmlhelper import CloudConfigNodeWrapper
+import wpi_wireless_install.websso
+from wpi_wireless_install.dbusproxies import NetworkManagerProxy
+from wpi_wireless_install.enroll import enroll, TPMRequired
+from wpi_wireless_install.enrollapi import ConnectorError, EnrollmentException
+from wpi_wireless_install.keystore import Certificate
+from wpi_wireless_install.paladindefs import *
+from wpi_wireless_install.reporter import PaladinCloudReporter
+from wpi_wireless_install.resourcemanager import load_resources
+from wpi_wireless_install.ui import Buttons
+from wpi_wireless_install.xmlhelper import CloudConfigNodeWrapper
 
 
 MAX_FILENAME_SIZE = 127     # Based on max 255 bytes assuming worst case scenario of 2 bytes per unicode character
@@ -409,7 +409,7 @@ class CredentialsAction(NoneAction):
             raise InternalActionError(self, 'webSSOConfirmType %d not supported' % auth_type)
 
         # HACK: When using the console UI, have a separate 'window' for the device name prompt
-        from ui import ConsoleUI
+        from wpi_wireless_install.ui import ConsoleUI
 
         if type(ui) == ConsoleUI and self.prompt_for_device_name():
             window = ui.window()

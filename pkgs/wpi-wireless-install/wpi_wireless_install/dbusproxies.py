@@ -3,9 +3,9 @@ import uuid
 from time import sleep
 from dbus.exceptions import DBusException
 
-from pycompat import time, _long
+from wpi_wireless_install.pycompat import time, _long
 
-from detect import wpa_supplicant_version
+from wpi_wireless_install.detect import wpa_supplicant_version
 
 def dbus_path(path):
     if path != None and len(path) > 0:

@@ -2,8 +2,8 @@ from ctypes import cast, CDLL, POINTER
 from ctypes import c_void_p, c_char_p, c_int, c_uint, c_long, c_ulong
 from struct import pack
 
-from detect import detect_library, LibraryNotFoundError
-from memutils import int_size, long_size, ptr_size
+from wpi_wireless_install.detect import detect_library, LibraryNotFoundError
+from wpi_wireless_install.memutils import int_size, long_size, ptr_size
 
 class X_Atom(c_ulong):
     pass

@@ -6,10 +6,10 @@ from hashlib import sha1
 from textwrap import wrap
 from os import environ, makedirs, path, unlink
 
-from pycompat import FILETYPES
+from wpi_wireless_install.pycompat import FILETYPES
 
-from sslengine import generate_software_key, generate_tpm_key, key_valid, encrypt_private_key, generate_csr, sign_raw_data, detect_tpm, read_certificate, read_certificate_file, SSLEngineError
-from secrets import SecretStorage, generate_temporary_secret
+from wpi_wireless_install.sslengine import generate_software_key, generate_tpm_key, key_valid, encrypt_private_key, generate_csr, sign_raw_data, detect_tpm, read_certificate, read_certificate_file, SSLEngineError
+from wpi_wireless_install.secrets import SecretStorage, generate_temporary_secret
 
 class PrivateKeyExists(Exception):
     pass
