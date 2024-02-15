@@ -5,10 +5,10 @@
     ./generic.nix
   ];
   home = {
-    packages = with pkgs; [
-      unstable.vagrant
+    packages = with pkgs.unstable; [
+      vagrant
 
-      unstable.lua-language-server
+      lua-language-server
     ];
   };
   programs.fish = {
