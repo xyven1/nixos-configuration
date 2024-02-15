@@ -7,5 +7,6 @@
   # };
   # config = lib.mkIf config.nixpkgs.config.useDefaultOverlays {
   nixpkgs.overlays = builtins.attrValues (import ../overlay { inherit inputs config; });
+  nixpkgs.config.allowUnfree = false;
   # };
 }
