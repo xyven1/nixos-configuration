@@ -3,6 +3,7 @@
   services.nginx =
     let
       domain = "${config.networking.hostName}.${config.networking.domain}";
+      e' = "''";
     in
     {
       enable = true;
@@ -41,23 +42,23 @@
                   proxy_set_header Upgrade $http_upgrade;
                   proxy_set_header Connection "upgrade";
                   proxy_hide_header Authorization;
-                  proxy_set_header Referer ''\'';
-                proxy_set_header Origin ''\'';
+                  proxy_set_header Referer ${e'};
+                  proxy_set_header Origin ${e'};
                 '';
-              priority = 100;
+                priority = 100;
               };
               "/inform" = {
                 proxyPass = "https://127.0.0.1:8080/";
                 recommendedProxySettings = true;
                 extraConfig = ''
-                proxy_ssl_verify off;
-                proxy_ssl_session_reuse on;
-                proxy_buffering off;
-                proxy_set_header Upgrade $http_upgrade;
-                proxy_set_header Connection "upgrade";
-                proxy_hide_header Authorization;
-                proxy_set_header Referer ''\'';
-                proxy_set_header Origin ''\'';
+                  proxy_ssl_verify off;
+                  proxy_ssl_session_reuse on;
+                  proxy_buffering off;
+                  proxy_set_header Upgrade $http_upgrade;
+                  proxy_set_header Connection "upgrade";
+                  proxy_hide_header Authorization;
+                  proxy_set_header Referer ${e'};
+                  proxy_set_header Origin ${e'};
                 '';
                 priority = 100;
               };
@@ -65,20 +66,20 @@
                 proxyPass = "https://127.0.0.1:8443/";
                 recommendedProxySettings = true;
                 extraConfig = ''
-                proxy_http_version 1.1;
-                proxy_set_header Upgrade $http_upgrade;
-                proxy_set_header Connection "upgrade";
-                proxy_set_header Referer ''\'';
-                proxy_set_header Origin ''\'';
-                proxy_buffering off;
-                proxy_hide_header Authorization;
+                  proxy_http_version 1.1;
+                  proxy_set_header Upgrade $http_upgrade;
+                  proxy_set_header Connection "upgrade";
+                  proxy_set_header Referer ${e'};
+                  proxy_set_header Origin ${e'};
+                  proxy_buffering off;
+                  proxy_hide_header Authorization;
                 '';
                 priority = 100;
               };
             };
           };
           "plex.${domain}" = {
-            locations."/" =  {
+            locations."/" = {
               proxyPass = "http://127.0.0.1:32400/";
               proxyWebsockets = true;
               recommendedProxySettings = true;
@@ -103,20 +104,22 @@
                 # Buffering off send to the client as soon as the data is received from Plex.
                 proxy_redirect off;
                 proxy_buffering off;
-                '';
+              '';
             };
           };
           "monitor.${domain}" =
-          let settings = config.services.grafana.settings; in {
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:${toString settings.server.http_port}";
-              proxyWebsockets = true;
-              recommendedProxySettings = true;
+            let settings = config.services.grafana.settings; in {
+              locations."/" = {
+                proxyPass = "http://127.0.0.1:${toString settings.server.http_port}";
+                proxyWebsockets = true;
+                recommendedProxySettings = true;
+              };
             };
-          };
         };
-  };
+    };
 }
+
+
 
 
 
