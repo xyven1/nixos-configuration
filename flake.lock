@@ -580,11 +580,11 @@
     "neovim-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1707770729,
-        "narHash": "sha256-Ku9NPmbJWwCLUQmwCV/7KtNH/2Ot8bSVS9TV19tQvVw=",
+        "lastModified": 1708464584,
+        "narHash": "sha256-9sm7bV3u0Ct4E23z2K4+mNte8jWgOVFyXXuLX6U/Hkc=",
         "owner": "xyven1",
         "repo": "neovim-config",
-        "rev": "848fc301bbc69bb6170a70796bf65c983358713f",
+        "rev": "ef7a34ab4f341558d1459628d751b747497b9028",
         "type": "github"
       },
       "original": {

@@ -1,6 +1,8 @@
-{ inputs, pkgs, ... }:
-
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   home = {
     packages = with pkgs.unstable; [
       neovide
@@ -13,14 +15,14 @@
     viAlias = true;
     defaultEditor = true;
 
-    extraPackages = with pkgs; [
+    extraPackages = with pkgs.unstable; [
       ripgrep
       fzf
       gcc
       nodejs
-      rust-bin.beta.latest.default
       gitui
-      nixpkgs-fmt
+      nil
+      alejandra
     ];
   };
 
@@ -31,4 +33,3 @@
     };
   };
 }
-
