@@ -1,12 +1,14 @@
-{ inputs, config }:
 {
+  inputs,
+  config,
+}: {
   unstable = final: prev: {
     unstable = import inputs.nixpkgs-unstable {
       system = prev.system;
       config = config.nixpkgs.config;
     };
   };
-  jetbrains = (final: prev: {
+  jetbrains = final: prev: {
     # Override jetbrains idea-ultimate until the newer version is available
     jetbrains =
       prev.jetbrains
@@ -19,8 +21,8 @@
           };
         });
       };
-  });
-  additions = final: _prev: import ../pkgs { pkgs = final; };
+  };
+  additions = final: _prev: import ../pkgs {pkgs = final;};
 
   wpi-wireless-install = inputs.wpi-wireless-install.overlays.default;
 

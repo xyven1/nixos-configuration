@@ -3,4 +3,3 @@
   nixpkgs-overlay = import ../nixpkgs-overlay.nix;
   scripts = import ./scripts.nix;
 }
-

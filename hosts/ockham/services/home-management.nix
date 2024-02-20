@@ -1,12 +1,14 @@
-{ config, lib, inputs, pkgs, ... }:
-
-with lib;
-
-let
+{
+  config,
+  lib,
+  inputs,
+  pkgs,
+  ...
+}:
+with lib; let
   cfg = config.services.homeManagement;
   username = "hmmngmnt";
-in
-{
+in {
   options = {
     services.homeManagement = {
       enable = mkEnableOption ''
@@ -22,20 +24,38 @@ in
       createHome = false;
       group = username;
     };
-    users.groups.${username} = { };
+    users.groups.${username} = {};
 
-    networking.firewall.allowedTCPPorts = [ 8080 8443 ];
+    networking.firewall.allowedTCPPorts = [8080 8443];
     networking.firewall.allowedUDPPortRanges = [
-      { from = 3475; to = 3478; }
-      { from = 5223; to = 5228; }
-      { from = 8445; to = 8663; }
+      {
+        from = 3475;
+        to = 3478;
+      }
+      {
+        from = 5223;
+        to = 5228;
+      }
+      {
+        from = 8445;
+        to = 8663;
+      }
     ];
     networking.firewall.allowedTCPPortRanges = [
-      { from = 3475; to = 3478; }
-      { from = 5223; to = 5228; }
-      { from = 8445; to = 8663; }
+      {
+        from = 3475;
+        to = 3478;
+      }
+      {
+        from = 5223;
+        to = 5228;
+      }
+      {
+        from = 8445;
+        to = 8663;
+      }
     ];
-    networking.firewall.extraPackages = [ pkgs.ipset ];
+    networking.firewall.extraPackages = [pkgs.ipset];
     networking.firewall.extraCommands = ''
       if ! ipset --quiet list upnp; then
         ipset create upnp hash:ip,port timeout 3
@@ -46,16 +66,16 @@ in
 
     systemd.services.homeManagement = {
       description = "Home management daemon";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
-      wants = [ "network.target" ];
-      path = [ pkgs.nodejs_18 ];
+      wantedBy = ["multi-user.target"];
+      after = ["network.target"];
+      wants = ["network.target"];
+      path = [pkgs.nodejs_18];
 
       serviceConfig = {
         User = username;
         WorkingDirectory = "${inputs.home-management.packages.x86_64-linux.home-management}/lib/node_modules/.bin";
         Restart = "on-failure";
-        Environment = [ "SERVER_PORT=43434" ];
+        Environment = ["SERVER_PORT=43434"];
         ExecStart = "${inputs.home-management.packages.x86_64-linux.home-management}/lib/node_modules/.bin/home-management-server";
       };
       preStart = ''

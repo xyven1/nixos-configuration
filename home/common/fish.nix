@@ -1,5 +1,9 @@
-{ lib, pkgs, config, ... }:
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}: {
   programs.nix-index = {
     enable = true;
     enableFishIntegration = true;
@@ -45,13 +49,15 @@
       "nvim-update-config" = "env -C /etc/nixos/ nix flake lock --update-input neovim-config && rbh";
     };
     interactiveShellInit = ''
-        any-nix-shell fish | source
-        fish_vi_key_bindings
-        user_vi_key_bindings
-        fish_vi_cursor
+      any-nix-shell fish | source
+      fish_vi_key_bindings
+      user_vi_key_bindings
+      fish_vi_cursor
     '';
-    shellInit = let sv = config.home.sessionVariables; in ''
-      ${lib.optionalString (sv?EDITOR) "set -x EDITOR ${sv.EDITOR}"}
+    shellInit = let
+      sv = config.home.sessionVariables;
+    in ''
+      ${lib.optionalString (sv ? EDITOR) "set -x EDITOR ${sv.EDITOR}"}
     '';
   };
 }

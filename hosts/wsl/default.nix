@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{inputs, ...}: {
   imports = [
     ../common/global
     ../common/users/xyven

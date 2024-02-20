@@ -1,5 +1,4 @@
-{ config, inputs, pkgs, ... }:
-{
+{inputs, ...}: {
   imports = [
     inputs.hyprland.nixosModules.default
   ];

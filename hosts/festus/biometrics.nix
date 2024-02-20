@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{pkgs, ...}: {
   services.fprintd = {
     enable = true;
     tod = {

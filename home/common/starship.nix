@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{...}: {
   programs.starship = {
     enable = true;
     settings = {
@@ -31,7 +30,6 @@
       };
 
       command_timeout = 50;
-
 
       directory = {
         format = "[$path]($style)( [$read_only]($read_only_style)) ";

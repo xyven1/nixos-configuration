@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [
@@ -9,7 +8,7 @@
     ];
   };
   environment.variables = {
-  #   LIBVA_DRIVER_NAME = "i915";
+    #   LIBVA_DRIVER_NAME = "i915";
     VDPAU_DRIVER = "va_gl";
   };
 }

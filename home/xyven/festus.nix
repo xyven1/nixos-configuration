@@ -1,5 +1,9 @@
-{ pkgs, inputs, lib, ... }:
 {
+  pkgs,
+  inputs,
+  lib,
+  ...
+}: {
   imports = [
     ./generic.nix
     ../common/font.nix

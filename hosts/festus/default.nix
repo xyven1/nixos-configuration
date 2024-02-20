@@ -1,21 +1,19 @@
-{ pkgs, lib, ... }:
-{
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./accelerated-video.nix
-      # ./disko.nix
-      # ./biometrics.nix
-      ./nvidia.nix
-      # ./nvidia-disable.nix
-      # ./wiregaurd.nix
+{pkgs, ...}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./accelerated-video.nix
+    # ./disko.nix
+    # ./biometrics.nix
+    ./nvidia.nix
+    # ./nvidia-disable.nix
+    # ./wiregaurd.nix
 
-      ../common/global
-      ../common/users/xyven
-      ../common/optional/gnome.nix
-      # ../common/optional/hyprland.nix
-    ];
+    ../common/global
+    ../common/users/xyven
+    ../common/optional/gnome.nix
+    # ../common/optional/hyprland.nix
+  ];
 
   # Setup keyfile
   boot = {

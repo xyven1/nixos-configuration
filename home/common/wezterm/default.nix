@@ -1,5 +1,8 @@
-{ inputs, config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.sessionVariables = {
     TERMINAL = "${config.home.profileDirectory}/bin/wezterm";
     XCURSOR_THEME = "Adwaita";

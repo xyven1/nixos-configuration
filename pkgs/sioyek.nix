@@ -1,21 +1,21 @@
-{ lib
-, stdenv
-, installShellFiles
-, fetchFromGitHub
-, freetype
-, gumbo
-, harfbuzz
-, jbig2dec
-, mujs
-, mupdf
-, openjpeg
-, qt3d
-, qtbase
-, qmake
-, qtspeech
-, wrapQtAppsHook
+{
+  lib,
+  stdenv,
+  installShellFiles,
+  fetchFromGitHub,
+  freetype,
+  gumbo,
+  harfbuzz,
+  jbig2dec,
+  mujs,
+  mupdf,
+  openjpeg,
+  qt3d,
+  qtbase,
+  qmake,
+  qtspeech,
+  wrapQtAppsHook,
 }:
-
 stdenv.mkDerivation (finalAttrs: {
   pname = "sioyek";
   version = "unstable-2024-01-25";
@@ -27,18 +27,19 @@ stdenv.mkDerivation (finalAttrs: {
     sha256 = "00hwg47dj4q6l9z5glw6hsp0s7nmyds7073hd2kxrln9n6b52c44";
   };
 
-  buildInputs = [
-    gumbo
-    harfbuzz
-    jbig2dec
-    mujs
-    mupdf
-    openjpeg
-    qt3d
-    qtbase
-    qtspeech
-  ]
-  ++ lib.optionals stdenv.isDarwin [ freetype ];
+  buildInputs =
+    [
+      gumbo
+      harfbuzz
+      jbig2dec
+      mujs
+      mupdf
+      openjpeg
+      qt3d
+      qtbase
+      qtspeech
+    ]
+    ++ lib.optionals stdenv.isDarwin [freetype];
 
   nativeBuildInputs = [
     installShellFiles
@@ -46,7 +47,7 @@ stdenv.mkDerivation (finalAttrs: {
     wrapQtAppsHook
   ];
 
-  qmakeFlags = lib.optionals stdenv.isDarwin [ "CONFIG+=non_portable" ];
+  qmakeFlags = lib.optionals stdenv.isDarwin ["CONFIG+=non_portable"];
 
   postPatch = ''
     substituteInPlace pdf_viewer_build_config.pro \
@@ -58,7 +59,8 @@ stdenv.mkDerivation (finalAttrs: {
   '';
 
   postInstall =
-    if stdenv.isDarwin then ''
+    if stdenv.isDarwin
+    then ''
       cp -r pdf_viewer/shaders sioyek.app/Contents/MacOS/shaders
       cp pdf_viewer/prefs.config sioyek.app/Contents/MacOS/
       cp pdf_viewer/prefs_user.config sioyek.app/Contents/MacOS/
@@ -69,7 +71,8 @@ stdenv.mkDerivation (finalAttrs: {
       mkdir -p $out/Applications $out/bin
       cp -r sioyek.app $out/Applications
       ln -s $out/Applications/sioyek.app/Contents/MacOS/sioyek $out/bin/sioyek
-    '' else ''
+    ''
+    else ''
       install -Dm644 tutorial.pdf $out/share/tutorial.pdf
       cp -r pdf_viewer/shaders $out/share/
       install -Dm644 -t $out/etc/ pdf_viewer/{keys,prefs}.config
@@ -81,7 +84,7 @@ stdenv.mkDerivation (finalAttrs: {
     description = "A PDF viewer designed for research papers and technical books";
     changelog = "https://github.com/ahrm/sioyek/releases/tag/v${finalAttrs.version}";
     license = licenses.gpl3Only;
-    maintainers = with maintainers; [ podocarp xyven1 ];
+    maintainers = with maintainers; [podocarp xyven1];
     platforms = platforms.unix;
   };
 })
