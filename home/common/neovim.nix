@@ -13,15 +13,14 @@
     viAlias = true;
     defaultEditor = true;
 
-    extraPackages = with pkgs.unstable; [
+    extraPackages = with pkgs; [
       ripgrep
       fzf
       gcc
       nodejs
-      rustc
+      rust-bin.beta.latest.default
       gitui
-      nil
-      alejandra
+      nixpkgs-fmt
     ];
   };
 
