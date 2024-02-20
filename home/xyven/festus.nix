@@ -4,6 +4,7 @@
     ./generic.nix
     ../common/font.nix
     ../common/wezterm
+    ../common/helix.nix
     # ../common/hyprland.nix
   ];
 
