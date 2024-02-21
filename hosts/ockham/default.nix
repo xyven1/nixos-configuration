@@ -24,8 +24,6 @@ in {
     fsType = "ext4";
   };
 
-  nixpkgs.config.allowUnfree = true;
-
   security.polkit.enable = true;
 
   boot.loader = {

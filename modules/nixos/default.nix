@@ -1,3 +1,3 @@
 {
-  nixpkgs-overlay = import ../nixpkgs-overlay.nix;
+  nixpkgs = import ../shared/nixpkgs.nix;
 }

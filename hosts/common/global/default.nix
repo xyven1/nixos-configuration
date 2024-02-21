@@ -17,7 +17,6 @@
       ./nix.nix
     ]
     ++ (builtins.attrValues outputs.nixosModules);
-  # nixpkgs.config.useDefaultOverlays = true;
   environment.systemPackages = [
     pkgs.bash
     (pkgs.writeScriptBin
@@ -27,6 +26,8 @@
         sudo nixos-rebuild switch "$@"
       '')
   ];
+  # enable overlays defined in overlay/default.nix
+  nixpkgs.myOverlays.enable = true;
   home-manager = {
     extraSpecialArgs = {inherit inputs outputs;};
     sharedModules = builtins.attrValues outputs.homeManagerModules;

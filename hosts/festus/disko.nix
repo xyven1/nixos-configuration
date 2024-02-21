@@ -4,29 +4,21 @@
       type = "disk";
       device = builtins.elemAt disks 0;
       content = {
-        type = "table";
-        format = "gpt";
-        partitions = [
-          {
-            type = "partition";
-            name = "ESP";
-            start = "1MiB";
-            end = "100MiB";
-            bootable = true;
+        type = "gpt";
+        partitions = {
+          ESP = {
+            type = "EF00";
+            start = "1M";
+            end = "100M";
             content = {
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
-              mountOptions = [
-                "defaults"
-              ];
             };
-          }
-          {
-            type = "partition";
-            name = "luks";
-            start = "100MiB";
-            end = "500000MiB";
+          };
+          luks = {
+            start = "100M";
+            end = "500000M";
             content = {
               type = "luks";
               name = "crypted";
@@ -36,8 +28,8 @@
                 vg = "pool";
               };
             };
-          }
-        ];
+          };
+        };
       };
     };
   };
@@ -46,7 +38,6 @@
       type = "lvm_vg";
       lvs = {
         root = {
-          type = "lvm_lv";
           size = "400G";
           content = {
             type = "filesystem";
@@ -58,7 +49,6 @@
           };
         };
         swap = {
-          type = "lvm_lv";
           size = "32G";
           content = {
             type = "swap";
