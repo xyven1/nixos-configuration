@@ -49,25 +49,22 @@
         else if builtins.hasAttr "generic.nix" user-dir
         then home-dir + /${user}/generic.nix
         else null;
-      defaultUser = {...}: {
-        home.stateVersion = "23.11";
-      };
     in
       builtins.listToAttrs (builtins.map
         (v: {
           name = v.user;
-          value =
-            if v.config_path != null
-            then import v.config_path
-            else defaultUser;
+          value = import v.config_path;
         })
-        (builtins.map
-          (user: {
-            inherit user;
-            config_path = getHomePath user;
-          })
-          (builtins.attrNames (lib.filterAttrs
-            (n: v: v.isNormalUser)
-            config.users.users))));
+        (
+          builtins.filter (v: v.config_path != null)
+          (builtins.map
+            (user: {
+              inherit user;
+              config_path = getHomePath user;
+            })
+            (builtins.attrNames (lib.filterAttrs
+              (n: v: v.isNormalUser)
+              config.users.users)))
+        ));
   };
 }
