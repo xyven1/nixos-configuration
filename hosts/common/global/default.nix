@@ -19,6 +19,7 @@
     ++ (builtins.attrValues outputs.nixosModules);
   environment.systemPackages = [
     pkgs.bash
+    pkgs.home-manager
     (pkgs.writeScriptBin
       "rb"
       ''
@@ -47,22 +48,25 @@
         else if builtins.hasAttr "generic.nix" user-dir
         then home-dir + /${user}/generic.nix
         else null;
+      defaultUser = {...}: {
+        home.stateVersion = "23.11";
+      };
     in
       builtins.listToAttrs (builtins.map
         (v: {
           name = v.user;
-          value = import v.config_path;
+          value =
+            if v.config_path != null
+            then import v.config_path
+            else defaultUser;
         })
-        (
-          builtins.filter (v: v.config_path != null)
-          (builtins.map
-            (user: {
-              inherit user;
-              config_path = getHomePath user;
-            })
-            (builtins.attrNames (lib.filterAttrs
-              (n: v: v.isNormalUser)
-              config.users.users)))
-        ));
+        (builtins.map
+          (user: {
+            inherit user;
+            config_path = getHomePath user;
+          })
+          (builtins.attrNames (lib.filterAttrs
+            (n: v: v.isNormalUser)
+            config.users.users))));
   };
 }
