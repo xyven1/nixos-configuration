@@ -19,6 +19,7 @@
     ++ (builtins.attrValues outputs.nixosModules);
   environment.systemPackages = [
     pkgs.bash
+    pkgs.git
     pkgs.home-manager
     (pkgs.writeScriptBin
       "rb"
@@ -30,7 +31,7 @@
   # enable overlays defined in overlay/default.nix
   nixpkgs.myOverlays.enable = true;
   home-manager = {
-    extraSpecialArgs = {inherit inputs outputs;};
+    extraSpecialArgs = {inherit inputs outputs hostname;};
     sharedModules = builtins.attrValues outputs.homeManagerModules;
     users = let
       getHomePath = user: let
