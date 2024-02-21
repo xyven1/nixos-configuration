@@ -606,11 +606,11 @@
     "neovim-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1708464584,
-        "narHash": "sha256-9sm7bV3u0Ct4E23z2K4+mNte8jWgOVFyXXuLX6U/Hkc=",
+        "lastModified": 1708485352,
+        "narHash": "sha256-kIc1GXYv5rO7yionDQO7FtnlOzmHMlLbYpt1X0oUSlM=",
         "owner": "xyven1",
         "repo": "neovim-config",
-        "rev": "ef7a34ab4f341558d1459628d751b747497b9028",
+        "rev": "11031ae624af3b20fedbc56fc6b6e7909e7e87df",
         "type": "github"
       },
       "original": {
