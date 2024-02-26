@@ -90,7 +90,7 @@
 
     packages = forAllPkgs (pkgs: import ./pkgs {inherit pkgs;});
     devShells = forAllPkgs (pkgs: import ./shell.nix {inherit pkgs;});
-    formatter = forAllPkgs (pkgs: pkgs.nixpkgs-fmt);
+    formatter = forAllPkgs (pkgs: pkgs.alejandra);
 
     nixosConfigurations = builtins.listToAttrs (builtins.map
       (host: {
