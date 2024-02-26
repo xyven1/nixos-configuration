@@ -65,6 +65,21 @@
         && v == "directory"
         && builtins.hasAttr "default.nix" (builtins.readDir ./hosts/${n}))
       (builtins.readDir ./hosts));
+    homes =
+      outputs.lib.flatMap
+      (user:
+        builtins.map
+        (hostFile: {
+          inherit user;
+          host = nixpkgs.lib.removeSuffix ".nix" hostFile;
+          config_path = ./home/${user}/${hostFile};
+        })
+        (builtins.attrNames (nixpkgs.lib.filterAttrs
+          (n: v: v == "regular")
+          (builtins.readDir ./home/${user}))))
+      (builtins.attrNames (nixpkgs.lib.filterAttrs
+        (n: v: v == "directory" && n != "common")
+        (builtins.readDir ./home)));
   in {
     lib = import ./lib {
       inherit inputs outputs;
@@ -89,13 +104,16 @@
 
     homeConfigurations = builtins.listToAttrs (builtins.map
       (hostUser: {
-        name = "${hostUser.user}@${hostUser.host}";
+        name =
+          if hostUser.host == "generic"
+          then hostUser.user
+          else "${hostUser.user}@${hostUser.host}";
         value = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {inherit inputs outputs;};
           modules = [hostUser.config_path] ++ builtins.attrValues outputs.homeManagerModules;
         };
       })
-      (nixpkgs.lib.flatten (builtins.map outputs.lib.getHostUsers hosts)));
+      homes);
   };
 }
