@@ -31,4 +31,6 @@
     builtins.filter
     (v: v.config_path != null)
     (outputs.lib.getAllHostUsers host);
+  flatMap = f: l:
+    builtins.concatLists (builtins.map f l);
 }
