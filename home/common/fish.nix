@@ -49,7 +49,7 @@
       "nvim-update-config" = "env -C /etc/nixos/ nix flake lock --update-input neovim-config && rbh";
     };
     interactiveShellInit = ''
-      any-nix-shell fish | source
+      any-nix-shell fish --info-right | source
       fish_vi_key_bindings
       user_vi_key_bindings
       fish_vi_cursor
