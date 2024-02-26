@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
@@ -8,6 +9,10 @@
     ../common/fish.nix
     ../common/starship.nix
     ../common/direnv.nix
+    inputs.nix-index-database.hmModules.nix-index
+    {
+      programs.nix-index-database.comma.enable = true;
+    }
   ];
 
   nix = {
