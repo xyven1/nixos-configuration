@@ -66,7 +66,7 @@
         && builtins.hasAttr "default.nix" (builtins.readDir ./hosts/${n}))
       (builtins.readDir ./hosts));
     homes =
-      outputs.lib.flatMap
+      builtins.concatMap
       (user:
         builtins.map
         (hostFile: {
