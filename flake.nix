@@ -3,38 +3,49 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
-    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
-    rust-overlay.url = "github:oxalica/rust-overlay";
 
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    hyprland.url = "github:hyprwm/Hyprland";
-
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
-    neovim-config = {
-      flake = false;
-      url = "github:xyven1/neovim-config";
-    };
-
-    wpi-wireless-install.url = "github:xyven1/wpi-wireless-install";
-
-    vscode-server.url = "github:nix-community/nixos-vscode-server";
-
-    backgrounds = {
-      flake = false;
-      url = "github:xyven1/nixos-backgrounds";
-    };
-
-    home-management.url = "github:xyven1/home-management";
-
-    sops-nix.url = "github:Mic92/sops-nix";
-
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-index-database.url = "github:Mic92/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.inputs.nixpkgs.follows = "nixpkgs";
+
+    # to be removed
+    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
+
+    # overlays
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    rust-overlay.url = "github:oxalica/rust-overlay";
+
+    # config
+    neovim-config.url = "github:xyven1/neovim-config";
+    neovim-config.flake = false;
+
+    neovim-config-local.url = "git+file:///home/xyven/code/neovim-config";
+    neovim-config-local.flake = false;
+
+    backgrounds.flake = false;
+    backgrounds.url = "github:xyven1/nixos-backgrounds";
+
+    # host specific
+    # festus
+    wpi-wireless-install.url = "github:xyven1/wpi-wireless-install";
+
+    # ockham
+    home-management.url = "github:xyven1/home-management";
+    vscode-server.url = "github:nix-community/nixos-vscode-server";
+
+    # wsl
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
   };
