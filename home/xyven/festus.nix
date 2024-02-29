@@ -25,8 +25,10 @@
         };
       })
       (self: super: {
-        google-chrome-wayland = super.pkgs.unstable.google-chrome.override {
-          commandLineArgs = "--disable-features=WaylandFractionalScaleV1";
+        google-chrome = super.pkgs.unstable.google-chrome.override {
+          commandLineArgs = [
+            "--use-angle=vulkan"
+          ];
         };
       })
     ];
@@ -54,7 +56,7 @@
       # unfree
       slack
       obsidian
-      google-chrome
+      pkgs.google-chrome
       # firefox
       discord
       zoom-us
