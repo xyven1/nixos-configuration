@@ -936,7 +936,6 @@
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "neovim-config": "neovim-config",
-        "neovim-config-local": "neovim-config-local",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nix-index-database": "nix-index-database",
         "nixos-wsl": "nixos-wsl",

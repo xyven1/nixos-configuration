@@ -31,9 +31,6 @@
     neovim-config.url = "github:xyven1/neovim-config";
     neovim-config.flake = false;
 
-    neovim-config-local.url = "git+file:///home/xyven/code/neovim-config";
-    neovim-config-local.flake = false;
-
     backgrounds.flake = false;
     backgrounds.url = "github:xyven1/nixos-backgrounds";
 
