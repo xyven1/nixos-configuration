@@ -10,10 +10,12 @@ in {
     acceptTerms = true;
     defaults.email = "acme@xyven.dev";
     certs."${fqdn}" = {
-      domain = "*.${fqdn}";
+      domain = fqdn;
+      extraDomainNames = ["*.${fqdn}"];
       dnsProvider = "cloudflare";
       environmentFile = "/var/lib/secrets/cloudflare.secret";
       group = "nginx";
+      dnsPropagationCheck = false;
     };
   };
   services.nginx = let
