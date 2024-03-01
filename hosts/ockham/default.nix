@@ -47,7 +47,7 @@ in {
   networking = {
     useDHCP = lib.mkForce false;
     hostName = "ockham";
-    domain = "viselaya.org";
+    domain = "viselaya.com";
     interfaces.eno1.ipv4.addresses = [
       {
         address = "10.200.10.4";

@@ -2,25 +2,43 @@
   config,
   lib,
   ...
-}: {
+}: let
+  fqdn = "${config.networking.hostName}.${config.networking.domain}";
+in {
   networking.firewall.allowedTCPPorts = [80 443];
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "acme@xyven.dev";
+    certs."${fqdn}" = {
+      domain = "*.${fqdn}";
+      dnsProvider = "cloudflare";
+      environmentFile = "/var/lib/secrets/cloudflare.secret";
+      group = "nginx";
+    };
+  };
   services.nginx = let
-    domain = "${config.networking.hostName}.${config.networking.domain}";
     e' = "''";
   in {
     enable = true;
-    # reverse proxy for port 43434
     virtualHosts =
-      lib.mapAttrs
-      (name: cfg:
-        {
-          forceSSL = true;
-          sslCertificate = "/etc/certtest/ockham.crt";
-          sslCertificateKey = "/etc/certtest/ockham.key";
+      lib.mapAttrs'
+      (
+        subdomain: cfg: {
+          name = "${
+            if builtins.stringLength subdomain > 0
+            then "${subdomain}."
+            else ""
+          }${fqdn}";
+          value =
+            {
+              forceSSL = true;
+              useACMEHost = "${fqdn}";
+            }
+            // cfg;
         }
-        // cfg)
+      )
       {
-        ${domain} = {
+        "" = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:43434";
             recommendedProxySettings = true;
@@ -35,7 +53,7 @@
             '';
           };
         };
-        "unifi.${domain}" = {
+        "unifi" = {
           locations = {
             "/" = {
               proxyPass = "https://127.0.0.1:8443/";
@@ -83,7 +101,7 @@
             };
           };
         };
-        "plex.${domain}" = {
+        "plex" = {
           locations."/" = {
             proxyPass = "http://127.0.0.1:32400/";
             proxyWebsockets = true;
@@ -112,7 +130,7 @@
             '';
           };
         };
-        "monitor.${domain}" = let
+        "monitor" = let
           settings = config.services.grafana.settings;
         in {
           locations."/" = {
