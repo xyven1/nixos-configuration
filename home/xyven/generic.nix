@@ -56,6 +56,8 @@
       ripgrep
       fzf
       jq
+      # other nice-to-haves
+      unstable.gh
     ];
   };
 

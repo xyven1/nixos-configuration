@@ -37,7 +37,6 @@
   home = {
     packages = with pkgs.unstable; [
       scc
-      gh
       pkgs.tlpui
       pkgs.wpi-wireless-install # for installing wifi certs
       spotify
