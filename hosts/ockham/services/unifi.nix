@@ -13,7 +13,7 @@
   ];
   services.unifi = {
     enable = true;
-    unifiPackage = pkgs.unstable.unifi7;
+    unifiPackage = pkgs.unstable.unifi8;
     openFirewall = true;
   };
 }
