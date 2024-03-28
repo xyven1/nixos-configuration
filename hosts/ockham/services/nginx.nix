@@ -6,6 +6,7 @@
   fqdn = "${config.networking.hostName}.${config.networking.domain}";
 in {
   networking.firewall.allowedTCPPorts = [80 443];
+  sops.secrets.cloudflare = {};
   security.acme = {
     acceptTerms = true;
     defaults.email = "acme@xyven.dev";
@@ -13,7 +14,7 @@ in {
       domain = fqdn;
       extraDomainNames = ["*.${fqdn}"];
       dnsProvider = "cloudflare";
-      environmentFile = "/var/lib/secrets/cloudflare.secret";
+      environmentFile = config.sops.secrets.cloudflare.path;
       group = "nginx";
       dnsPropagationCheck = false;
     };
