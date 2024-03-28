@@ -43,7 +43,7 @@
       spotify-tray # shows current track and controls in notification area
       gnomeExtensions.spotify-tray # shows current track in tray
       gnomeExtensions.paperwm # tiling window manager
-      pkgs.spotify-player # terminal spotify client
+      spotify-player # terminal spotify client
       wl-clipboard # for clip board support in neovim
       libsForQt5.okular # pdf editor
       libreoffice-qt
@@ -55,8 +55,8 @@
       # unfree
       slack
       obsidian
-      pkgs.google-chrome
-      # firefox
+      google-chrome
+      firefox
       discord
       zoom-us
       parsec-bin
@@ -101,7 +101,24 @@
     };
   };
 
+  xdg.configFile."paperwm/user.css".text = ''
+    .paperwm-selection {
+        border-radius: 12px 12px 0px 0px;
+        border-width: 4px;
+        background-color: rgba(0, 0, 0, 0);
+    }
+  '';
   dconf.settings = {
+    "org/gnome/nautilus/list-view" = {
+      default-zoom-level = "medium";
+      use-tree-view = true;
+    };
+    "org/gnome/nautilus/preferences" = {
+      default-folder-viewer = "list-view";
+      migrated-gtk-settings = true;
+      search-filter-time-type = "last_modified";
+      search-view = "list-view";
+    };
     "org/gnome/desktop/default-applications/terminal" = {
       exec = "/etc/profiles/per-user/xyven/bin/wezterm";
     };
@@ -112,7 +129,7 @@
       delay = lib.hm.gvariant.mkUint32 225;
     };
     "org/gnome/shell/extensions/paperwm" = {
-      "use-default-background" = true;
+      use-default-background = true;
     };
     "org/gnome/shell" = {
       favorite-apps = [
