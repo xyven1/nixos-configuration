@@ -3,6 +3,7 @@
   outputs,
   host,
   pkgs,
+  lib,
   ...
 }: {
   imports =
@@ -27,7 +28,7 @@
       '')
   ];
   # enable overlays defined in overlay/default.nix
-  nixpkgs.myOverlays.enable = true;
+  nixpkgs.myOverlays.enable = lib.mkDefault true;
   home-manager = {
     extraSpecialArgs = {inherit inputs outputs;};
     sharedModules = builtins.attrValues outputs.homeManagerModules;
