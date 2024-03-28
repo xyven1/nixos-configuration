@@ -1,20 +1,11 @@
 keys:
-  - &users:
-    - &xyven
-  - &hosts:
-    - &laptop
-
+  - &users
+    - &xyven age1gteg9ehk9spfkufmg2hfsrzfnk7ejxe20jdgnxvzua7c2ktcd5ys0fgygp
+  - &hosts
+    - &festus age1hh7j26fwfl8mchs2x7htwd6zeheetxdvvfjtwnhr23v5txjeuvqq7cal6a
 creation_rules:
-  - path_regex: hosts/laptop/secrets.ya?ml$
+  - path_regex: hosts/festus/secrets.ya?ml$
     key_groups:
     - age:
-      - *laptop
-      pgp:
+      - *festus
       - *xyven
-  - path_regex: hosts/common/secrets.ya?ml$
-    key_groups:
-    - age:
-      - *laptop
-      pgp:
-      - *xyven
-

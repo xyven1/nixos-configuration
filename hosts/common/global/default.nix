@@ -16,6 +16,9 @@
       ./nix.nix
     ]
     ++ (builtins.attrValues outputs.nixosModules);
+  sops.secrets.test = {owner = "xyven";};
+  sops.secrets."example_key" = {};
+
   environment.systemPackages = [
     pkgs.bash
     pkgs.git
