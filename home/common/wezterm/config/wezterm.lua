@@ -23,7 +23,7 @@ local config = {
     top = 0,
     bottom = 0,
   },
-  window_background_opacity = 0.96
+  window_background_opacity = 0.9
 };
 
 return merge_tables(
