@@ -1,18 +1,13 @@
 {pkgs, ...}: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./accelerated-video.nix
-    # ./disko.nix
     # ./biometrics.nix
-    ./nvidia.nix
-    # ./nvidia-disable.nix
-    # ./wiregaurd.nix
+    ./nvidia.nix # ./nvidia-disable.nix
 
     ../common/global
     ../common/users/xyven
     ../common/optional/gnome.nix
-    # ../common/optional/hyprland.nix
   ];
 
   # Setup keyfile
@@ -21,7 +16,15 @@
     initrd.secrets = {
       "/crypto_keyfile.bin" = null;
     };
+    loader = {
+      systemd-boot.enable = true;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot/efi";
+      };
+    };
   };
+  hardware.enableRedistributableFirmware = true;
 
   networking = {
     hostName = "festus"; # Define your hostname.
@@ -49,7 +52,9 @@
     pulse.enable = true;
   };
 
-  # powerManagement.powertop.enable = true;
+  # improve boot time
+  systemd.services.NetworkManager-wait-online.enable = false;
+
   services.thermald.enable = true;
   services.tlp = {
     enable = true;
