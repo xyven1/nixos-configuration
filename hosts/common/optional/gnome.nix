@@ -1,9 +1,9 @@
 {pkgs, ...}: {
   services.xserver = {
     enable = true;
-    layout = "us";
-    xkbVariant = "";
-    xkbOptions = "caps:swapescape";
+    xkb.layout = "us";
+    xkb.variant = "";
+    xkb.options = "caps:swapescape";
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
   };
