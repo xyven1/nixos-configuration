@@ -36,10 +36,9 @@
       # unfree
       slack
       obsidian
-      google-chrome.override
-      {
+      (google-chrome.override {
         commandLineArgs = ["--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder"];
-      }
+      })
       firefox
       discord
       zoom-us
@@ -49,9 +48,7 @@
       #general dev
       lua-language-server
     ];
-    sessionVariables = {
-      # NIXOS_OZONE_WL = "1";
-    };
+    sessionVariables.NIXOS_OZONE_WL = "1";
   };
 
   programs.sioyek = {
