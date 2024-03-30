@@ -1,21 +1,22 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ./accelerated-video.nix
-    # ./biometrics.nix
-    ./nvidia.nix # ./nvidia-disable.nix
+    ./nvidia.nix
 
     ../common/global
     ../common/users/xyven
     ../common/optional/gnome.nix
   ];
 
-  # Setup keyfile
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
-    initrd.secrets = {
-      "/crypto_keyfile.bin" = null;
-    };
+    # Setup keyfile
+    initrd.secrets."/crypto_keyfile.bin" = null;
     loader = {
       systemd-boot.enable = true;
       efi = {
@@ -25,18 +26,21 @@
     };
   };
   hardware.enableRedistributableFirmware = true;
+  # improve boot time
+  systemd.services.NetworkManager-wait-online.enable = false;
+  systemd.services.docker.wantedBy = lib.mkForce [];
 
   networking = {
     hostName = "festus"; # Define your hostname.
     networkmanager.enable = true;
   };
 
-  services.fwupd.enable = true;
-
-  services.fstrim.enable = true;
-
   virtualisation.libvirtd.enable = true;
   virtualisation.docker.enable = true;
+
+  # Services
+  services.fwupd.enable = true;
+  services.fstrim.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -52,9 +56,7 @@
     pulse.enable = true;
   };
 
-  # improve boot time
-  systemd.services.NetworkManager-wait-online.enable = false;
-
+  # Power management
   services.thermald.enable = true;
   services.tlp = {
     enable = true;
