@@ -12,15 +12,19 @@
   ];
   programs.dconf.enable = true;
   environment.gnome.excludePackages = with pkgs.gnome; [
+    # baobab # disk usage analyzer
+    # file-roller # archive manager
+    # gnome-font-viewer
+    # gnome-logs
+    # gnome-system-monitor
+    # nautilus
+    # pkgs.gnome-connections
+    # pkgs.loupe
+    # pkgs.snapshot
     cheese # photo booth
     epiphany # web browser
-    gedit # text editor
-    simple-scan # scanner
-    yelp # help browser
     evince # document viewer
-    file-roller # archive manager
     geary # email client
-
     gnome-calculator
     gnome-calendar
     gnome-characters
@@ -28,11 +32,14 @@
     gnome-contacts
     gnome-maps
     gnome-music
-    gnome-weather
     gnome-terminal
-
-    pkgs.gnome-text-editor
+    gnome-weather
+    pkgs.gnome-console
     pkgs.gnome-photos
+    pkgs.gnome-text-editor
+    simple-scan # scanner
+    totem # video player
+    yelp # help browser
   ];
 
   console.useXkbConfig = true; # applies xkb config to tty terminals

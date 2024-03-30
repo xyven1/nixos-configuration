@@ -32,10 +32,10 @@
     };
     eza = {
       enable = true;
-      enableAliases = true;
       icons = true;
       git = true;
     };
+    zoxide.enable = true;
     fzf.enable = true;
     gitui.enable = true;
   };

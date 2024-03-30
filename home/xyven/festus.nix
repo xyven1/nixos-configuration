@@ -9,29 +9,10 @@
     ../common/font.nix
     ../common/wezterm
     ../common/helix.nix
-    # ../common/hyprland.nix
   ];
 
   nixpkgs = {
     config.allowUnfree = true;
-    config.permittedInsecurePackages = [
-      "electron-25.9.0"
-    ];
-    overlays = [
-      (self: super: {
-        spotify-player = super.pkgs.unstable.spotify-player.override {
-          withSixel = false;
-          withNotify = false;
-        };
-      })
-      (self: super: {
-        google-chrome = super.pkgs.unstable.google-chrome.override {
-          commandLineArgs = [
-            "--use-angle=vulkan"
-          ];
-        };
-      })
-    ];
   };
 
   home = {
@@ -55,7 +36,10 @@
       # unfree
       slack
       obsidian
-      google-chrome
+      google-chrome.override
+      {
+        commandLineArgs = ["--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder"];
+      }
       firefox
       discord
       zoom-us
