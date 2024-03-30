@@ -48,7 +48,7 @@
       #general dev
       lua-language-server
     ];
-    sessionVariables.NIXOS_OZONE_WL = "1";
+    # sessionVariables.NIXOS_OZONE_WL = "1";
   };
 
   programs.sioyek = {
