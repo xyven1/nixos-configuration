@@ -17,14 +17,16 @@
     kernelPackages = pkgs.linuxPackages_zen;
     # Setup keyfile
     initrd.secrets."/crypto_keyfile.bin" = null;
-    loader = {
-      systemd-boot.enable = true;
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot/efi";
-      };
+    loader.efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot/efi";
+    };
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/etc/secureboot";
     };
   };
+  environment.systemPackages = [pkgs.sbctl];
   hardware.enableRedistributableFirmware = true;
   # improve boot time
   systemd.services.NetworkManager-wait-online.enable = false;

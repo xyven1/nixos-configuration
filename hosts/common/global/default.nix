@@ -10,6 +10,7 @@
     [
       inputs.home-manager.nixosModules.home-manager
       inputs.disko.nixosModules.disko
+      inputs.lanzaboote.nixosModules.lanzaboote
       inputs.flake-utils-plus.nixosModules.autoGenFromInputs
       ./locale.nix
       ./sops.nix

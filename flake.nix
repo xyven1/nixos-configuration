@@ -13,11 +13,11 @@
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
+    lanzaboote.url = "github:nix-community/lanzaboote/v0.3.0";
+    lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
+
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprland.inputs.nixpkgs.follows = "nixpkgs";
 
     # to be removed
     flake-utils.url = "github:numtide/flake-utils";
