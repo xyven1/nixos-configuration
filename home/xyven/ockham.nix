@@ -4,8 +4,6 @@
   ];
   home = {
     packages = with pkgs.unstable; [
-      vagrant
-
       lua-language-server
     ];
   };
