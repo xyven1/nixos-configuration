@@ -3,12 +3,6 @@
   pkgs,
   ...
 }: {
-  home = {
-    packages = with pkgs.unstable; [
-      neovide
-    ];
-  };
-
   programs.neovim = {
     enable = true;
     vimAlias = true;

@@ -28,10 +28,10 @@
       wl-clipboard # for clip board support in neovim
       libsForQt5.okular # pdf editor
       libreoffice-qt
-      thunderbird
       vscode
       vagrant
       zotero
+      neovide
 
       # unfree
       slack
@@ -49,6 +49,7 @@
       lua-language-server
     ];
     # sessionVariables.NIXOS_OZONE_WL = "1";
+    sessionVariables.NEOVIDE_FRAME = "none";
   };
 
   programs.sioyek = {
@@ -104,7 +105,10 @@
       exec = "/etc/profiles/per-user/xyven/bin/wezterm";
     };
     "org/gnome/desktop/wm/preferences" = {
-      button-layout = "appmenu:minimize,maximize,close";
+      button-layout = ":menu"; #appmenu:minimize,maximize,close";
+    };
+    "org/gnome/desktop/peripherals/touchpad" = {
+      tap-to-click = true;
     };
     "org/gnome/desktop/peripherals/keyboard" = {
       delay = lib.hm.gvariant.mkUint32 225;

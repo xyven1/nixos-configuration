@@ -2,7 +2,7 @@ local wezterm = require 'wezterm'
 
 local function merge_tables(...)
   local result = {}
-  for _, t in ipairs({...}) do
+  for _, t in ipairs({ ... }) do
     for k, v in pairs(t) do
       result[k] = v
     end
@@ -23,6 +23,7 @@ local config = {
     top = 0,
     bottom = 0,
   },
+  window_decorations = "NONE",
   window_background_opacity = 0.9
 };
 
