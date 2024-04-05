@@ -24,6 +24,7 @@
       spotify-tray # shows current track and controls in notification area
       gnomeExtensions.spotify-tray # shows current track in tray
       gnomeExtensions.paperwm # tiling window manager
+      gnomeExtensions.window-title-is-back
       spotify-player # terminal spotify client
       wl-clipboard # for clip board support in neovim
       libsForQt5.okular # pdf editor
@@ -116,6 +117,13 @@
     "org/gnome/shell/extensions/paperwm" = {
       use-default-background = true;
     };
+    "org/gnome/shell/extensions/window-title-is-back" = {
+      colored-icon = true;
+      icon-size = lib.hm.gvariant.mkUint32 20;
+      show-app = false;
+      show-icon = true;
+      show-title = true;
+    };
     "org/gnome/shell" = {
       favorite-apps = [
         "org.wezfurlong.wezterm.desktop"
@@ -126,8 +134,8 @@
       disable-user-extensions = false;
       enabled-extensions = [
         "sp-tray@sp-tray.esenliyim.github.com"
-        "gnome-vagrant-indicator@gnome-shell-exstensions.fffilo.github.com"
         "paperwm@paperwm.github.com"
+        "window-title-is-back@fthx"
       ];
     };
     "org/gnome/desktop/background" = {
