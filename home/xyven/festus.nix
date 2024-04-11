@@ -46,8 +46,6 @@
       parsec-bin
       plex-media-player
 
-      #general dev
-      lua-language-server
     ];
     # sessionVariables.NIXOS_OZONE_WL = "1";
     sessionVariables.NEOVIDE_FRAME = "none";

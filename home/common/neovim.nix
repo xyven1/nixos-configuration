@@ -17,6 +17,7 @@
       gitui
       nil
       alejandra
+      lua-language-server
     ];
   };
 
