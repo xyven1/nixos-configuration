@@ -38,9 +38,13 @@
       slack
       obsidian
       (google-chrome.override {
-        commandLineArgs = ["--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder"];
+        commandLineArgs = [
+          "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder"
+          "--enable-features=UseOzonePlatform"
+          "--ozone-platform=wayland"
+          "--disable-features=WaylandFractionalScaleV1"
+        ];
       })
-      firefox
       discord
       zoom-us
       parsec-bin
