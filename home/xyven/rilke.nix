@@ -27,12 +27,13 @@
       gnomeExtensions.window-title-is-back
       gnomeExtensions.freon
       spotify-player # terminal spotify client
-      wl-clipboard # for clip board support in neovim
+      xclip # for clip board support in neovim
       libsForQt5.okular # pdf editor
       libreoffice-qt
       vscode
       vagrant
       zotero
+      texliveFull
       neovide
 
       # unfree
