@@ -94,6 +94,9 @@
     }
   '';
   dconf.settings = {
+    "org/gnome/desktop/interface" ={
+      color-scheme = "prefer-dark";
+    };
     "org/gnome/nautilus/list-view" = {
       default-zoom-level = "medium";
       use-tree-view = true;
