@@ -16,41 +16,53 @@
   };
 
   home = {
-    packages = with pkgs.unstable; [
-      scc
-      pkgs.tlpui
-      pkgs.wpi-wireless-install # for installing wifi certs
-      spotify
-      spotify-tray # shows current track and controls in notification area
-      gnomeExtensions.spotify-tray # shows current track in tray
-      gnomeExtensions.paperwm # tiling window manager
-      gnomeExtensions.window-title-is-back
-      spotify-player # terminal spotify client
-      wl-clipboard # for clip board support in neovim
-      libsForQt5.okular # pdf editor
-      libreoffice-qt
-      vscode
-      vagrant
-      zotero
-      neovide
+    packages =
+      (with pkgs; [
+        # my own packages
+        tlpui
+        wpi-wireless-install # for installing wifi certs
+      ])
+      ++ (with pkgs.unstable; [
+        gnome-obfuscate
+        junction # application picker
+        libreoffice-qt
+        metadata-cleaner
+        mousai # music recognition
+        neovide
+        scc
+        spotify
+        spotify-player # terminal spotify client
+        spotify-tray # shows current track and controls in notification area
+        switcheroo # image converter
+        video-trimmer
+        vscode
+        warp # file transfers
+        wike # wikipedia reader
+        wl-clipboard # for clip board support in neovim
+        zotero
 
-      # unfree
-      slack
-      obsidian
-      (google-chrome.override {
-        commandLineArgs = [
-          "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder"
-          "--enable-features=UseOzonePlatform"
-          "--ozone-platform=wayland"
-          "--disable-features=WaylandFractionalScaleV1"
-        ];
-      })
-      discord
-      zoom-us
-      parsec-bin
-      plex-media-player
+        # unfree
+        slack
+        obsidian
+        (google-chrome.override {
+          commandLineArgs = [
+            "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder"
+            "--enable-features=UseOzonePlatform"
+            "--ozone-platform=wayland"
+            "--disable-features=WaylandFractionalScaleV1"
+          ];
+        })
+        discord
+        zoom-us
+        parsec-bin
+        plex-media-player
 
-    ];
+      ])
+      ++ (with pkgs.unstable.gnomeExtensions; [
+        paperwm
+        spotify-tray
+        window-title-is-back
+      ]);
     # sessionVariables.NIXOS_OZONE_WL = "1";
     sessionVariables.NEOVIDE_FRAME = "none";
   };

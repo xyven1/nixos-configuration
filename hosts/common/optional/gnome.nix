@@ -7,39 +7,25 @@
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
   };
+
+  services.gnome = {
+    core-os-services.enable = true;
+    core-utilities.enable = false;
+  };
+
   environment.systemPackages = with pkgs; [
-    gnome.gnome-session
-  ];
-  programs.dconf.enable = true;
-  environment.gnome.excludePackages = with pkgs.gnome; [
-    # baobab # disk usage analyzer
-    # file-roller # archive manager
-    # gnome-font-viewer
-    # gnome-logs
-    # gnome-system-monitor
-    # nautilus
-    # pkgs.gnome-connections
-    # pkgs.loupe
-    # pkgs.snapshot
-    cheese # photo booth
-    epiphany # web browser
+    baobab # disk usage analyzer
+    # decibels # audio playback
     evince # document viewer
-    geary # email client
-    gnome-calculator
-    gnome-calendar
-    gnome-characters
-    gnome-clocks
-    gnome-contacts
-    gnome-maps
-    gnome-music
-    gnome-terminal
-    gnome-weather
-    pkgs.gnome-console
-    pkgs.gnome-photos
-    pkgs.gnome-text-editor
-    simple-scan # scanner
-    totem # video player
-    yelp # help browser
+    eyedropper # color picker
+    gnome-connections # remote desktop viewer
+    gnome.file-roller # archive manager
+    gnome.gnome-logs # log viewer
+    gnome.gnome-system-monitor # system monitor
+    gnome.nautilus # file manager
+    gnome.totem # video player
+    loupe # image viewer
+    snapshot # screenshot tool
   ];
 
   console.useXkbConfig = true; # applies xkb config to tty terminals
