@@ -47,7 +47,6 @@
       zoom-us
       parsec-bin
       plex-media-player
-
     ];
     # sessionVariables.NIXOS_OZONE_WL = "1";
     sessionVariables.NEOVIDE_FRAME = "none";
@@ -92,7 +91,7 @@
     }
   '';
   dconf.settings = {
-    "org/gnome/desktop/interface" ={
+    "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
     };
     "org/gnome/nautilus/list-view" = {
@@ -147,4 +146,6 @@
       picture-uri-dark = "file:///home/xyven/.local/background/forest.jpg";
     };
   };
+
+  home.stateVersion = "24.05";
 }

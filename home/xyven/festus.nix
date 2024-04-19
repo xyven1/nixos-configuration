@@ -160,4 +160,6 @@
       picture-uri-dark = "file:///home/xyven/.local/background/forest.jpg";
     };
   };
+
+  home.stateVersion = "22.11";
 }

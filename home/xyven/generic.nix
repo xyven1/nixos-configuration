@@ -77,5 +77,5 @@
     ];
   };
 
-  home.stateVersion = "22.11";
+  home.stateVersion = lib.mkDefault "24.05";
 }
