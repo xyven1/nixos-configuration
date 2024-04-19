@@ -29,35 +29,51 @@
       enable = true;
       userName = "xyven1";
       userEmail = "git@xyven.dev";
+      package = pkgs.unstable.git;
     };
     eza = {
       enable = true;
       icons = true;
       git = true;
+      package = pkgs.unstable.eza;
     };
-    zoxide.enable = true;
-    fzf.enable = true;
-    gitui.enable = true;
+    zoxide = {
+      enable = true;
+      package = pkgs.unstable.zoxide;
+    };
+    fzf = {
+      enable = true;
+      package = pkgs.unstable.fzf;
+    };
+    gitui = {
+      enable = true;
+      package = pkgs.unstable.gitui;
+    };
   };
 
   home = {
     username = "xyven";
     homeDirectory = "/home/xyven";
     sessionVariables = {
-      NIX_AUTO_RUN = "1";
+      # NIX_AUTO_RUN = "1";
     };
-    packages = with pkgs; [
-      # basic utils
-      wget
-      unzip
-      zip
+    packages = with pkgs.unstable; [
+      # networking tools
       dnsutils
       inetutils
-      ripgrep
-      fzf
+      nmap
+      wget
+      # text tools
       jq
+      ripgrep
+      # compression tools
+      unzip
+      zip
       # other nice-to-haves
-      unstable.gh
+      gh
+      hyperfine
+      ncdu
+      pipes-rs
     ];
   };
 
