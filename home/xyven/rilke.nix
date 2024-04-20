@@ -16,45 +16,48 @@
   };
 
   home = {
-    packages = with pkgs.unstable; [
-      scc
-      pkgs.tlpui
-      pkgs.wpi-wireless-install # for installing wifi certs
-      spotify
-      spotify-tray # shows current track and controls in notification area
-      gnomeExtensions.spotify-tray # shows current track in tray
-      gnomeExtensions.paperwm # tiling window manager
-      gnomeExtensions.window-title-is-back
-      gnomeExtensions.freon
-      spotify-player # terminal spotify client
-      xclip # for clip board support in neovim
-      libsForQt5.okular # pdf editor
-      libreoffice-qt
-      vscode
-      vagrant
-      zotero
-      texliveFull
-      neovide
+    packages =
+      (with pkgs.unstable; [
+        gnome-obfuscate
+        junction # application picker
+        libreoffice-qt
+        metadata-cleaner
+        mousai # music recognition
+        neovide
+        scc
+        spotify
+        spotify-player # terminal spotify client
+        spotify-tray # shows current track and controls in notification area
+        switcheroo # image converter
+        texliveFull
+        video-trimmer
+        virt-manager
+        vscode
+        warp # file transfers
+        wike # wikipedia reader
+        xclip # for clip board support in neovim
 
-      # unfree
-      slack
-      obsidian
-      # (google-chrome.override {
-      #   commandLineArgs = [ "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder" ];
-      # })
-      google-chrome
-      discord
-      zoom-us
-      parsec-bin
-      plex-media-player
-    ];
+        # unfree
+        slack
+        obsidian
+        google-chrome
+        discord
+        zoom-us
+        parsec-bin
+        plex-media-player
+      ])
+      ++ (with pkgs.unstable.gnomeExtensions; [
+        freon
+        paperwm
+        spotify-tray
+        window-title-is-back
+      ]);
     # sessionVariables.NIXOS_OZONE_WL = "1";
     sessionVariables.NEOVIDE_FRAME = "none";
   };
 
   programs.sioyek = {
     enable = true;
-    package = pkgs.sioyek;
     config = {
       "ui_font" = "JetBrainsMono Nerd Font";
       # "status_bar_font_size" = "30";
