@@ -12,19 +12,15 @@
     extraPackages = with pkgs.unstable; [
       ripgrep
       fzf
-      gcc
-      nodejs
       gitui
+      lua-language-server
       nil
       alejandra
-      lua-language-server
     ];
   };
 
-  home.file = {
-    ".config/nvim" = {
-      recursive = true;
-      source = inputs.neovim-config;
-    };
+  xdg.configFile."nvim" = {
+    recursive = true;
+    source = inputs.neovim-config;
   };
 }
