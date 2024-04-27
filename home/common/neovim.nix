@@ -8,6 +8,8 @@
     vimAlias = true;
     viAlias = true;
     defaultEditor = true;
+    withNodeJs = true;
+
 
     extraPackages = with pkgs.unstable; [
       ripgrep
