@@ -26,6 +26,7 @@
         gnome-obfuscate
         junction # application picker
         libreoffice-qt
+        magic-wormhole-rs
         metadata-cleaner
         mousai # music recognition
         neovide
@@ -36,7 +37,6 @@
         switcheroo # image converter
         video-trimmer
         vscode
-        warp # file transfers
         wike # wikipedia reader
         wl-clipboard # for clip board support in neovim
         zotero
