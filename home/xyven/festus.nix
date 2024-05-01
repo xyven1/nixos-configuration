@@ -23,6 +23,7 @@
         wpi-wireless-install # for installing wifi certs
       ])
       ++ (with pkgs.unstable; [
+        exercism
         gnome-obfuscate
         junction # application picker
         libreoffice-qt
