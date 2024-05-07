@@ -94,7 +94,7 @@
     homeManagerModules = import ./modules/home-manager;
 
     packages = forAllPkgs (pkgs: import ./pkgs {inherit pkgs;});
-    devShells = forAllPkgs (pkgs: import ./shell.nix {inherit pkgs;});
+    devShell = forAllPkgs (pkgs: import ./shell.nix {inherit pkgs;});
     formatter = forAllPkgs (pkgs: pkgs.alejandra);
 
     nixosConfigurations = builtins.listToAttrs (builtins.map
