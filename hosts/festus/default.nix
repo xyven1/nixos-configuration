@@ -58,6 +58,9 @@
     pulse.enable = true;
   };
 
+  # allow gnome to manage system time
+  time.timeZone = null;
+
   # Power management
   services.thermald.enable = true;
   services.tlp = {
