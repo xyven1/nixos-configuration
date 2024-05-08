@@ -47,6 +47,12 @@
         vimcmd_replace_one_symbol = "[<<-](bold purple)";
       };
 
+      nix_shell = {
+        symbol = " ";
+        format = "via [$symbol]($style)⠀";
+        heuristic = true;
+      };
+
       time = {
         format = "\\\[[$time]($style)\\\]";
         disabled = false;

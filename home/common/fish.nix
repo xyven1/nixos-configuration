@@ -9,7 +9,8 @@
     enableFishIntegration = true;
   };
   home.packages = [
-    pkgs.any-nix-shell
+    pkgs.unstable.any-nix-shell
+    pkgs.unstable.fishPlugins.fzf-fish
   ];
   programs.fish = {
     enable = true;
@@ -48,16 +49,20 @@
       "nvim-update" = "env -C /etc/nixos/ nix flake lock --update-input neovim-nightly-overlay --update-input neovim-config && rbh";
       "nvim-update-config" = "env -C /etc/nixos/ nix flake lock --update-input neovim-config && rbh";
     };
-    interactiveShellInit = ''
-      any-nix-shell fish --info-right | source
-      fish_vi_key_bindings
-      user_vi_key_bindings
-      fish_vi_cursor
-    '';
     shellInit = let
       sv = config.home.sessionVariables;
     in ''
       ${lib.optionalString (sv ? EDITOR) "set -x EDITOR ${sv.EDITOR}"}
+      set fish_vi_force_cursor 1
+      set fzf_fd_opts --hidden
+    '';
+    interactiveShellInit = ''
+    '';
+    shellInitLast = ''
+      any-nix-shell fish --info-right | source
+      fish_vi_key_bindings
+      user_vi_key_bindings
+      fish_vi_cursor
     '';
   };
 }

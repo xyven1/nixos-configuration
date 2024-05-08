@@ -31,15 +31,15 @@
       userEmail = "git@xyven.dev";
       package = pkgs.unstable.git;
     };
+    bat = {
+      enable = true;
+      package = pkgs.unstable.bat;
+    };
     eza = {
       enable = true;
       icons = true;
       git = true;
       package = pkgs.unstable.eza;
-    };
-    zoxide = {
-      enable = true;
-      package = pkgs.unstable.zoxide;
     };
     fzf = {
       enable = true;
@@ -49,14 +49,20 @@
       enable = true;
       package = pkgs.unstable.gitui;
     };
+    ripgrep = {
+      enable = true;
+      package = pkgs.unstable.ripgrep;
+    };
+    zoxide = {
+      enable = true;
+      package = pkgs.unstable.zoxide;
+    };
   };
 
   home = {
     username = "xyven";
     homeDirectory = "/home/xyven";
-    sessionVariables = {
-      # NIX_AUTO_RUN = "1";
-    };
+
     packages = with pkgs.unstable; [
       # networking tools
       dnsutils
@@ -65,11 +71,11 @@
       wget
       # text tools
       jq
-      ripgrep
       # compression tools
       unzip
       zip
       # other nice-to-haves
+      fd
       gh
       hyperfine
       ncdu
