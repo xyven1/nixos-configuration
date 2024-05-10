@@ -4,6 +4,10 @@ with pkgs; {
   sioyek = qt6.callPackage ./sioyek.nix {};
   scenebuilder19 = callPackage ./scenebuilder.nix {};
   neovide-nightly = callPackage ./neovide {};
+
+  wezterm-nightly = darwin.apple_sdk_11_0.callPackage ./wezterm {
+    inherit (darwin.apple_sdk_11_0.frameworks) Cocoa CoreGraphics Foundation UserNotifications System;
+  };
   idea-ultimate-latest = pkgs.jetbrains.idea-ultimate.overrideAttrs (_: {
     version = "2022.3";
     src = pkgs.fetchurl {
