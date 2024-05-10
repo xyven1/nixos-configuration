@@ -1,12 +1,4 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
-  disabledModules = ["services/networking/unifi.nix"];
-  imports = [
-    "${inputs.nixpkgs-unstable}/nixos/modules/services/networking/unifi.nix"
-  ];
+{pkgs, ...}: {
   nixpkgs.allowUnfreePackages = [
     "unifi-controller"
     "mongodb"
