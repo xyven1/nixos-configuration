@@ -3,6 +3,7 @@ with pkgs; {
   tlpui = python3Packages.callPackage ./tlpui.nix {};
   sioyek = qt6.callPackage ./sioyek.nix {};
   scenebuilder19 = callPackage ./scenebuilder.nix {};
+  neovide-nightly = callPackage ./neovide {};
   idea-ultimate-latest = pkgs.jetbrains.idea-ultimate.overrideAttrs (_: {
     version = "2022.3";
     src = pkgs.fetchurl {

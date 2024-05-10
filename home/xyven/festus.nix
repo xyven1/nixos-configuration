@@ -19,6 +19,7 @@
     packages =
       (with pkgs; [
         # my own packages
+        neovide-nightly
         tlpui
         wpi-wireless-install # for installing wifi certs
       ])
@@ -30,7 +31,6 @@
         magic-wormhole-rs
         metadata-cleaner
         mousai # music recognition
-        neovide
         scc
         spotify
         spotify-player # terminal spotify client
