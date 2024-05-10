@@ -23,7 +23,7 @@ local config = {
     top = 0,
     bottom = 0,
   },
-  window_decorations = "NONE",
+  window_decorations = "RESIZE",
   window_background_opacity = 0.9
 };
 
