@@ -1,8 +1,5 @@
-{
-  pkgs,
-  python3Packages,
-}:
-with pkgs; {
+self: super:
+with self; {
   droncan-gui-tool = python3Packages.callPackage ../applications/dronecan-gui-tool {};
 
   neovide-nightly = callPackage ../applications/neovide {};
