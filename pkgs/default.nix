@@ -1,13 +1,16 @@
-{pkgs ? import <nixpkgs> {}}:
-with pkgs; {
-  tlpui = python3Packages.callPackage ./tlpui.nix {};
-  sioyek = qt6.callPackage ./sioyek.nix {};
-  scenebuilder19 = callPackage ./scenebuilder.nix {};
-  neovide-nightly = callPackage ./neovide {};
+{pkgs ? import <nixpkgs> {}}: let
+  python3Packages = pkgs.python3Packages.override {
+    overrides = import ./python-packages.nix;
+  };
+in {
+  tlpui = pkgs.python3Packages.callPackage ./tlpui.nix {};
+  sioyek = pkgs.qt6.callPackage ./sioyek.nix {};
+  scenebuilder19 = pkgs.callPackage ./scenebuilder.nix {};
+  neovide-nightly = pkgs.callPackage ./neovide {};
   droncan-gui-tool = python3Packages.callPackage ./dronecan-gui-tool.nix {};
 
-  wezterm-nightly = darwin.apple_sdk_11_0.callPackage ./wezterm {
-    inherit (darwin.apple_sdk_11_0.frameworks) Cocoa CoreGraphics Foundation UserNotifications System;
+  wezterm-nightly = pkgs.darwin.apple_sdk_11_0.callPackage ./wezterm {
+    inherit (pkgs.darwin.apple_sdk_11_0.frameworks) Cocoa CoreGraphics Foundation UserNotifications System;
   };
   idea-ultimate-latest = pkgs.jetbrains.idea-ultimate.overrideAttrs (_: {
     version = "2022.3";
