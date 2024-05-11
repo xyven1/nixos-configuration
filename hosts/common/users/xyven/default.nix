@@ -19,6 +19,7 @@ in {
         "networkmanager"
         "docker"
         "libvirtd"
+        "dialout"
       ];
   };
 }
