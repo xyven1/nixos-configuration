@@ -1,6 +1,6 @@
 self: super:
 with self; {
-  droncan-gui-tool = python3Packages.callPackage ../applications/dronecan-gui-tool {};
+  dronecan-gui-tool = callPackage ../applications/dronecan-gui-tool {};
 
   neovide-nightly = callPackage ../applications/neovide {};
 
@@ -8,7 +8,7 @@ with self; {
 
   sioyek = qt6.callPackage ../applications/sioyek {};
 
-  tlpui = python3Packages.callPackage ../applications/tlpui {};
+  tlpui = callPackage ../applications/tlpui {};
 
   wezterm-nightly = darwin.apple_sdk_11_0.callPackage ../applications/wezterm {
     inherit (pkgs.darwin.apple_sdk_11_0.frameworks) Cocoa CoreGraphics Foundation UserNotifications System;

@@ -3,10 +3,6 @@
   python3Packages,
   fetchFromGitHub,
   libsForQt5,
-  install-freedesktop,
-  easywebdav,
-  pymonocypher,
-  qtwidgets,
 }:
 python3Packages.buildPythonApplication rec {
   pname = "dronecan-gui-tool";
