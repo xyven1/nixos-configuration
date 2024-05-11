@@ -4,6 +4,7 @@ with pkgs; {
   sioyek = qt6.callPackage ./sioyek.nix {};
   scenebuilder19 = callPackage ./scenebuilder.nix {};
   neovide-nightly = callPackage ./neovide {};
+  droncan-gui-tool = python3Packages.callPackage ./dronecan-gui-tool.nix {};
 
   wezterm-nightly = darwin.apple_sdk_11_0.callPackage ./wezterm {
     inherit (darwin.apple_sdk_11_0.frameworks) Cocoa CoreGraphics Foundation UserNotifications System;
