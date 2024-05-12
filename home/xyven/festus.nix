@@ -20,6 +20,7 @@
     packages =
       (with pkgs; [
         # my own packages
+        dronecan-gui-tool
         neovide-nightly
         tlpui
         wpi-wireless-install # for installing wifi certs

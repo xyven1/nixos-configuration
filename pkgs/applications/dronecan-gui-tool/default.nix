@@ -3,6 +3,7 @@
   python3Packages,
   fetchFromGitHub,
   libsForQt5,
+  imagemagick,
 }:
 python3Packages.buildPythonApplication rec {
   pname = "dronecan-gui-tool";
@@ -21,9 +22,11 @@ python3Packages.buildPythonApplication rec {
     setuptools-git
     wheel
     libsForQt5.wrapQtAppsHook
+    imagemagick
   ];
 
   dependencies = with python3Packages; [
+    pkgs.iproute2
     dronecan
     easywebdav
     ipykernel
@@ -46,15 +49,23 @@ python3Packages.buildPythonApplication rec {
 
   dontWrapQtApps = true;
 
+  postInstall = ''
+    convert icons/logo.ico icons/dronecan_gui_tool.png
+    mv $out/share/applications/DroneCAN\ GUI\ Tool.desktop $out/share/applications/dronecan_gui_tool.desktop
+    substituteInPlace $out/share/applications/dronecan_gui_tool.desktop \
+      --replace "Exec=/dronecan_gui_tool-1.2.25.data/scripts/dronecan_gui_tool" "Exec=dronecan_gui_tool"
+    install -Dm644 icons/dronecan_gui_tool-0.png $out/share/icons/hicolor/256x256/apps/dronecan_gui_tool.png
+  '';
+
   preFixup = ''
     makeWrapperArgs+=("''${qtWrapperArgs[@]}")
   '';
 
-  meta = with lib; {
+  meta = {
     description = "DroneCAN GUI Tool is a cross-platform free open source application for DroneCAN bus management and diagnostics";
     mainProgram = "dronecan_gui_tool";
     homepage = "https://github.com/dronecan/gui_tool";
-    license = licenses.mit;
-    maintainers = with maintainers; [xyven1];
+    license = lib.licenses.mit;
+    maintainers = with lib.maintainers; [xyven1];
   };
 }
