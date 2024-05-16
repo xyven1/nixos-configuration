@@ -21,6 +21,7 @@
         neovide-nightly
       ]) ++
       (with pkgs.unstable; [
+        exercism
         gnome-obfuscate
         junction # application picker
         libreoffice-qt
