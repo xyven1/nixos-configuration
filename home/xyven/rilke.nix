@@ -17,6 +17,9 @@
 
   home = {
     packages =
+      (with pkgs; [
+        neovide-nightly
+      ]) ++
       (with pkgs.unstable; [
         gnome-obfuscate
         junction # application picker
@@ -24,7 +27,6 @@
         magic-wormhole-rs
         metadata-cleaner
         mousai # music recognition
-        neovide
         scc
         spotify
         spotify-player # terminal spotify client
