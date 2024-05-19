@@ -150,6 +150,7 @@
     "org/gnome/shell" = {
       favorite-apps = [
         "org.wezfurlong.wezterm.desktop"
+        "neovide.desktop"
         "google-chrome.desktop"
         "obsidian.desktop"
         "discord.desktop"
