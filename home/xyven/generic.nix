@@ -35,11 +35,25 @@
       enable = true;
       package = pkgs.unstable.bat;
     };
+    btop = {
+      enable = true;
+      package = pkgs.unstable.btop;
+      settings = {
+        color_theme = "Default";
+        theme_background = false;
+        vim_keys = true;
+        update_ms = 1000;
+      };
+    };
     eza = {
       enable = true;
       icons = true;
       git = true;
       package = pkgs.unstable.eza;
+    };
+    fd = {
+      enable = true;
+      package = pkgs.unstable.fd;
     };
     fzf = {
       enable = true;
@@ -48,6 +62,10 @@
     gitui = {
       enable = true;
       package = pkgs.unstable.gitui;
+    };
+    gh = {
+      enable = true;
+      package = pkgs.unstable.gh;
     };
     ripgrep = {
       enable = true;
@@ -64,21 +82,22 @@
     homeDirectory = "/home/xyven";
 
     packages = with pkgs.unstable; [
-      busybox
       # networking tools
       dig
+      iputils
       rustscan
+      socat
       wget
+      # hardware tools
+      pciutils
+      usbutils
       # text tools
       jq
       # compression tools
       unzip
       zip
       # other nice-to-haves
-      btop
       duf
-      fd
-      gh
       hyperfine
       ncdu
       pipes-rs
