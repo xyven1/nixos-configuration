@@ -47,6 +47,13 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 16 * 1024;
+    }
+  ];
+
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
