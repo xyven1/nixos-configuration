@@ -25,6 +25,9 @@
       enable = true;
       pkiBundle = "/etc/secureboot";
     };
+    # For hibernation
+    resumeDevice = "/dev/dm-0";
+    kernelParams = ["resume_offset=113446912"];
   };
   environment.systemPackages = [pkgs.sbctl];
   hardware.enableRedistributableFirmware = true;
@@ -46,13 +49,6 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 16 * 1024;
-    }
-  ];
 
   # Enable sound with pipewire.
   sound.enable = true;
