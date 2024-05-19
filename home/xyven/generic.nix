@@ -64,10 +64,10 @@
     homeDirectory = "/home/xyven";
 
     packages = with pkgs.unstable; [
+      busybox
       # networking tools
-      dnsutils
-      inetutils
-      nmap
+      dig
+      rustscan
       wget
       # text tools
       jq
@@ -75,11 +75,15 @@
       unzip
       zip
       # other nice-to-haves
+      btop
+      duf
       fd
       gh
       hyperfine
       ncdu
       pipes-rs
+      screen
+      tldr
     ];
   };
 
