@@ -78,9 +78,6 @@
   };
 
   home = {
-    username = "xyven";
-    homeDirectory = "/home/xyven";
-
     packages = with pkgs.unstable; [
       # networking tools
       dig
