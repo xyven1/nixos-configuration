@@ -82,13 +82,6 @@
     };
   };
 
-  home.file = {
-    ".local/background/" = {
-      recursive = true;
-      source = inputs.backgrounds;
-    };
-  };
-
   xdg.configFile."paperwm/user.css".text = ''
     .paperwm-selection {
         border-radius: 12px 12px 0px 0px;
@@ -148,8 +141,8 @@
       ];
     };
     "org/gnome/desktop/background" = {
-      picture-uri = "file:///home/xyven/.local/background/forest.jpg";
-      picture-uri-dark = "file:///home/xyven/.local/background/forest.jpg";
+      picture-uri = "${inputs.backgrounds}/forest.jpg";
+      picture-uri-dark = "${inputs.backgrounds}/forest.jpg";
     };
   };
 

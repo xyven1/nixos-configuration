@@ -60,7 +60,6 @@
         zoom-us
         parsec-bin
         plex-media-player
-
       ])
       ++ (with pkgs.unstable.gnomeExtensions; [
         paperwm
@@ -92,13 +91,6 @@
   programs.fish = {
     shellAliases = {
       sp = "spotify_player";
-    };
-  };
-
-  home.file = {
-    ".local/background/" = {
-      recursive = true;
-      source = inputs.backgrounds;
     };
   };
 
@@ -163,8 +155,8 @@
       ];
     };
     "org/gnome/desktop/background" = {
-      picture-uri = "file:///home/xyven/.local/background/forest.jpg";
-      picture-uri-dark = "file:///home/xyven/.local/background/forest.jpg";
+      picture-uri = "${inputs.backgrounds}/forest.jpg";
+      picture-uri-dark = "${inputs.backgrounds}/forest.jpg";
     };
   };
 
