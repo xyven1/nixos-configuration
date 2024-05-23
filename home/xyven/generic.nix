@@ -30,10 +30,16 @@
       userName = "xyven1";
       userEmail = "git@xyven.dev";
       package = pkgs.unstable.git;
+      delta = {
+        enable = true;
+        package = pkgs.unstable.delta;
+        options.syntax-theme = "Visual Studio Dark+";
+      };
     };
     bat = {
       enable = true;
       package = pkgs.unstable.bat;
+      config.theme = "Visual Studio Dark+";
     };
     btop = {
       enable = true;
@@ -66,6 +72,14 @@
     gh = {
       enable = true;
       package = pkgs.unstable.gh;
+    };
+    lazygit = {
+      enable = true;
+      package = pkgs.unstable.lazygit;
+      settings.git.paging = {
+        colorArg = "always";
+        pager = "delta --dark --paging=never";
+      };
     };
     ripgrep = {
       enable = true;
