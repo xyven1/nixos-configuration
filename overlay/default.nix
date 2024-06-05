@@ -13,7 +13,7 @@
 
   wpi-wireless-install = inputs.wpi-wireless-install.overlays.default;
 
-  neovimNightly = inputs.neovim-nightly-overlay.overlay;
+  neovimNightly = inputs.neovim-nightly-overlay.overlays.default;
 
   rust-overlay = inputs.rust-overlay.overlays.default;
 }
