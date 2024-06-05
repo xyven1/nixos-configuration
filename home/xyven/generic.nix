@@ -33,7 +33,16 @@
       delta = {
         enable = true;
         package = pkgs.unstable.delta;
-        options.syntax-theme = "Visual Studio Dark+";
+        options = {
+          syntax-theme = "Visual Studio Dark+";
+          features = "decorations";
+          decorations = {
+            hunk-header-style = "file line-number syntax italic";
+            hunk-header-decoration-style = "cyan bold ul";
+            file-style = "yellow bold";
+            file-decoration-style = "yellow bold ul";
+          };
+        };
       };
     };
     bat = {
