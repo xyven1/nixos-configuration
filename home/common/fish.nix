@@ -4,10 +4,8 @@
   config,
   ...
 }: {
-  programs.nix-index = {
-    enable = true;
-    enableFishIntegration = true;
-  };
+  programs.nix-index.enable = true;
+
   home.packages = [
     pkgs.unstable.any-nix-shell
     pkgs.unstable.fishPlugins.fzf-fish
@@ -30,10 +28,6 @@
       snrs = "sudo nixos-rebuild --flake . switch";
       hm = "home-manager --flake .";
       hms = "home-manager --flake . switch";
-
-      v = "nvim";
-      vi = "nvim";
-      vim = "nvim";
 
       conf = "/etc/nixos";
     };

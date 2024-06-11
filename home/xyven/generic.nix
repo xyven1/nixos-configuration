@@ -25,6 +25,12 @@
 
   programs = {
     home-manager.enable = true;
+    fish.shellAbbrs = {
+      lg = "lazygit";
+      v = "nvim";
+      vi = "nvim";
+      vim = "nvim";
+    };
     git = {
       enable = true;
       userName = "xyven1";
