@@ -89,7 +89,7 @@
   };
 
   programs.fish = {
-    shellAbbr = {
+    shellAbbrs = {
       sp = "spotify_player";
     };
   };
