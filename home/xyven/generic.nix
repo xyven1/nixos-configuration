@@ -25,11 +25,20 @@
 
   programs = {
     home-manager.enable = true;
-    fish.shellAbbrs = {
-      lg = "lazygit";
-      v = "nvim";
-      vi = "nvim";
-      vim = "nvim";
+    fish = {
+      functions = builtins.listToAttrs (map (command: {
+        name = command;
+        value = {
+          wraps = command;
+          body = "env TERM=xterm-256color ${command} $argv";
+        };
+      }) ["ssh" "lazygit"]);
+      shellAbbrs = {
+        lg = "lazygit";
+        v = "nvim";
+        vi = "nvim";
+        vim = "nvim";
+      };
     };
     git = {
       enable = true;
