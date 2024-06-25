@@ -15,7 +15,6 @@
     config.allowUnfree = true;
   };
 
-  programs.wezterm.package = lib.mkForce pkgs.wezterm-nightly;
   home = {
     packages =
       (with pkgs; [
