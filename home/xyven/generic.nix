@@ -109,6 +109,11 @@
       enable = true;
       package = pkgs.unstable.ripgrep;
     };
+    yazi = {
+      enable = true;
+      enableFishIntegration = true;
+      package = pkgs.unstable.yazi;
+    };
     zoxide = {
       enable = true;
       package = pkgs.unstable.zoxide;
