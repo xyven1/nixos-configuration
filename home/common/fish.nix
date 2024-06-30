@@ -20,14 +20,9 @@
       nb = "nix build";
       nbn = "nix build nixpkgs#";
       nf = "nix flake";
-      nu = "nix flake lock --update-input";
-
-      nr = "nixos-rebuild --flake .";
-      nrs = "nixos-rebuild --flake . switch";
-      snr = "sudo nixos-rebuild --flake .";
-      snrs = "sudo nixos-rebuild --flake . switch";
-      hm = "home-manager --flake .";
-      hms = "home-manager --flake . switch";
+      nfu = "nix flake update";
+      gc = "nix-collect-garbage";
+      gcd = "nix-collect-garbage -d";
 
       conf = "/etc/nixos";
     };

@@ -29,7 +29,7 @@ in {
         "rbh"
         ''
           #!/usr/bin/env bash
-          home-manager switch --flake ${cfg.nixos-conf-dir}${l.optionalString (cfg.profile != null) "#"}${cfg.profile} "$@"
+          home-manager switch --flake ${cfg.nixos-conf-dir}${l.optionalString (cfg.profile != null) "#${cfg.profile}"} "$@"
         '')
     ];
   };
