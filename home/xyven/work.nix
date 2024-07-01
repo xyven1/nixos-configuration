@@ -54,6 +54,7 @@ in {
   programs = {
     wezterm.package = lib.mkForce (nixGLWrap pkgs.unstable.wezterm);
     fish.package = pkgs.fish.override {
+      # fix for using fish as login shell
       fishEnvPreInit = source: source "/etc/profile.d/nix.sh";
     };
   };
