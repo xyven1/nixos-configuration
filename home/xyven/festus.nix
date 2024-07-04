@@ -1,18 +1,20 @@
-{
-  pkgs,
-  inputs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./generic.nix
     ../common/font.nix
-    ../common/wezterm
+    ../common/gnome.nix
     ../common/helix.nix
+    ../common/wezterm
   ];
 
   nixpkgs = {
     config.allowUnfree = true;
+  };
+
+  gnome.extensions = {
+    paperwm.enable = true;
+    window-title.enable = true;
+    spotify-tray.enable = true;
   };
 
   home = {
@@ -59,11 +61,12 @@
         zoom-us
         parsec-bin
         plex-media-player
-      ])
-      ++ (with pkgs.unstable.gnomeExtensions; [
-        paperwm
-        spotify-tray
-        window-title-is-back
+
+        # games
+        (factorio.override {
+          username = "xyven1";
+          token = "cc2c5b58e4c49687c2454a81282696";
+        })
       ]);
     # sessionVariables.NIXOS_OZONE_WL = "1";
     sessionVariables.NEOVIDE_FRAME = "none";
@@ -93,69 +96,22 @@
     };
   };
 
-  xdg.configFile."paperwm/user.css".text = ''
-    .paperwm-selection {
-        border-radius: 12px 12px 0px 0px;
-        border-width: 4px;
-        background-color: rgba(0, 0, 0, 0);
-    }
-  '';
   dconf.settings = {
     "org/gnome/desktop/datetime" = {automatic-timezone = true;};
     "org/gnome/system/location" = {enabled = true;};
-    "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-    };
-    "org/gnome/nautilus/list-view" = {
-      default-zoom-level = "medium";
-      use-tree-view = true;
-    };
-    "org/gnome/nautilus/preferences" = {
-      default-folder-viewer = "list-view";
-      migrated-gtk-settings = true;
-      search-filter-time-type = "last_modified";
-      search-view = "list-view";
-    };
-    "org/gnome/desktop/default-applications/terminal" = {
-      exec = "/etc/profiles/per-user/xyven/bin/wezterm";
-    };
     "org/gnome/desktop/wm/preferences" = {
-      button-layout = ":menu"; #appmenu:minimize,maximize,close";
+      button-layout = ":menu";
     };
     "org/gnome/desktop/peripherals/touchpad" = {
       tap-to-click = true;
     };
-    "org/gnome/desktop/peripherals/keyboard" = {
-      delay = lib.hm.gvariant.mkUint32 225;
-    };
-    "org/gnome/shell/extensions/paperwm" = {
-      use-default-background = true;
-    };
-    "org/gnome/shell/extensions/window-title-is-back" = {
-      colored-icon = true;
-      icon-size = lib.hm.gvariant.mkUint32 20;
-      show-app = false;
-      show-icon = true;
-      show-title = true;
-    };
     "org/gnome/shell" = {
       favorite-apps = [
-        "org.wezfurlong.wezterm.desktop"
         "neovide.desktop"
         "google-chrome.desktop"
         "obsidian.desktop"
         "discord.desktop"
       ];
-      disable-user-extensions = false;
-      enabled-extensions = [
-        "sp-tray@sp-tray.esenliyim.github.com"
-        "paperwm@paperwm.github.com"
-        "window-title-is-back@fthx"
-      ];
-    };
-    "org/gnome/desktop/background" = {
-      picture-uri = "${inputs.backgrounds}/forest.jpg";
-      picture-uri-dark = "${inputs.backgrounds}/forest.jpg";
     };
   };
 
