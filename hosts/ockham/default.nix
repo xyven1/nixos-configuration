@@ -30,6 +30,8 @@ in {
   };
   networking.firewall.allowedTCPPorts = [54321];
 
+  environment.enableAllTerminfo = true;
+
   security.polkit.enable = true;
 
   boot.loader = {
