@@ -61,12 +61,6 @@
         zoom-us
         parsec-bin
         plex-media-player
-
-        # games
-        (factorio.override {
-          username = "xyven1";
-          token = "cc2c5b58e4c49687c2454a81282696";
-        })
       ]);
     # sessionVariables.NIXOS_OZONE_WL = "1";
     sessionVariables.NEOVIDE_FRAME = "none";
