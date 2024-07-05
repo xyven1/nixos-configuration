@@ -88,12 +88,14 @@
       ++ lib.optionals cfg.window-title.enable [gnome-exts.window-title-is-back]
       ++ lib.optionals cfg.spotify-tray.enable [gnome-exts.spotify-tray]
       ++ lib.optionals cfg.freon.enable [gnome-exts.freon];
-    xdg.configFile."paperwm/user.css".text = lib.mkIf cfg.paperwm.enable ''
-      .paperwm-selection {
-          border-radius: 12px 12px 0px 0px;
-          border-width: 4px;
-          background-color: rgba(0, 0, 0, 0);
-      }
-    '';
+    xdg.configFile."paperwm/user.css" = lib.mkIf cfg.paperwm.enable {
+      text = ''
+        .paperwm-selection {
+            border-radius: 12px 12px 0px 0px;
+            border-width: 4px;
+            background-color: rgba(0, 0, 0, 0);
+        }
+      '';
+    };
   };
 }
