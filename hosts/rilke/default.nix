@@ -6,7 +6,7 @@
   imports = [
     ./hardware-configuration.nix
     ./nvidia.nix
-    ./unifi.nix
+    # ./unifi.nix
 
     ../common/global
     ../common/users/xyven
@@ -33,7 +33,7 @@
         package = pkgs.qemu_kvm;
         swtpm.enable = true;
         ovmf.enable = true;
-        ovmf.packages = [ pkgs.OVMFFull.fd ];
+        ovmf.packages = [pkgs.OVMFFull.fd];
       };
     };
   };
@@ -59,4 +59,3 @@
 
   system.stateVersion = "24.05"; # Did you read the comment?
 }
-

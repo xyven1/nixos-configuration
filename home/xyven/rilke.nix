@@ -19,39 +19,37 @@
   };
 
   home = {
-    packages =
-      (with pkgs; [
-        neovide-nightly
-      ])
-      ++ (with pkgs.unstable; [
-        exercism
-        gnome-obfuscate
-        junction # application picker
-        libreoffice-qt
-        magic-wormhole-rs
-        metadata-cleaner
-        mousai # music recognition
-        scc
-        spotify
-        spotify-player # terminal spotify client
-        spotify-tray # shows current track and controls in notification area
-        switcheroo # image converter
-        texliveFull
-        video-trimmer
-        virt-manager
-        vscode
-        wike # wikipedia reader
-        xclip # for clip board support in neovim
+    packages = with pkgs.unstable; [
+      exercism
+      gnome-obfuscate
+      junction # application picker
+      libreoffice-qt
+      magic-wormhole-rs
+      metadata-cleaner
+      mousai # music recognition
+      neovide
+      scc
+      spotify
+      spotify-player # terminal spotify client
+      spotify-tray # shows current track and controls in notification area
+      switcheroo # image converter
+      texliveFull
+      video-trimmer
+      virt-manager
+      vscode
+      wike # wikipedia reader
+      xclip # for clip board support in neovim
 
-        # unfree
-        slack
-        obsidian
-        google-chrome
-        discord
-        zoom-us
-        parsec-bin
-        plex-media-player
-      ]);
+      # unfree
+      slack
+      obsidian
+      google-chrome
+      discord
+      zoom-us
+      parsec-bin
+      plex-media-player
+      # games
+    ];
     # sessionVariables.NIXOS_OZONE_WL = "1";
     sessionVariables.NEOVIDE_FRAME = "none";
   };
