@@ -47,6 +47,8 @@
       package = pkgs.unstable.git;
       ignores = [
         ".direnv"
+        ".lazy.lua"
+        ".nvim.lua"
       ];
       delta = {
         enable = true;
