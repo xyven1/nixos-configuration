@@ -6,6 +6,11 @@
     xkb.options = "caps:swapescape";
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
+    excludePackages = with pkgs; [xterm];
+  };
+  xdg.terminal-exec = {
+    enable = true;
+    settings.GNOME = ["wezterm.desktop"];
   };
 
   services.gnome = {
