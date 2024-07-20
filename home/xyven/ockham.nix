@@ -9,7 +9,7 @@
   };
   programs.fish = {
     functions = {
-      update = "env -C /etc/nixos/ nix flake lock --update-input home-management && rb";
+      update-home-server = "env -C /etc/nixos/ nix flake update home-management && rb";
     };
     interactiveShellInit = ''
       eval (ssh-agent -c)

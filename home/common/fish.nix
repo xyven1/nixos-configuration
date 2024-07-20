@@ -35,8 +35,8 @@
           end
         end
       '';
-      "nvim-update" = "env -C /etc/nixos/ nix flake lock --update-input neovim-nightly-overlay --update-input neovim-config && rbh";
-      "nvim-update-config" = "env -C /etc/nixos/ nix flake lock --update-input neovim-config && rbh";
+      "nvim-update" = "env -C /etc/nixos/ nix flake update neovim-nightly-overlay neovim-config && rbh";
+      "nvim-update-config" = "env -C /etc/nixos/ nix flake update neovim-config && rbh";
     };
     shellInit = let
       sv = config.home.sessionVariables;
