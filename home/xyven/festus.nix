@@ -15,14 +15,12 @@
     paperwm.enable = true;
     window-title.enable = true;
     spotify-tray.enable = true;
+    gsconnect.enable = true;
   };
 
   home = {
     packages =
       (with pkgs; [
-        # my own packages
-        dronecan-gui-tool
-        tlpui
         wpi-wireless-install # for installing wifi certs
       ])
       ++ (with pkgs.unstable; [
