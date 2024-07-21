@@ -19,6 +19,9 @@
       freon = {
         enable = lib.mkEnableOption "Enable Freon";
       };
+      gsconnect = {
+        enable = lib.mkEnableOption "Enable GSConnect";
+      };
     };
   };
 
@@ -30,6 +33,7 @@
     dconf.settings = {
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
+        clock-format = "12h";
       };
       "org/gnome/nautilus/list-view" = {
         default-zoom-level = "medium";
@@ -58,15 +62,6 @@
         picture-uri-dark = "${inputs.backgrounds}/forest.jpg";
       };
 
-      # Extensions
-      "org/gnome/shell" = {
-        enabled-extensions =
-          []
-          ++ lib.optionals cfg.paperwm.enable ["paperwm@paperwm.github.com"]
-          ++ lib.optionals cfg.window-title.enable ["window-title-is-back@fthx"]
-          ++ lib.optionals cfg.spotify-tray.enable ["sp-tray@sp-tray.esenliyim.github.com"]
-          ++ lib.optionals cfg.freon.enable ["freon@UshakovVasilii_Github.yahoo.com"];
-      };
       "org/gnome/shell/extensions/paperwm" = lib.mkIf cfg.paperwm.enable {
         horizontal-margin = gv.mkInt32 10;
         use-default-background = gv.mkBoolean true;
@@ -81,13 +76,24 @@
         show-icon = true;
         show-title = true;
       };
+      # Extensions
+      "org/gnome/shell" = {
+        enabled-extensions =
+          []
+          ++ lib.optionals cfg.paperwm.enable ["paperwm@paperwm.github.com"]
+          ++ lib.optionals cfg.window-title.enable ["window-title-is-back@fthx"]
+          ++ lib.optionals cfg.spotify-tray.enable ["sp-tray@sp-tray.esenliyim.github.com"]
+          ++ lib.optionals cfg.freon.enable ["freon@UshakovVasilii_Github.yahoo.com"]
+          ++ lib.optionals cfg.gsconnect.enable ["gsconnect@andyholmes.github.io"];
+      };
     };
     home.packages =
       []
       ++ lib.optionals cfg.paperwm.enable [gnome-exts.paperwm]
       ++ lib.optionals cfg.window-title.enable [gnome-exts.window-title-is-back]
       ++ lib.optionals cfg.spotify-tray.enable [gnome-exts.spotify-tray]
-      ++ lib.optionals cfg.freon.enable [gnome-exts.freon];
+      ++ lib.optionals cfg.freon.enable [gnome-exts.freon]
+      ++ lib.optionals cfg.gsconnect.enable [gnome-exts.gsconnect];
     xdg.configFile."paperwm/user.css" = lib.mkIf cfg.paperwm.enable {
       text = ''
         .paperwm-selection {
