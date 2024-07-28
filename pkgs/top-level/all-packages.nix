@@ -9,8 +9,4 @@ with self; {
   sioyek = qt6.callPackage ../applications/sioyek {};
 
   tlpui = callPackage ../applications/tlpui {};
-
-  wezterm-nightly = darwin.apple_sdk_11_0.callPackage ../applications/wezterm {
-    inherit (pkgs.darwin.apple_sdk_11_0.frameworks) Cocoa CoreGraphics Foundation UserNotifications System;
-  };
 }

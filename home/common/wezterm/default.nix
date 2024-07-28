@@ -1,6 +1,6 @@
 {
   config,
-  pkgs,
+  pkgs, lib,
   ...
 }: {
   home.sessionVariables = {
@@ -10,7 +10,7 @@
 
   programs.wezterm = {
     enable = true;
-    package = pkgs.unstable.wezterm;
+    package = lib.mkDefault pkgs.unstable.wezterm;
   };
 
   home.file = {

@@ -25,7 +25,8 @@
 
     # overlays
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    rust-overlay.url = "github:oxalica/rust-overlay";
+    wezterm.url = "github:wez/wezterm?dir=nix";
+    wezterm.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     # config
     neovim-config.url = "github:xyven1/neovim-config";

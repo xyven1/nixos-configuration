@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./generic.nix
     ../common/font.nix
@@ -15,7 +19,11 @@
     paperwm.enable = true;
     window-title.enable = true;
     spotify-tray.enable = true;
+    freon.enable = true;
     gsconnect.enable = true;
+  };
+  programs.wezterm = {
+    # package = inputs.wezterm.packages.${pkgs.stdenv.system}.default;
   };
 
   home = {
