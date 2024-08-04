@@ -6,7 +6,7 @@
   imports = [
     ./hardware-configuration.nix
     ./nvidia.nix
-    # ./unifi.nix
+    ./unifi.nix
 
     ../common/global
     ../common/users/xyven
