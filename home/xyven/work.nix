@@ -44,10 +44,10 @@ in {
       wike
       xclip
       firefox
+      google-chrome
       docker
       glab
     ];
-    sessionVariables.NEOVIDE_FRAME = "none";
     sessionVariables.TERMINFO_DIRS = "${pkgs.wezterm.passthru.terminfo}/share/terminfo";
   };
 

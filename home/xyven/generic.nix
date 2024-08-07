@@ -45,11 +45,6 @@
       userName = "xyven1";
       userEmail = "git@xyven.dev";
       package = pkgs.unstable.git;
-      ignores = [
-        ".direnv"
-        ".lazy.lua"
-        ".nvim.lua"
-      ];
       delta = {
         enable = true;
         package = pkgs.unstable.delta;

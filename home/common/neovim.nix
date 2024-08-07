@@ -17,6 +17,10 @@
       alejandra
     ];
   };
+  programs.git.ignores = [
+    ".lazy.lua"
+    ".nvim.lua"
+  ];
 
   xdg.configFile."nvim" = {
     recursive = true;
