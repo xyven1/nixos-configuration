@@ -3,11 +3,11 @@ on:
   check_suite:
     types:
       - completed
-permissions:
-  pull-requests: write
 jobs:
   automerge:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - id: automerge
         name: automerge
