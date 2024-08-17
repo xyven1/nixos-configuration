@@ -35,6 +35,7 @@
   systemd.services.NetworkManager-wait-online.enable = false;
   systemd.services.docker.wantedBy = lib.mkForce [];
 
+  services.resolved.enable = true;
   networking = {
     hostName = "festus";
     networkmanager.enable = true;
