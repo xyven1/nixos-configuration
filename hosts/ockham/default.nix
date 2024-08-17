@@ -40,13 +40,6 @@ in {
     efi.canTouchEfiVariables = true;
   };
 
-  services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
-    };
-  };
   services = {
     homeManagement.enable = true;
     vscode-server.enable = true;
