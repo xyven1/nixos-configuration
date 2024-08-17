@@ -109,6 +109,10 @@
       enable = true;
       package = pkgs.unstable.ripgrep;
     };
+    thefuck = {
+      enable = true;
+      package = pkgs.unstable.thefuck;
+    };
     yazi = {
       enable = true;
       enableFishIntegration = true;
@@ -127,22 +131,30 @@
       iputils
       rustscan
       socat
+      trippy
       wget
+
       # hardware tools
       pciutils
       usbutils
+
       # text tools
       jq
-      # compression tools
-      unzip
-      zip
+      ripgrep-all # ripgrep all file types
+      sd # sed alternative
+
       # other nice-to-haves
-      duf
-      hyperfine
-      ncdu
-      pipes-rs
-      screen
-      tldr
+      dua # disk usage analyzer
+      duf # df alternative
+      dust # du alternative
+      hyperfine # benchmarking tool
+      ncdu # disk usage analyzer
+      ouch # compress/decompress tool
+      pipes-rs # pipes screensaver
+      pipr # interactive shell pipeline builder
+      procs # ps alternative
+      screen # terminal multiplexer
+      tealdeer # tldr client
     ];
   };
 
