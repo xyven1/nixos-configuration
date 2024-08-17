@@ -17,7 +17,8 @@ config = {
     top = 0,
     bottom = 0,
   },
-  -- window_decorations = "RESIZE",
+  enable_wayland = false;
+  window_decorations = "NONE",
   window_background_opacity = 0.9
 }
 
