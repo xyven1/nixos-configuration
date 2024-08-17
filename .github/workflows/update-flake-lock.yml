@@ -3,10 +3,11 @@ on:
   workflow_dispatch: # allows manual triggering
   schedule:
     - cron: '0 5 */2 * *'
-permissions:
-  pull-requests: write
 jobs:
   lockfile:
+    permissions:
+      contents: write
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
