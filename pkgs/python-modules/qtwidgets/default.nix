@@ -2,7 +2,7 @@
   buildPythonPackage,
   fetchFromGitHub,
   pyqt5,
-  setuptools-scm
+  setuptools-scm,
 }:
 buildPythonPackage {
   pname = "qtwidgets";
