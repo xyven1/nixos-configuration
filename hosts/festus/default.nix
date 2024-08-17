@@ -36,6 +36,7 @@
   systemd.services.docker.wantedBy = lib.mkForce [];
 
   services.resolved.enable = true;
+  services.tailscale.enable = true; # VPN
   networking = {
     hostName = "festus";
     networkmanager.enable = true;

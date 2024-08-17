@@ -22,6 +22,9 @@
       gsconnect = {
         enable = lib.mkEnableOption "Enable GSConnect";
       };
+      tailscale-status = {
+        enable = lib.mkEnableOption "Enable TailScale Status";
+      };
     };
   };
 
@@ -84,7 +87,8 @@
           ++ lib.optionals cfg.window-title.enable ["window-title-is-back@fthx"]
           ++ lib.optionals cfg.spotify-tray.enable ["sp-tray@sp-tray.esenliyim.github.com"]
           ++ lib.optionals cfg.freon.enable ["freon@UshakovVasilii_Github.yahoo.com"]
-          ++ lib.optionals cfg.gsconnect.enable ["gsconnect@andyholmes.github.io"];
+          ++ lib.optionals cfg.gsconnect.enable ["gsconnect@andyholmes.github.io"]
+          ++ lib.optionals cfg.tailscale-status.enable ["tailscale-status@maxgallup.github.com"];
       };
     };
     home.packages =
@@ -93,7 +97,8 @@
       ++ lib.optionals cfg.window-title.enable [gnome-exts.window-title-is-back]
       ++ lib.optionals cfg.spotify-tray.enable [gnome-exts.spotify-tray]
       ++ lib.optionals cfg.freon.enable [gnome-exts.freon]
-      ++ lib.optionals cfg.gsconnect.enable [gnome-exts.gsconnect];
+      ++ lib.optionals cfg.gsconnect.enable [gnome-exts.gsconnect]
+      ++ lib.optionals cfg.tailscale-status.enable [gnome-exts.tailscale-status];
     xdg.configFile."paperwm/user.css" = lib.mkIf cfg.paperwm.enable {
       text = ''
         .paperwm-selection {

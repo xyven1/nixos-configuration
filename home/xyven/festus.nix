@@ -21,6 +21,7 @@
     spotify-tray.enable = true;
     freon.enable = true;
     gsconnect.enable = true;
+    tailscale-status.enable = true;
   };
   programs.wezterm = {
     # package = inputs.wezterm.packages.${pkgs.stdenv.system}.default;
