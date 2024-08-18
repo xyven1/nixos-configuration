@@ -1,5 +1,6 @@
 name: automerge
 on:
+  pull_request:
   check_suite:
     types:
       - completed
