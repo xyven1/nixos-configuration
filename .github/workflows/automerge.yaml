@@ -1,6 +1,6 @@
 name: automerge
 on:
-  workflow_run:
+  workflow_dispatch: # allows manual triggering
   pull_request:
     types:
       - labeled
