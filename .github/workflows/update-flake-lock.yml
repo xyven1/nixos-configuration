@@ -16,12 +16,13 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@main
       - name: Update flake.lock
         uses: DeterminateSystems/update-flake-lock@main
+        id: update
         with:
           commit-msg: "chore(flake): bump inputs"
           pr-title: "chore(flake): bump inputs"
           pr-labels: |
             dependencies
             automated
-      - run: "gh pr merge --auto --merge ${{ steps.update.outputs.pull-request-number }}"
+      - run: "if [ -n ${{ steps.update.outputs.pull-request-number }} ]; then gh pr merge --auto --merge ${{ steps.update.outputs.pull-request-number }}; fi"
         env:
           GH_TOKEN: ${{ github.token }}
