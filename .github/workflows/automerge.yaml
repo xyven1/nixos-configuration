@@ -31,3 +31,6 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_LABELS: "dependencies,automated"
+          MERGE_METHOD: "rebase"
+          UPDATE_LABELS: "dependencies,automated"
+          UPDATE_METHOD: "rebase"
