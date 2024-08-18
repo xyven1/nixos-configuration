@@ -1,5 +1,6 @@
 name: automerge
 on:
+  workflow_run:
   pull_request:
     types:
       - labeled
