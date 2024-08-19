@@ -8,7 +8,6 @@
   environment.systemPackages = [
     pkgs.hello
     pkgs.unstable.hello
-    pkgs.rust-bin.nightly.latest.default
     pkgs.neovim
   ];
   boot.loader.grub.enable = false;

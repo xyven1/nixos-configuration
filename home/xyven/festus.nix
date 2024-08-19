@@ -23,9 +23,6 @@
     gsconnect.enable = true;
     tailscale-status.enable = true;
   };
-  programs.wezterm = {
-    # package = inputs.wezterm.packages.${pkgs.stdenv.system}.default;
-  };
 
   home = {
     packages =
