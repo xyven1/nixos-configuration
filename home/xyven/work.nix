@@ -35,7 +35,6 @@ in {
   rbh.profile = "xyven@work";
 
   home = {
-    username = lib.mkForce "bbruell";
     packages = with pkgs.unstable; [
       (nixGLWrap neovide)
       libreoffice-qt
