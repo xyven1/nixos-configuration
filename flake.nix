@@ -19,6 +19,10 @@
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
+    # clear linux kernel tweaks
+    kernel-clr.url = "github:clearlinux-pkgs/linux";
+    kernel-clr.flake = false;
+
     # to be removed
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";

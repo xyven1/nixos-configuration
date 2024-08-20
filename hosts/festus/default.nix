@@ -14,7 +14,8 @@
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_latest;
+    clearLinuxPatches.enable = true;
     # Setup keyfile
     initrd.secrets."/crypto_keyfile.bin" = null;
     loader.efi = {
