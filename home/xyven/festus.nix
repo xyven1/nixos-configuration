@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./generic.nix
     ../common/font.nix
@@ -21,7 +17,6 @@
     spotify-tray.enable = true;
     freon.enable = true;
     gsconnect.enable = true;
-    tailscale-status.enable = true;
   };
 
   home = {
