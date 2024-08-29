@@ -34,6 +34,8 @@
     interactiveShellInit = ''
       complete -f -c dda -a "(sed -n 's/^export_alias\s\+\([^ ]\+\)\s\+\(.\+\)/\1\t\2/p' .envrc)" -n "__fish_is_first_arg"
       complete -f -c dda -n "not __fish_is_first_arg" -a ""
+      complete -f -c dea -a "(sed -n 's/^export_alias\s\+\([^ ]\+\)\s\+\(.\+\)/\1\t\2/p' .envrc)" -n "__fish_is_first_arg"
+      complete -f -c dea -n "not __fish_is_first_arg" -a ""
       complete -f -c dca -a "(sed -n 's/^export_alias\s\+\([^ ]\+\)\s\+\(.\+\)/\1\t\2/p' .envrc)" -n "__fish_is_first_arg"
       complete -f -c dca -n "not __fish_is_first_arg" -a ""
       complete -f -c dcs -a ""
@@ -69,14 +71,52 @@
             echo "Error: command cannot contain single quotes"
             return
           end
-
-          # if a line starting with "export_alias $argv[1]" already exists, overwrite it, otherwise append it
-          if grep -q "export_alias $name" .envrc
-            set sed_escaped_command (echo $command | sed 's/\$/\\\$/g' | sed 's/&/\\\&/g')
-            sed -i "s/export_alias $name.*/export_alias $name '$sed_escaped_command'/" .envrc
-          else
-            echo "export_alias $name '$command'" >> .envrc
+          # if command contains newlines, error
+          if test $(echo $command | wc -l) -gt 1
+            echo "Error: command must be a single line"
+            return
           end
+
+          if grep -q "export_alias $name" .envrc
+            read -l -P "Alias $name already exists, what would you like to do? ([o]verwrite/[e]dit/[a]bort)" answer
+            switch $answer
+              case o
+                sed -i "/^export_alias $name/d" .envrc
+              case e
+                dea $name
+                return
+              case a
+                return
+              case '*'
+                echo "Invalid option"
+                return
+            end
+          end
+          echo "export_alias $name '$command'" >> .envrc
+          direnv allow
+        '';
+      };
+      dea = {
+        description = "Edit a local alias using direnv";
+        argumentNames = ["name"];
+        body = ''
+          # if first argument is empty, report usage and exit
+          if test -z "$argv[1]"
+            echo "Usage: dea <alias-name>"
+            return
+          end
+          # if .envrc doesn't exist, do nothing
+          if not test -f .envrc
+            return
+          end
+          # if the alias doesn't exist, do nothing
+          if not grep -q "export_alias $argv[1]" .envrc
+            echo "Alias $argv[1] does not exist"
+            return
+          end
+          set line $(grep -n "export_alias $argv[1]" .envrc | cut -d: -f1)
+          # open the alias in nvim
+          nvim .envrc +$line +'norm!2W'
           direnv allow
         '';
       };
