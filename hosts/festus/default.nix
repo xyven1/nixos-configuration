@@ -35,6 +35,9 @@
   # improve boot time
   systemd.services.NetworkManager-wait-online.enable = false;
   systemd.services.docker.wantedBy = lib.mkForce [];
+  systemd.sleep.extraConfig = ''
+    HibernateMode=platform
+  '';
 
   services.resolved.enable = true;
   services.tailscale.enable = true; # VPN
