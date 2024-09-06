@@ -25,7 +25,7 @@
     eyedropper # color picker
     gnome-connections # remote desktop viewer
     file-roller # archive manager
-    gnome.gnome-logs # log viewer
+    gnome-logs # log viewer
     gnome-system-monitor # system monitor
     nautilus # file manager
     totem # video player
