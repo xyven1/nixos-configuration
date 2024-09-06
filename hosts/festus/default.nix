@@ -4,8 +4,9 @@
   ...
 }: {
   imports = [
-    ./hardware-configuration.nix
     ./accelerated-video.nix
+    ./biometrics.nix
+    ./hardware-configuration.nix
     ./nvidia-disable.nix
 
     ../common/global
