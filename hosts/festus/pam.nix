@@ -98,24 +98,9 @@ let
   package = config.security.pam.package;
   parentConfig = config;
 
-  valueFromPath = path: value:
-    if builtins.length path == 0
-    then value
-    else valueFromPath (lib.tail path) value.${lib.head path};
-
-  pamOpts = default: { config, name, ... }: let cfg = config; in let config = parentConfig; in {
-
-    imports = [
-      (lib.mkRenamedOptionModule [ "enableKwallet" ] [ "kwallet" "enable" ])
-    ];
-
-    options = lib.mapAttrsRecursiveCond
-      (as: !(lib.isOption as && builtins.hasAttr "default" as))
-      (path: value:
-        if lib.isAttrs value && !default
-        then value // { default = valueFromPath path config.security.pam.serviceDefaults; }
-        else value)
-    {
+  pamOpts = default: {config, name, ...}: let cfg = config; in let
+    config = parentConfig;
+    configDefaults = {
 
       name = lib.mkOption {
         example = "sshd";
@@ -596,6 +581,24 @@ let
       };
 
     };
+  in {
+    imports = [
+      (lib.mkRenamedOptionModule [ "enableKwallet" ] [ "kwallet" "enable" ])
+    ];
+
+    options =
+      if default
+      then configDefaults
+      else lib.mapAttrsRecursiveCond
+        (as: !(lib.isOption as))
+        (path: value:
+          if lib.isOption value && builtins.hasAttr "default" value
+          then value // {
+            default = lib.attrByPath path (throw "Service default does not exist") config.security.pam.serviceDefaults;
+            defaultText = lib.literalExpression "config.security.pam.serviceDefaults.${lib.concatStringsSep "." path}";
+          }
+          else value)
+        configDefaults;
 
     # The resulting /etc/pam.d/* file contents are verified in
     # nixos/tests/pam/pam-file-contents.nix. Please update tests there when
