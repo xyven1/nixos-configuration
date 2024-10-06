@@ -11,7 +11,7 @@
     extraPackages = with pkgs.unstable; [
       ripgrep
       fzf
-      gitui
+      lazygit
       lua-language-server
       nil
       alejandra
