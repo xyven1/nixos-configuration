@@ -89,10 +89,6 @@
       enable = true;
       package = pkgs.unstable.fzf;
     };
-    gitui = {
-      enable = true;
-      package = pkgs.unstable.gitui;
-    };
     gh = {
       enable = true;
       package = pkgs.unstable.gh;
