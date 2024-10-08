@@ -12,6 +12,7 @@
       ripgrep
       fzf
       lazygit
+      marksman
       lua-language-server
       nil
       alejandra
