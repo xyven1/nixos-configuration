@@ -49,7 +49,7 @@
         search-view = "list-view";
       };
       "org/gnome/desktop/default-applications/terminal" = lib.mkIf config.programs.wezterm.enable {
-        exec = "${config.home.homeDirectory}/.nix-profile/bin/wezterm";
+        exec = "${config.home.profileDirectory}/bin/wezterm";
       };
       "org/gnome/desktop/peripherals/keyboard" = {
         delay = lib.hm.gvariant.mkUint32 225;
