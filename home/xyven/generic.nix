@@ -36,8 +36,8 @@
       shellAbbrs = {
         lg = "lazygit";
         v = "nvim";
-        vi = "nvim";
-        vim = "nvim";
+        vd = "nvim +\"Resession load_dir\"";
+        vl = "nvim +\"Resession load_latest\"";
       };
     };
     git = {
