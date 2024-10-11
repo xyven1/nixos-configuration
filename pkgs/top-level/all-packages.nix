@@ -6,7 +6,5 @@ with self; {
 
   scenebuilder19 = callPackage ../applications/scenebuilder {};
 
-  sioyek = qt6.callPackage ../applications/sioyek {};
-
   tlpui = callPackage ../applications/tlpui {};
 }
