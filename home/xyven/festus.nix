@@ -60,7 +60,6 @@
         parsec-bin
         plex-media-player
       ]);
-    # sessionVariables.NIXOS_OZONE_WL = "1";
     sessionVariables.NEOVIDE_FRAME = "none";
   };
 
@@ -92,14 +91,6 @@
     };
     "org/gnome/desktop/peripherals/touchpad" = {
       tap-to-click = true;
-    };
-    "org/gnome/shell" = {
-      favorite-apps = [
-        "neovide.desktop"
-        "google-chrome.desktop"
-        "obsidian.desktop"
-        "discord.desktop"
-      ];
     };
   };
 
