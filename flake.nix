@@ -30,14 +30,13 @@
     # overlays
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     wezterm.url = "github:wez/wezterm?dir=nix";
-    wezterm.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     # config
     neovim-config.url = "github:xyven1/neovim-config";
     neovim-config.flake = false;
 
-    backgrounds.flake = false;
     backgrounds.url = "github:xyven1/nixos-backgrounds";
+    backgrounds.flake = false;
 
     # host specific
     # festus
