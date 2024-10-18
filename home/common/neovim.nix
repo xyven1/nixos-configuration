@@ -23,8 +23,17 @@
     ".nvim.lua"
   ];
 
-  xdg.configFile."nvim" = {
-    recursive = true;
-    source = inputs.neovim-config;
+  xdg.configFile = {
+    "nvim" = {
+      recursive = true;
+      source = inputs.neovim-config;
+    };
+    "nvim/lua/plugins/treesitter-parsers.lua".text = ''
+      vim.opt.runtimepath:append("${pkgs.symlinkJoin {
+        name = "treesitter-parsers";
+        paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
+      }}")
+      return {}
+    '';
   };
 }
