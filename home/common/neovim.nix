@@ -1,17 +1,22 @@
 {
   inputs,
   pkgs,
+  lib,
   ...
 }: {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    withNodeJs = true;
+    withRuby = false;
+    withPython3 = false;
 
     extraPackages = with pkgs.unstable; [
+      # For plugin functionality
       ripgrep
       fzf
       lazygit
+      (writeShellScriptBin "nvim-node" "${lib.getExe pkgs.nodejs} $@")
+      # LSP & Formatting Providers
       marksman
       lua-language-server
       nil
