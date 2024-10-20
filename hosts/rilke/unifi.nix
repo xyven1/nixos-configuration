@@ -9,4 +9,6 @@
     mongodbPackage = pkgs.mongodb-6_0;
     openFirewall = true;
   };
+  # allow login
+  networking.firewall.allowedTCPPorts = [8443];
 }
