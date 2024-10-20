@@ -71,5 +71,5 @@ in {
     nameservers = ["10.200.10.1" "1.1.1.1"];
   };
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "24.11";
 }
