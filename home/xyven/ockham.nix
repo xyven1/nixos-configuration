@@ -1,10 +1,14 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./generic.nix
   ];
   home = {
-    packages = with pkgs.unstable; [
-      lua-language-server
+    packages = [
+      inputs.wezterm.packages.${pkgs.system}.default
     ];
   };
   programs.fish = {
