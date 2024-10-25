@@ -56,6 +56,7 @@
   # Services
   services.fwupd.enable = true;
   services.fstrim.enable = true;
+  services.resolved.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
