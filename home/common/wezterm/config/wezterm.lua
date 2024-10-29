@@ -46,7 +46,11 @@ bar.apply_to_config(config, {
     pane = { enabled = false },
     clock = { enabled = false },
     username = { enabled = false },
-    domain = { enabled = true },
+    domain = {
+      enabled = true,
+      icon = wezterm.nerdfonts.cod_server,
+      color = 8,
+    },
   }
 })
 
