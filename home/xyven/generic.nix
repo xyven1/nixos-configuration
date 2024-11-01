@@ -145,6 +145,7 @@
       dust # du alternative
       hyperfine # benchmarking tool
       ncdu # disk usage analyzer
+      nh # nix helpers
       ouch # compress/decompress tool
       pipes-rs # pipes screensaver
       pipr # interactive shell pipeline builder
