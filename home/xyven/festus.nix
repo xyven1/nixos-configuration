@@ -11,12 +11,15 @@
     config.allowUnfree = true;
   };
 
-  gnome.extensions = {
-    paperwm.enable = true;
-    window-title.enable = true;
-    spotify-tray.enable = true;
-    freon.enable = true;
-    gsconnect.enable = true;
+  gnome = {
+    background = "starship.jpeg";
+    extensions = {
+      paperwm.enable = true;
+      window-title.enable = true;
+      spotify-tray.enable = true;
+      freon.enable = true;
+      gsconnect.enable = true;
+    };
   };
 
   home = {

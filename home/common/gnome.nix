@@ -26,12 +26,17 @@
         enable = lib.mkEnableOption "Enable TailScale Status";
       };
     };
+    background = lib.mkOption {
+      type = lib.types.str;
+      default = "forest.jpg";
+    };
   };
 
   config = let
-    cfg = config.gnome.extensions;
+    ext-cfg = config.gnome.extensions;
+    cfg = config.gnome;
     gv = lib.hm.gvariant;
-    gnome-exts = pkgs.unstable.gnomeExtensions;
+    gnome-exts = pkgs.gnomeExtensions;
   in {
     dconf.settings = {
       "org/gnome/desktop/interface" = {
@@ -61,18 +66,18 @@
         disable-user-extensions = false;
       };
       "org/gnome/desktop/background" = {
-        picture-uri = "${inputs.backgrounds}/forest.jpg";
-        picture-uri-dark = "${inputs.backgrounds}/forest.jpg";
+        picture-uri = lib.mkDefault "${inputs.backgrounds}/${cfg.background}";
+        picture-uri-dark = lib.mkDefault "${inputs.backgrounds}/${cfg.background}";
       };
 
-      "org/gnome/shell/extensions/paperwm" = lib.mkIf cfg.paperwm.enable {
+      "org/gnome/shell/extensions/paperwm" = lib.mkIf ext-cfg.paperwm.enable {
         horizontal-margin = gv.mkInt32 10;
         use-default-background = gv.mkBoolean true;
         vertical-margin = gv.mkInt32 10;
         vertical-margin-bottom = gv.mkInt32 10;
         window-gap = gv.mkInt32 12;
       };
-      "org/gnome/shell/extensions/window-title-is-back" = lib.mkIf cfg.window-title.enable {
+      "org/gnome/shell/extensions/window-title-is-back" = lib.mkIf ext-cfg.window-title.enable {
         colored-icon = true;
         icon-size = lib.hm.gvariant.mkUint32 20;
         show-app = false;
@@ -83,23 +88,23 @@
       "org/gnome/shell" = {
         enabled-extensions =
           []
-          ++ lib.optionals cfg.paperwm.enable ["paperwm@paperwm.github.com"]
-          ++ lib.optionals cfg.window-title.enable ["window-title-is-back@fthx"]
-          ++ lib.optionals cfg.spotify-tray.enable ["sp-tray@sp-tray.esenliyim.github.com"]
-          ++ lib.optionals cfg.freon.enable ["freon@UshakovVasilii_Github.yahoo.com"]
-          ++ lib.optionals cfg.gsconnect.enable ["gsconnect@andyholmes.github.io"]
-          ++ lib.optionals cfg.tailscale-status.enable ["tailscale-status@maxgallup.github.com"];
+          ++ lib.optionals ext-cfg.paperwm.enable ["paperwm@paperwm.github.com"]
+          ++ lib.optionals ext-cfg.window-title.enable ["window-title-is-back@fthx"]
+          ++ lib.optionals ext-cfg.spotify-tray.enable ["sp-tray@sp-tray.esenliyim.github.com"]
+          ++ lib.optionals ext-cfg.freon.enable ["freon@UshakovVasilii_Github.yahoo.com"]
+          ++ lib.optionals ext-cfg.gsconnect.enable ["gsconnect@andyholmes.github.io"]
+          ++ lib.optionals ext-cfg.tailscale-status.enable ["tailscale-status@maxgallup.github.com"];
       };
     };
     home.packages =
       []
-      ++ lib.optionals cfg.paperwm.enable [gnome-exts.paperwm]
-      ++ lib.optionals cfg.window-title.enable [gnome-exts.window-title-is-back]
-      ++ lib.optionals cfg.spotify-tray.enable [gnome-exts.spotify-tray]
-      ++ lib.optionals cfg.freon.enable [gnome-exts.freon]
-      ++ lib.optionals cfg.gsconnect.enable [gnome-exts.gsconnect]
-      ++ lib.optionals cfg.tailscale-status.enable [gnome-exts.tailscale-status];
-    xdg.configFile."paperwm/user.css" = lib.mkIf cfg.paperwm.enable {
+      ++ lib.optionals ext-cfg.paperwm.enable [gnome-exts.paperwm]
+      ++ lib.optionals ext-cfg.window-title.enable [gnome-exts.window-title-is-back]
+      ++ lib.optionals ext-cfg.spotify-tray.enable [gnome-exts.spotify-tray]
+      ++ lib.optionals ext-cfg.freon.enable [gnome-exts.freon]
+      ++ lib.optionals ext-cfg.gsconnect.enable [gnome-exts.gsconnect]
+      ++ lib.optionals ext-cfg.tailscale-status.enable [gnome-exts.tailscale-status];
+    xdg.configFile."paperwm/user.css" = lib.mkIf ext-cfg.paperwm.enable {
       text = ''
         .paperwm-selection {
             border-radius: 12px 12px 0px 0px;

@@ -20,11 +20,11 @@
     "backgrounds": {
       "flake": false,
       "locked": {
-        "lastModified": 1676532891,
-        "narHash": "sha256-Qtev8WxPyWVyhKvGLgabJ3IJyLNFX7D1oH0dc3fCC6c=",
+        "lastModified": 1730756059,
+        "narHash": "sha256-+dEK3WxB8QL8pkBFnYzQUnO45SN7S/AfyTfZl+vQPxM=",
         "owner": "xyven1",
         "repo": "nixos-backgrounds",
-        "rev": "54e1826e745349d8909009e9cdd339898c8a5e21",
+        "rev": "dd5da0833c56d8b4c50592740cc1ce7b3f8115bc",
         "type": "github"
       },
       "original": {
