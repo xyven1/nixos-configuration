@@ -29,9 +29,7 @@
       ])
       ++ (with pkgs.unstable; [
         bottles
-        exercism
         gnome-obfuscate
-        junction # application picker
         libreoffice-qt
         magic-wormhole-rs
         metadata-cleaner
@@ -40,7 +38,6 @@
         scc
         spotify
         spotify-player # terminal spotify client
-        spotify-tray # shows current track and controls in notification area
         switcheroo # image converter
         video-trimmer
         vscode
@@ -60,8 +57,6 @@
         })
         discord
         zoom-us
-        parsec-bin
-        plex-media-player
       ]);
     sessionVariables.NEOVIDE_FRAME = "none";
   };
