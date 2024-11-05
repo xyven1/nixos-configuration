@@ -35,7 +35,7 @@
   config = let
     ext-cfg = config.gnome.extensions;
     cfg = config.gnome;
-    gv = lib.hm.gvariant;
+    gv = lib.gvariant;
     gnome-exts = pkgs.gnomeExtensions;
   in {
     dconf.settings = {
@@ -46,6 +46,12 @@
       "org/gnome/nautilus/list-view" = {
         default-zoom-level = "medium";
         use-tree-view = true;
+      };
+      "org/gnome/mutter" = {
+        experimental-features = gv.mkArray [
+          "scale-monitor-framebuffer"
+          "xwayland-native-scaling"
+        ];
       };
       "org/gnome/nautilus/preferences" = {
         default-folder-viewer = "list-view";
@@ -71,11 +77,12 @@
       };
 
       "org/gnome/shell/extensions/paperwm" = lib.mkIf ext-cfg.paperwm.enable {
-        horizontal-margin = gv.mkInt32 10;
+        horizontal-margin = gv.mkInt32 4;
         use-default-background = gv.mkBoolean true;
-        vertical-margin = gv.mkInt32 10;
-        vertical-margin-bottom = gv.mkInt32 10;
-        window-gap = gv.mkInt32 12;
+        selection-border-size = gv.mkInt32 4;
+        vertical-margin = gv.mkInt32 4;
+        vertical-margin-bottom = gv.mkInt32 4;
+        window-gap = gv.mkInt32 4;
       };
       "org/gnome/shell/extensions/window-title-is-back" = lib.mkIf ext-cfg.window-title.enable {
         colored-icon = true;
