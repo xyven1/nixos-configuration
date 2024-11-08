@@ -21,6 +21,10 @@
       gsconnect.enable = true;
     };
   };
+  neovim = {
+    local-config = true;
+    use-nix-parsers = false;
+  };
 
   home = {
     packages =
