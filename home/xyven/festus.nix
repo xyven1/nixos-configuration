@@ -50,6 +50,7 @@
         zotero
 
         # unfree
+        jetbrains.datagrip
         slack
         obsidian
         (google-chrome.override {
