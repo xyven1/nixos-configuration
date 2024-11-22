@@ -7,7 +7,7 @@
     ./accelerated-video.nix
     ./biometrics.nix
     ./hardware-configuration.nix
-    ./nvidia-disable.nix
+    ./nvidia.nix
 
     ../common/global
     ../common/users/xyven
