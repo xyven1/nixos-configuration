@@ -48,6 +48,7 @@
         wike # wikipedia reader
         wl-clipboard # for clip board support in neovim
         zotero
+        gpclient
 
         # unfree
         jetbrains.datagrip
