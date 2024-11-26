@@ -17,8 +17,8 @@
       paperwm.enable = true;
       window-title.enable = true;
       spotify-tray.enable = true;
-      freon.enable = true;
       gsconnect.enable = true;
+      astra-monitor.enable = true;
     };
   };
   neovim = {
