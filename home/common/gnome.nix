@@ -25,6 +25,9 @@
       tailscale-status = {
         enable = lib.mkEnableOption "Enable TailScale Status";
       };
+      astra-monitor = {
+        enable = lib.mkEnableOption "Enable Astra Monitor";
+      };
     };
     background = lib.mkOption {
       type = lib.types.str;
@@ -100,7 +103,8 @@
           ++ lib.optionals ext-cfg.spotify-tray.enable ["sp-tray@sp-tray.esenliyim.github.com"]
           ++ lib.optionals ext-cfg.freon.enable ["freon@UshakovVasilii_Github.yahoo.com"]
           ++ lib.optionals ext-cfg.gsconnect.enable ["gsconnect@andyholmes.github.io"]
-          ++ lib.optionals ext-cfg.tailscale-status.enable ["tailscale-status@maxgallup.github.com"];
+          ++ lib.optionals ext-cfg.tailscale-status.enable ["tailscale-status@maxgallup.github.com"]
+          ++ lib.optionals ext-cfg.astra-monitor.enable ["monitor@astraext.github.io"];
       };
     };
     home.packages =
@@ -110,7 +114,15 @@
       ++ lib.optionals ext-cfg.spotify-tray.enable [gnome-exts.spotify-tray]
       ++ lib.optionals ext-cfg.freon.enable [gnome-exts.freon]
       ++ lib.optionals ext-cfg.gsconnect.enable [gnome-exts.gsconnect]
-      ++ lib.optionals ext-cfg.tailscale-status.enable [gnome-exts.tailscale-status];
+      ++ lib.optionals ext-cfg.tailscale-status.enable [gnome-exts.tailscale-status]
+      ++ lib.optionals ext-cfg.astra-monitor.enable [
+        gnome-exts.astra-monitor
+        pkgs.iotop
+        pkgs.iw
+      ];
+    home.sessionVariables = {
+      GI_TYPELIB_PATH = "${pkgs.libgtop}/lib/girepository-1.0";
+    };
     xdg.configFile."paperwm/user.css" = lib.mkIf ext-cfg.paperwm.enable {
       text = ''
         .paperwm-selection {
