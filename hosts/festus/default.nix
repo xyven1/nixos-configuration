@@ -31,7 +31,16 @@
     resumeDevice = "/dev/dm-0";
     kernelParams = ["resume_offset=113446912"];
   };
-  environment.systemPackages = [pkgs.sbctl];
+  environment.systemPackages = with pkgs; [sbctl];
+  security.wrappers = {
+    nethogs = {
+      source = lib.getExe pkgs.nethogs;
+      capabilities = "cap_net_admin=ep cap_net_raw=ep";
+      owner = "root";
+      group = "root";
+      permissions = "u+rx,g+x,o+x";
+    };
+  };
   hardware.enableRedistributableFirmware = true;
   # improve boot time
   systemd.services.NetworkManager-wait-online.enable = false;
