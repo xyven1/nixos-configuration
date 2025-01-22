@@ -36,6 +36,7 @@
         nil
         alejandra
       ];
+      extraLuaPackages = ps: with ps; [magick];
     };
     programs.git.ignores = [
       ".lazy.lua"
