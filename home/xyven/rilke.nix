@@ -15,7 +15,7 @@
     paperwm.enable = true;
     window-title.enable = true;
     spotify-tray.enable = true;
-    freon.enable = true;
+    astra-monitor.enable = true;
   };
 
   home = {
