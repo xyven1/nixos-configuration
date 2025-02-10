@@ -69,9 +69,6 @@
         delay = lib.hm.gvariant.mkUint32 225;
       };
       "org/gnome/shell" = {
-        favorite-apps =
-          []
-          ++ lib.optionals config.programs.wezterm.enable ["org.wezfurlong.wezterm.desktop"];
         disable-user-extensions = false;
       };
       "org/gnome/desktop/background" = {
