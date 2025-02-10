@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   pkgs,
   lib,
   ...
@@ -12,7 +11,7 @@
 
   programs.wezterm = {
     enable = true;
-    package = lib.mkDefault inputs.wezterm.packages.${pkgs.system}.default;
+    package = lib.mkDefault pkgs.unstable.wezterm;
   };
 
   home.file = {
