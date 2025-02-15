@@ -57,9 +57,8 @@
         obsidian
         (google-chrome.override {
           commandLineArgs = [
-            "--enable-features=UseOzonePlatform"
+            "--enable-features=AcceleratedVideoDecodeLinuxGL"
             "--ozone-platform=wayland"
-            "--enable-features=VaapiVideoDecodeLinuxGL,VaapiVideoEncoder"
           ];
         })
         discord
