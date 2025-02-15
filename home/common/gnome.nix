@@ -42,6 +42,9 @@
     gnome-exts = pkgs.gnomeExtensions;
   in {
     dconf.settings = {
+      "org/gnome/shell" = {
+        favorite-apps = [];
+      };
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
         clock-format = "12h";
@@ -79,9 +82,11 @@
       "org/gnome/shell/extensions/paperwm" = lib.mkIf ext-cfg.paperwm.enable {
         horizontal-margin = gv.mkInt32 4;
         use-default-background = gv.mkBoolean true;
-        selection-border-size = gv.mkInt32 4;
+        selection-border-size = gv.mkInt32 3;
         vertical-margin = gv.mkInt32 4;
         vertical-margin-bottom = gv.mkInt32 4;
+        selection-border-radius-top = gv.mkInt32 4;
+        selection-border-radius-bottom = gv.mkInt32 4;
         window-gap = gv.mkInt32 4;
       };
       "org/gnome/shell/extensions/window-title-is-back" = lib.mkIf ext-cfg.window-title.enable {
@@ -123,8 +128,7 @@
     xdg.configFile."paperwm/user.css" = lib.mkIf ext-cfg.paperwm.enable {
       text = ''
         .paperwm-selection {
-            border-radius: 12px 12px 0px 0px;
-            border-width: 4px;
+            border-width: 2px;
             background-color: rgba(0, 0, 0, 0);
         }
       '';
