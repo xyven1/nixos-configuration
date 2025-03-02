@@ -23,6 +23,7 @@
       defaultEditor = true;
       withRuby = false;
       withPython3 = false;
+      package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
 
       extraPackages = with pkgs.unstable; [
         # For plugin functionality

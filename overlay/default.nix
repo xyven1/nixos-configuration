@@ -12,6 +12,4 @@
   additions = final: _prev: import ../pkgs {pkgs = final;};
 
   wpi-wireless-install = inputs.wpi-wireless-install.overlays.default;
-
-  neovimNightly = inputs.neovim-nightly-overlay.overlays.default;
 }
