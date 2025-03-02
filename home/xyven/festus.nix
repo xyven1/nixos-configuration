@@ -13,13 +13,13 @@
   };
 
   gnome = {
-    background = "starship.jpeg";
     extensions = {
       paperwm.enable = true;
       window-title.enable = true;
       spotify-tray.enable = true;
       gsconnect.enable = true;
       astra-monitor.enable = true;
+      wallpaper-slideshow.enable = true;
     };
   };
   neovim = {

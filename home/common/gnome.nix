@@ -28,10 +28,13 @@
       astra-monitor = {
         enable = lib.mkEnableOption "Enable Astra Monitor";
       };
+      wallpaper-slideshow = {
+        enable = lib.mkEnableOption "Enable wallpaper slideshow";
+      };
     };
     background = lib.mkOption {
-      type = lib.types.str;
-      default = "forest.jpg";
+      type = lib.types.nullOr lib.types.str;
+      default = null;
     };
   };
 
@@ -74,11 +77,10 @@
       "org/gnome/shell" = {
         disable-user-extensions = false;
       };
-      "org/gnome/desktop/background" = {
+      "org/gnome/desktop/background" = lib.mkIf (cfg.background != null) {
         picture-uri = lib.mkDefault "${inputs.backgrounds}/${cfg.background}";
         picture-uri-dark = lib.mkDefault "${inputs.backgrounds}/${cfg.background}";
       };
-
       "org/gnome/shell/extensions/paperwm" = lib.mkIf ext-cfg.paperwm.enable {
         horizontal-margin = gv.mkInt32 4;
         use-default-background = gv.mkBoolean true;
@@ -106,6 +108,7 @@
           ++ lib.optionals ext-cfg.freon.enable ["freon@UshakovVasilii_Github.yahoo.com"]
           ++ lib.optionals ext-cfg.gsconnect.enable ["gsconnect@andyholmes.github.io"]
           ++ lib.optionals ext-cfg.tailscale-status.enable ["tailscale-status@maxgallup.github.com"]
+          ++ lib.optionals ext-cfg.wallpaper-slideshow.enable ["azwallpaper@azwallpaper.gitlab.com"]
           ++ lib.optionals ext-cfg.astra-monitor.enable ["monitor@astraext.github.io"];
       };
     };
@@ -117,6 +120,7 @@
       ++ lib.optionals ext-cfg.freon.enable [gnome-exts.freon]
       ++ lib.optionals ext-cfg.gsconnect.enable [gnome-exts.gsconnect]
       ++ lib.optionals ext-cfg.tailscale-status.enable [gnome-exts.tailscale-status]
+      ++ lib.optionals ext-cfg.wallpaper-slideshow.enable [gnome-exts.wallpaper-slideshow]
       ++ lib.optionals ext-cfg.astra-monitor.enable [
         gnome-exts.astra-monitor
         pkgs.iotop
