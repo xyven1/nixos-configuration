@@ -1,11 +1,12 @@
 {
+  inputs,
   pkgs,
   lib,
   ...
 }: {
   imports = [
+    inputs.chaotic.nixosModules.default
     ./accelerated-video.nix
-    ./biometrics.nix
     ./hardware-configuration.nix
     ./nvidia.nix
 
@@ -15,8 +16,7 @@
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
-    clearLinuxPatches.enable = false;
+    kernelPackages = pkgs.linuxPackages_cachyos;
     # Setup keyfile
     initrd.secrets."/crypto_keyfile.bin" = null;
     loader.efi = {
@@ -80,7 +80,6 @@
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
-    pulse.enable = true;
   };
 
   # allow gnome to manage system time
