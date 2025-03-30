@@ -26,6 +26,7 @@
     use-nix-parsers = true;
   };
 
+  fonts.fontconfig.enable = true;
   home = {
     packages =
       (with pkgs; [
@@ -62,6 +63,10 @@
         })
         discord
         zoom-us
+
+        # fonts
+        jetbrains-mono
+        nerd-fonts.symbols-only
       ]);
     sessionVariables.NEOVIDE_FRAME = "none";
   };
