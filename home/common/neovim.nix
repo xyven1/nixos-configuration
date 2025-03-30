@@ -30,7 +30,9 @@
         ripgrep
         fzf
         lazygit
-        (writeShellScriptBin "nvim-node" "${lib.getExe pkgs.nodejs} $@")
+        (writeShellScriptBin "copilot-lsp" ''
+          exec ${lib.getExe nodejs} ${vscode-extensions.github.copilot}/share/vscode/extensions/github.copilot/dist/language-server.js $@
+        '')
         # LSP & Formatting Providers
         marksman
         lua-language-server
