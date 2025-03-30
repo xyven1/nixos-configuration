@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   imports = [
     ./generic.nix
-    ../common/font.nix
     ../common/ghostty.nix
     ../common/gnome.nix
     ../common/helix.nix

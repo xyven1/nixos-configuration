@@ -19,7 +19,6 @@
 in {
   imports = [
     ../xyven/generic.nix
-    ../common/font.nix
     ../common/gnome.nix
     ../common/helix.nix
     ../common/wezterm
