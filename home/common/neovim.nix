@@ -18,6 +18,9 @@
   config = let
     cfg = config.neovim;
   in {
+    nixpkgs.allowUnfreePackages = [
+      "vscode-extension-github-copilot"
+    ];
     programs.neovim = {
       enable = true;
       defaultEditor = true;
