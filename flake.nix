@@ -45,10 +45,6 @@
     home-management.url = "github:xyven1/home-management";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
-    # wsl
-    nixos-wsl.url = "github:nix-community/NixOS-WSL";
-    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
-
     # work
     nixgl.url = "github:nix-community/nixGL";
     nixgl.inputs.nixpkgs.follows = "nixpkgs";
