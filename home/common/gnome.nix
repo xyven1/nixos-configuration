@@ -28,8 +28,25 @@
       astra-monitor = {
         enable = lib.mkEnableOption "Enable Astra Monitor";
       };
+      blur-my-shell = {
+        enable = lib.mkEnableOption "Enable Blur My Shell";
+      };
+      openbar = {
+        enable = lib.mkEnableOption "Enable Open Bar";
+      };
+      floating-topbar = {
+        enable = lib.mkEnableOption "Enable Floating Topbar";
+        margin = lib.mkOption {
+          type = lib.types.int;
+          default = 10;
+          description = "Margin for the floating topbar";
+        };
+      };
+      rounded-corners = {
+        enable = lib.mkEnableOption "Enable Rounded Corners";
+      };
       wallpaper-slideshow = {
-        enable = lib.mkEnableOption "Enable wallpaper slideshow";
+        enable = lib.mkEnableOption "Enable Wallpaper Slideshow";
       };
     };
     background = lib.mkOption {
@@ -82,14 +99,18 @@
         picture-uri-dark = lib.mkDefault "${inputs.backgrounds}/${cfg.background}";
       };
       "org/gnome/shell/extensions/paperwm" = lib.mkIf ext-cfg.paperwm.enable {
-        horizontal-margin = gv.mkInt32 4;
+        horizontal-margin = gv.mkInt32 6;
         use-default-background = gv.mkBoolean true;
-        selection-border-size = gv.mkInt32 3;
-        vertical-margin = gv.mkInt32 4;
-        vertical-margin-bottom = gv.mkInt32 4;
+        selection-border-size = gv.mkInt32 5;
+        vertical-margin = gv.mkInt32 (
+          if ext-cfg.floating-topbar.enable
+          then 0
+          else 6
+        );
+        vertical-margin-bottom = gv.mkInt32 6;
         selection-border-radius-top = gv.mkInt32 4;
         selection-border-radius-bottom = gv.mkInt32 4;
-        window-gap = gv.mkInt32 4;
+        window-gap = gv.mkInt32 6;
       };
       "org/gnome/shell/extensions/window-title-is-back" = lib.mkIf ext-cfg.window-title.enable {
         colored-icon = true;
@@ -97,6 +118,9 @@
         show-app = false;
         show-icon = true;
         show-title = true;
+      };
+      "org/gnome/shell/extensions/user-theme" = lib.mkIf ext-cfg.floating-topbar.enable {
+        name = "floating-topbar";
       };
       # Extensions
       "org/gnome/shell" = {
@@ -109,11 +133,27 @@
           ++ lib.optionals ext-cfg.gsconnect.enable ["gsconnect@andyholmes.github.io"]
           ++ lib.optionals ext-cfg.tailscale-status.enable ["tailscale-status@maxgallup.github.com"]
           ++ lib.optionals ext-cfg.wallpaper-slideshow.enable ["azwallpaper@azwallpaper.gitlab.com"]
+          ++ lib.optionals ext-cfg.blur-my-shell.enable ["blur-my-shell@aunetx"]
+          ++ lib.optionals ext-cfg.openbar.enable ["openbar@neuromorph"]
+          ++ lib.optionals ext-cfg.openbar.enable ["openbar@neuromorph"]
+          ++ lib.optionals ext-cfg.floating-topbar.enable ["user-theme@gnome-shell-extensions.gcampax.github.com"]
+          ++ lib.optionals ext-cfg.rounded-corners.enable ["rounded-window-corners@fxgn"]
           ++ lib.optionals ext-cfg.astra-monitor.enable ["monitor@astraext.github.io"];
       };
     };
     home.packages =
-      []
+      [
+        (pkgs.stdenv.mkDerivation rec {
+          name = "floating-topbar";
+          dontUnpack = true;
+          installPhase = ''
+            mkdir -p $out/share/themes/${name}/gnome-shell
+            echo '#panel {
+              margin: ${toString ext-cfg.floating-topbar.margin}px;
+            }' > $out/share/themes/${name}/gnome-shell/gnome-shell.css
+          '';
+        })
+      ]
       ++ lib.optionals ext-cfg.paperwm.enable [gnome-exts.paperwm]
       ++ lib.optionals ext-cfg.window-title.enable [gnome-exts.window-title-is-back]
       ++ lib.optionals ext-cfg.spotify-tray.enable [gnome-exts.spotify-tray]
@@ -121,18 +161,26 @@
       ++ lib.optionals ext-cfg.gsconnect.enable [gnome-exts.gsconnect]
       ++ lib.optionals ext-cfg.tailscale-status.enable [gnome-exts.tailscale-status]
       ++ lib.optionals ext-cfg.wallpaper-slideshow.enable [gnome-exts.wallpaper-slideshow]
+      ++ lib.optionals ext-cfg.blur-my-shell.enable [gnome-exts.blur-my-shell]
+      ++ lib.optionals ext-cfg.openbar.enable [gnome-exts.open-bar]
+      ++ lib.optionals ext-cfg.floating-topbar.enable [gnome-exts.user-themes]
+      ++ lib.optionals ext-cfg.rounded-corners.enable [gnome-exts.rounded-window-corners-reborn]
       ++ lib.optionals ext-cfg.astra-monitor.enable [
         gnome-exts.astra-monitor
         pkgs.iotop
         pkgs.iw
       ];
-    home.sessionVariables = {
+    home.sessionVariables = lib.mkIf ext-cfg.astra-monitor.enable {
       GI_TYPELIB_PATH = "${pkgs.libgtop}/lib/girepository-1.0";
     };
     xdg.configFile."paperwm/user.css" = lib.mkIf ext-cfg.paperwm.enable {
       text = ''
         .paperwm-selection {
-            border-width: 2px;
+            border-width: ${toString (
+          if ext-cfg.floating-topbar.enable
+          then 0
+          else 2
+        )}px;
             background-color: rgba(0, 0, 0, 0);
         }
       '';
