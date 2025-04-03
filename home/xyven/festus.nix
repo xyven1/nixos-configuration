@@ -19,6 +19,11 @@
       gsconnect.enable = true;
       astra-monitor.enable = true;
       wallpaper-slideshow.enable = true;
+      blur-my-shell.enable = true;
+      floating-topbar = {
+        enable = true;
+        margin = 6;
+      };
     };
   };
   neovim = {
