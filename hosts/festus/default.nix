@@ -7,6 +7,7 @@
   imports = [
     inputs.chaotic.nixosModules.default
     ./accelerated-video.nix
+    ./biometrics.nix
     ./hardware-configuration.nix
     ./nvidia.nix
 
@@ -107,6 +108,12 @@
     };
   };
   services.power-profiles-daemon.enable = false;
+
+  # Enable evolution data server with ews support
+  programs.evolution = {
+    enable = true;
+    plugins = [pkgs.evolution-ews];
+  };
 
   system.stateVersion = "24.05"; # Did you read the comment?
 }
