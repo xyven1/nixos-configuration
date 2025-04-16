@@ -1,14 +1,10 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./generic.nix
   ];
   home = {
     packages = [
-      inputs.wezterm.packages.${pkgs.system}.default
+      pkgs.unstable.wezterm
     ];
   };
   programs.fish = {
