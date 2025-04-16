@@ -16,7 +16,6 @@ in {
       dnsProvider = "cloudflare";
       environmentFile = config.sops.secrets.cloudflare.path;
       group = "nginx";
-      dnsPropagationCheck = false;
     };
   };
   services.nginx = let
