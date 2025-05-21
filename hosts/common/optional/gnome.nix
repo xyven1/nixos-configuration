@@ -13,10 +13,7 @@
     settings.GNOME = ["wezterm.desktop"];
   };
 
-  services.gnome = {
-    core-os-services.enable = true;
-    core-utilities.enable = false;
-  };
+  services.gnome.core-apps.enable = false;
 
   environment.systemPackages = with pkgs; [
     baobab # disk usage analyzer
