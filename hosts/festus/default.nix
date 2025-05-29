@@ -5,7 +5,9 @@
   ...
 }: {
   imports = [
-    inputs.chaotic.nixosModules.default
+    inputs.chaotic.nixosModules.nyx-cache
+    inputs.chaotic.nixosModules.nyx-overlay
+    inputs.chaotic.nixosModules.nyx-registry
     ./accelerated-video.nix
     ./biometrics.nix
     ./hardware-configuration.nix
@@ -14,6 +16,30 @@
     ../common/global
     ../common/users/xyven
     ../common/optional/gnome.nix
+  ];
+
+  nixpkgs.hostPlatform = {
+    gcc.arch = "tigerlake";
+    gcc.tune = "tigerlake";
+    system = "x86_64-linux";
+  };
+
+  nix.settings.system-features = ["gccarch-tigerlake"];
+
+  systemd.extraConfig = "DefaultLimitNOFILE=2048:1048576";
+  security.pam.loginLimits = [
+    {
+      domain = "*";
+      type = "soft";
+      item = "nofile";
+      value = "65536";
+    }
+    {
+      domain = "*";
+      type = "hard";
+      item = "nofile";
+      value = "1048576";
+    }
   ];
 
   boot = {
