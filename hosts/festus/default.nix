@@ -5,7 +5,9 @@
   ...
 }: {
   imports = [
-    inputs.chaotic.nixosModules.default
+    inputs.chaotic.nixosModules.nyx-cache
+    inputs.chaotic.nixosModules.nyx-overlay
+    inputs.chaotic.nixosModules.nyx-registry
     ./accelerated-video.nix
     ./biometrics.nix
     ./hardware-configuration.nix
@@ -15,6 +17,12 @@
     ../common/users/xyven
     ../common/optional/gnome.nix
   ];
+
+  nixpkgs.hostPlatform = {
+    gcc.arch = "tigerlake";
+    gcc.tune = "tigerlake";
+    system = "x86_64-linux";
+  };
 
   boot = {
     kernelPackages = pkgs.linuxPackages_cachyos;
