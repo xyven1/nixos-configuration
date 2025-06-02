@@ -39,7 +39,7 @@
         # LSP & Formatting Providers
         marksman
         lua-language-server
-        nil
+        nixd
         alejandra
       ];
       extraLuaPackages = ps: with ps; [magick];
