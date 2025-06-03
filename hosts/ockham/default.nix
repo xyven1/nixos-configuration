@@ -1,5 +1,6 @@
 {
   inputs,
+  pkgs,
   lib,
   ...
 }: let
@@ -23,7 +24,26 @@ in {
     device = "/dev/mapper/media-volume";
     fsType = "ext4";
   };
-
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+    options = "caps:swapescape";
+  };
+  services.kmscon = {
+    enable = true;
+    fonts = [
+      {
+        name = "JetBrains Mono";
+        package = pkgs.jetbrains-mono;
+      }
+      {
+        name = "Symbols Nerd Font";
+        package = pkgs.nerd-fonts.symbols-only;
+      }
+    ];
+    useXkbConfig = true;
+    hwRender = true;
+  };
   virtualisation = {
     libvirtd.enable = true;
     docker.enable = true;
