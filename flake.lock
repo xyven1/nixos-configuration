@@ -792,11 +792,11 @@
     "neovim-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1747981052,
-        "narHash": "sha256-JoYGN2QQycLA3/SQd1vOJ8GMxTBbU0lkHoQqoznHs0o=",
+        "lastModified": 1748897695,
+        "narHash": "sha256-ydupDiqYDoWF+TRxHqTNrVNEEq9Db3/SOZ+7PZx2eig=",
         "owner": "xyven1",
         "repo": "neovim-config",
-        "rev": "484291b61e1c7285ce28fb83141c64d692a7d233",
+        "rev": "d4be6061abeca8fcd6c4cb3defaaf63ca4db86f3",
         "type": "github"
       },
       "original": {
