@@ -69,7 +69,6 @@ in {
       wantedBy = ["multi-user.target"];
       after = ["network.target"];
       wants = ["network.target"];
-      path = [pkgs.nodejs_18];
 
       serviceConfig = {
         User = username;
