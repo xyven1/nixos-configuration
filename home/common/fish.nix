@@ -4,8 +4,6 @@
   config,
   ...
 }: {
-  programs.nix-index.enable = true;
-
   home.packages = [
     pkgs.unstable.any-nix-shell
     pkgs.unstable.fishPlugins.fzf-fish

@@ -10,9 +10,6 @@
     ../common/starship.nix
     ../common/direnv.nix
     inputs.nix-index-database.hmModules.nix-index
-    {
-      programs.nix-index-database.comma.enable = true;
-    }
   ];
 
   nix = {
@@ -101,13 +98,16 @@
         pager = "delta --dark --paging=never";
       };
     };
+    nix-index.enable = true;
+    nix-index-database.comma.enable = true;
+    pay-respects = {
+      enable = true;
+      package = pkgs.unstable.pay-respects;
+      options = ["--nocnf"];
+    };
     ripgrep = {
       enable = true;
       package = pkgs.unstable.ripgrep;
-    };
-    thefuck = {
-      enable = true;
-      package = pkgs.unstable.thefuck;
     };
     yazi = {
       enable = true;
