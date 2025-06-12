@@ -68,6 +68,7 @@
         })
         discord
         zoom-us
+        plex-desktop
 
         # fonts
         jetbrains-mono

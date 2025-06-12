@@ -47,7 +47,7 @@
       discord
       zoom-us
       parsec-bin
-      plex-media-player
+      plex-desktop
       # games
     ];
     # sessionVariables.NIXOS_OZONE_WL = "1";
