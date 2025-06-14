@@ -61,6 +61,18 @@
     gv = lib.gvariant;
     gnome-exts = pkgs.gnomeExtensions;
   in {
+    gtk = {
+      enable = true;
+      theme = {
+        name = "adw-gtk3-dark";
+        package = pkgs.adw-gtk3;
+      };
+    };
+    qt = {
+      enable = true;
+      platformTheme = "adwaita";
+      style.name = "adwaita-dark";
+    };
     dconf.settings = {
       "org/gnome/shell" = {
         favorite-apps = [];
@@ -85,8 +97,8 @@
         search-filter-time-type = "last_modified";
         search-view = "list-view";
       };
-      "org/gnome/desktop/default-applications/terminal" = lib.mkIf config.programs.wezterm.enable {
-        exec = "${config.home.profileDirectory}/bin/wezterm";
+      "org/gnome/desktop/default-applications/terminal" = lib.mkIf config.programs.ghostty.enable {
+        exec = lib.getExe config.programs.ghostty.package;
       };
       "org/gnome/desktop/peripherals/keyboard" = {
         delay = lib.hm.gvariant.mkUint32 225;
