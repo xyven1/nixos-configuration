@@ -141,6 +141,34 @@ in {
             recommendedProxySettings = true;
           };
         };
+        "ombi" = {
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:5000";
+            proxyWebsockets = true;
+            recommendedProxySettings = true;
+          };
+        };
+        "radarr" = {
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:7878";
+            proxyWebsockets = true;
+            recommendedProxySettings = true;
+          };
+        };
+        "sonarr" = {
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:8989";
+            proxyWebsockets = true;
+            recommendedProxySettings = true;
+          };
+        };
+        "transmission" = {
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:9091";
+            proxyWebsockets = true;
+            recommendedProxySettings = true;
+          };
+        };
       };
   };
 }
