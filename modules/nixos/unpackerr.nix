@@ -5,6 +5,7 @@
   ...
 }: let
   cfg = config.services.unpackerr;
+  format = pkgs.formats.toml {};
 in {
   options = {
     services.unpackerr = {
@@ -15,18 +16,38 @@ in {
       user = lib.mkOption {
         type = lib.types.str;
         default = "unpackerr";
-        description = "User account under which unpackerr runs.";
+        description = "User account under which Unpackerr runs.";
       };
 
       group = lib.mkOption {
         type = lib.types.str;
         default = "unpackerr";
-        description = "Group under which unpackerr runs.";
+        description = "Group under which Unpackerr runs.";
       };
-      configPath = lib.mkOption {
+
+      home = lib.mkOption {
         type = lib.types.path;
-        default = "/etc/unpackerr/config.toml";
-        description = "Path to the unpackerr configuration file.";
+        default = "/var/lib/unpackerr";
+        description = ''
+          The directory where Unpackerr stores its data files.
+          This directory will be created if it does not exist.
+        '';
+      };
+
+      settings = lib.mkOption {
+        type = format.type;
+        default = {
+          debug = false;
+        };
+        description = lib.mdDoc ''
+          Unpackerr configuration. Refer to <https://unpackerr.zip/docs/install/configuration> for details.
+        '';
+      };
+
+      configFile = lib.mkOption {
+        type = lib.types.nullOr lib.types.path;
+        default = null;
+        description = "Path to a custom configuration file for unpackerr. If set, this will override the any settings in the `settings` option.";
       };
     };
   };
@@ -34,15 +55,23 @@ in {
   config = lib.mkIf cfg.enable {
     systemd.services.unpackerr = {
       description = "unpackerr";
-      after = ["network.target"];
       wantedBy = ["multi-user.target"];
-      serviceConfig = {
+      serviceConfig = let
+        configPath =
+          if cfg.configFile != null
+          then "${cfg.configPath}"
+          else
+            format.generate "unpackerr.conf" ({
+                log_file = "${cfg.home}/unpackerr.log";
+                log_file_mode = "0640";
+              }
+              // cfg.settings);
+      in {
         Type = "simple";
         User = cfg.user;
         Group = cfg.group;
-        ExecStart = "${lib.getExe cfg.package} --config ${cfg.configPath}";
+        ExecStart = "${lib.getExe cfg.package} --config ${configPath}";
         Restart = "on-failure";
-        WorkingDirectory = "/tmp";
       };
     };
 
@@ -50,6 +79,8 @@ in {
       unpackerr = {
         group = cfg.group;
         uid = 389;
+        home = cfg.home;
+        createHome = true;
       };
     };
 

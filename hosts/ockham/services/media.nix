@@ -1,10 +1,17 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   nixpkgs.allowUnfreePackages = ["plexmediaserver" "unrar"];
 
+  sops.secrets =
+    lib.genAttrs ["unpackerr/radarr_api_key" "unpackerr/sonarr_api_key"]
+    (name: {
+      owner = config.users.users.unpackerr.name;
+      group = config.users.users.unpackerr.group;
+    });
   users.groups.media = {};
   # allow
   services = {
@@ -32,6 +39,27 @@
       enable = true;
       group = "media";
       package = pkgs.unstable.unpackerr;
+      settings = let
+        downloads = "${config.services.qbittorrent.dataDir}/qBittorrent/downloads";
+      in {
+        radarr = [
+          {
+            url = "http://10.200.1.2:7878";
+            api_key = "filepath:${config.sops.secrets."unpackerr/radarr_api_key".path}";
+            paths = [downloads];
+          }
+        ];
+        sonarr = [
+          {
+            url = "http://10.200.1.2:8989";
+            api_key = "filepath:${config.sops.secrets."unpackerr/sonarr_api_key".path}";
+            paths = [downloads];
+          }
+        ];
+        webserver = {
+          metrics = true;
+        };
+      };
     };
     ombi = {
       enable = true;
