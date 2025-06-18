@@ -23,7 +23,17 @@ in {
   in {
     enable = true;
     virtualHosts =
-      lib.mapAttrs'
+      {
+        _ = {
+          default = true;
+          addSSL = true;
+          useACMEHost = "${fqdn}";
+          extraConfig = ''
+            deny all;
+          '';
+        };
+      }
+      // lib.mapAttrs'
       (
         subdomain: cfg: {
           name = "${
@@ -148,23 +158,44 @@ in {
             recommendedProxySettings = true;
           };
         };
+        "unpackerr" = {
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:5656";
+            proxyWebsockets = true;
+            recommendedProxySettings = true;
+          };
+        };
         "radarr" = {
           locations."/" = {
-            proxyPass = "http://127.0.0.1:7878";
+            proxyPass = "http://10.200.1.2:7878";
             proxyWebsockets = true;
             recommendedProxySettings = true;
           };
         };
         "sonarr" = {
           locations."/" = {
-            proxyPass = "http://127.0.0.1:8989";
+            proxyPass = "http://10.200.1.2:8989";
             proxyWebsockets = true;
             recommendedProxySettings = true;
           };
         };
-        "transmission" = {
+        "prowlarr" = {
           locations."/" = {
-            proxyPass = "http://127.0.0.1:9091";
+            proxyPass = "http://10.200.1.2:9696";
+            proxyWebsockets = true;
+            recommendedProxySettings = true;
+          };
+        };
+        "flaresolverr" = {
+          locations."/" = {
+            proxyPass = "http://10.200.1.2:8191";
+            proxyWebsockets = true;
+            recommendedProxySettings = true;
+          };
+        };
+        "qbittorrent" = {
+          locations."/" = {
+            proxyPass = "http://10.200.1.2:8081";
             proxyWebsockets = true;
             recommendedProxySettings = true;
           };

@@ -111,6 +111,7 @@ in {
           };
           environment = {
             RUST_LOG = "trace";
+            HOME = cfg.dataDir;
           };
           serviceConfig = let
             ports = unique (flatten (attrValues cfg.services));
@@ -121,7 +122,6 @@ in {
               else "";
           in {
             Type = "notify";
-            # vopono will perform privledge escalation anyways, so it is simplest to run as root to begin with
             User = "root";
             Group = cfg.group;
             WorkingDirectory = cfg.dataDir;
@@ -130,8 +130,8 @@ in {
             RestartSec = "5s";
             ExecStart = ''
               ${lib.getExe cfg.package} exec \
-                -u ${cfg.user} \
-                -g ${cfg.group} \
+                --user ${cfg.user} \
+                --group ${cfg.group} \
                 --keep-alive \
                 ${portForwards} \
                 ${interface} \

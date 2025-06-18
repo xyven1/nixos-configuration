@@ -23,10 +23,10 @@ in {
         default = "unpackerr";
         description = "Group under which unpackerr runs.";
       };
-      settings = lib.mkOption {
-        type = lib.types.attrsOf lib.types.str;
-        default = {};
-        description = "Settings for unpackerr in TOML format.";
+      configPath = lib.mkOption {
+        type = lib.types.path;
+        default = "/etc/unpackerr/config.toml";
+        description = "Path to the unpackerr configuration file.";
       };
     };
   };
@@ -40,7 +40,7 @@ in {
         Type = "simple";
         User = cfg.user;
         Group = cfg.group;
-        ExecStart = "${lib.getExe cfg.package}";
+        ExecStart = "${lib.getExe cfg.package} --config ${cfg.configPath}";
         Restart = "on-failure";
         WorkingDirectory = "/tmp";
       };

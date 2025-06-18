@@ -1,28 +1,27 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }: {
   nixpkgs.allowUnfreePackages = ["plexmediaserver" "unrar"];
 
-  users.groups.seedbox = {};
+  users.groups.media = {};
   # allow
   services = {
     plex = {
       enable = true;
-      group = "seedbox";
+      group = "media";
       openFirewall = true;
       package = pkgs.unstable.plex;
     };
     sonarr = {
       enable = true;
-      group = "seedbox";
+      group = "media";
       package = pkgs.unstable.sonarr;
     };
     radarr = {
       enable = true;
-      group = "seedbox";
+      group = "media";
       package = pkgs.unstable.radarr;
     };
     prowlarr = {
@@ -31,40 +30,40 @@
     };
     unpackerr = {
       enable = true;
-      group = "seedbox";
+      group = "media";
       package = pkgs.unstable.unpackerr;
-    };
-    transmission = {
-      enable = true;
-      group = "seedbox";
-      package = pkgs.unstable.transmission_4;
-      downloadDirPermissions = "770";
     };
     ombi = {
       enable = true;
-      group = "seedbox";
+      group = "media";
       package = pkgs.unstable.ombi;
       openFirewall = true;
     };
-    sabnzbd = {
+    flaresolverr = {
       enable = true;
-      group = "seedbox";
-      package = pkgs.unstable.sabnzbd;
+      package = pkgs.unstable.flaresolverr;
+    };
+    qbittorrent = {
+      enable = true;
+      group = "media";
+      package = pkgs.unstable.qbittorrent-nox;
+      port = 8081;
     };
     vopono = {
       enable = true;
-      group = "seedbox";
+      group = "media";
+      package = pkgs.unstable.vopono;
       protocol = "Wireguard";
       provider = "Mullvad";
       server = "usa-us";
-      namespace = "seedbox";
-      interface = "wlp0s20f3";
+      namespace = "media";
+      interface = "eno1";
       services = {
-        radarr = [7878];
-        sonarr = [8989];
-        prowlarr = [9696];
-        sabnzbd = [8080];
-        transmission = [9091];
+        radarr = [];
+        sonarr = [];
+        prowlarr = [];
+        flaresolverr = [];
+        qbittorrent = [];
       };
     };
   };

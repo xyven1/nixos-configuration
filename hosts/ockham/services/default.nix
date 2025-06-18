@@ -5,7 +5,7 @@
     ./unifi.nix
     ./factorio.nix
     ./minecraft.nix
-    ./plex.nix
+    ./media.nix
     ./monitoring.nix
   ];
 }
