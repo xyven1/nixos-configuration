@@ -10,7 +10,7 @@ with lib; let
   GID = 888;
 in {
   options.services.qbittorrent = {
-    enable = mkEnableOption (lib.mdDoc "qBittorrent headless");
+    enable = mkEnableOption "qBittorrent headless";
 
     dataDir = mkOption {
       type = types.path;
@@ -111,7 +111,7 @@ in {
     };
 
     users.groups = mkIf (cfg.group == "qbittorrent") {
-      qbittorrent = {gid = GID;};
+      qbittorrent.gid = GID;
     };
   };
 }

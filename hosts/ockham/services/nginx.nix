@@ -20,41 +20,52 @@ in {
   };
   services.nginx = let
     e' = "''";
+    srv = config.services;
   in {
     enable = true;
+    appendHttpConfig = ''
+      proxy_headers_hash_bucket_size 128;
+    '';
     virtualHosts =
-      {
-        _ = {
-          default = true;
-          addSSL = true;
-          useACMEHost = "${fqdn}";
-          extraConfig = ''
-            deny all;
-          '';
-        };
-      }
-      // lib.mapAttrs'
+      lib.mapAttrs'
       (
         subdomain: cfg: {
-          name = "${
-            if builtins.stringLength subdomain > 0
-            then "${subdomain}."
-            else ""
-          }${fqdn}";
+          name =
+            if subdomain == "_"
+            then "_"
+            else if subdomain == ""
+            then fqdn
+            else "${subdomain}.${fqdn}";
           value =
             {
               forceSSL = true;
               useACMEHost = "${fqdn}";
             }
-            // cfg;
+            // (
+              if cfg ? basic && lib.isAttrs cfg.basic
+              then {
+                locations."/" =
+                  {
+                    proxyPass = "http://${cfg.host or "127.0.0.1"}:${toString (cfg.port or 80)}";
+                    proxyWebsockets = true;
+                    recommendedProxySettings = true;
+                  }
+                  // cfg.basic;
+              }
+              else cfg
+            );
         }
       )
       {
+        _ = {
+          default = true;
+          extraConfig = ''
+            deny all;
+          '';
+        };
         "" = {
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:43434";
-            recommendedProxySettings = true;
-            proxyWebsockets = true;
+          port = srv.home-management.port;
+          basic = {
             extraConfig = ''
               proxy_pass_request_headers      on;
               add_header Last-Modified $date_gmt;
@@ -65,59 +76,59 @@ in {
             '';
           };
         };
-        "unifi" = {
-          locations = {
-            "/" = {
-              proxyPass = "https://127.0.0.1:8443/";
-              recommendedProxySettings = true;
-              extraConfig = ''
-                proxy_ssl_verify off;
-                proxy_ssl_session_reuse on;
-                proxy_buffering off;
-                proxy_set_header Upgrade $http_upgrade;
-                proxy_set_header Connection "upgrade";
-                proxy_hide_header Authorization;
-                proxy_set_header Referer ${e'};
-                proxy_set_header Origin ${e'};
-              '';
-              priority = 100;
-            };
-            "/inform" = {
-              proxyPass = "https://127.0.0.1:8080/";
-              recommendedProxySettings = true;
-              extraConfig = ''
-                proxy_ssl_verify off;
-                proxy_ssl_session_reuse on;
-                proxy_buffering off;
-                proxy_set_header Upgrade $http_upgrade;
-                proxy_set_header Connection "upgrade";
-                proxy_hide_header Authorization;
-                proxy_set_header Referer ${e'};
-                proxy_set_header Origin ${e'};
-              '';
-              priority = 100;
-            };
-            "/wss" = {
-              proxyPass = "https://127.0.0.1:8443/";
-              recommendedProxySettings = true;
-              extraConfig = ''
-                proxy_http_version 1.1;
-                proxy_set_header Upgrade $http_upgrade;
-                proxy_set_header Connection "upgrade";
-                proxy_set_header Referer ${e'};
-                proxy_set_header Origin ${e'};
-                proxy_buffering off;
-                proxy_hide_header Authorization;
-              '';
-              priority = 100;
-            };
+        unifi = {
+          locations."/" = {
+            proxyPass = "https://127.0.0.1:8443/";
+            recommendedProxySettings = true;
+            extraConfig = ''
+              proxy_ssl_verify off;
+              proxy_ssl_session_reuse on;
+              proxy_buffering off;
+              proxy_set_header Upgrade $http_upgrade;
+              proxy_set_header Connection "upgrade";
+              proxy_hide_header Authorization;
+              proxy_set_header Referer ${e'};
+              proxy_set_header Origin ${e'};
+            '';
+            priority = 100;
+          };
+          locations."/inform" = {
+            proxyPass = "https://127.0.0.1:8080/";
+            recommendedProxySettings = true;
+            extraConfig = ''
+              proxy_ssl_verify off;
+              proxy_ssl_session_reuse on;
+              proxy_buffering off;
+              proxy_set_header Upgrade $http_upgrade;
+              proxy_set_header Connection "upgrade";
+              proxy_hide_header Authorization;
+              proxy_set_header Referer ${e'};
+              proxy_set_header Origin ${e'};
+            '';
+            priority = 100;
+          };
+          locations."/wss" = {
+            proxyPass = "https://127.0.0.1:8443/";
+            recommendedProxySettings = true;
+            extraConfig = ''
+              proxy_http_version 1.1;
+              proxy_set_header Upgrade $http_upgrade;
+              proxy_set_header Connection "upgrade";
+              proxy_set_header Referer ${e'};
+              proxy_set_header Origin ${e'};
+              proxy_buffering off;
+              proxy_hide_header Authorization;
+            '';
+            priority = 100;
           };
         };
-        "plex" = {
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:32400/";
-            proxyWebsockets = true;
-            recommendedProxySettings = true;
+        monitor = {
+          port = srv.grafana.settings.server.http_port;
+          basic = {};
+        };
+        plex = {
+          port = 32400;
+          basic = {
             extraConfig = ''
               gzip on;
               gzip_vary on;
@@ -142,63 +153,42 @@ in {
             '';
           };
         };
-        "monitor" = let
-          settings = config.services.grafana.settings;
-        in {
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:${toString settings.server.http_port}";
-            proxyWebsockets = true;
-            recommendedProxySettings = true;
-          };
+        tautulli = {
+          port = srv.tautulli.port;
+          basic = {};
         };
-        "ombi" = {
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:5000";
-            proxyWebsockets = true;
-            recommendedProxySettings = true;
-          };
+        ombi = {
+          port = srv.ombi.port;
+          basic = {};
         };
-        "unpackerr" = {
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:5656";
-            proxyWebsockets = true;
-            recommendedProxySettings = true;
-          };
+        unpackerr = {
+          port = 5656;
+          basic = {};
         };
-        "radarr" = {
-          locations."/" = {
-            proxyPass = "http://10.200.1.2:7878";
-            proxyWebsockets = true;
-            recommendedProxySettings = true;
-          };
+        radarr = {
+          port = srv.radarr.settings.server.port;
+          host = "10.200.1.2";
+          basic = {};
         };
-        "sonarr" = {
-          locations."/" = {
-            proxyPass = "http://10.200.1.2:8989";
-            proxyWebsockets = true;
-            recommendedProxySettings = true;
-          };
+        sonarr = {
+          port = srv.sonarr.settings.server.port;
+          host = "10.200.1.2";
+          basic = {};
         };
-        "prowlarr" = {
-          locations."/" = {
-            proxyPass = "http://10.200.1.2:9696";
-            proxyWebsockets = true;
-            recommendedProxySettings = true;
-          };
+        prowlarr = {
+          port = srv.prowlarr.settings.server.port;
+          host = "10.200.1.2";
+          basic = {};
         };
-        "flaresolverr" = {
-          locations."/" = {
-            proxyPass = "http://10.200.1.2:8191";
-            proxyWebsockets = true;
-            recommendedProxySettings = true;
-          };
+        flaresolverr = {
+          port = srv.flaresolverr.port;
+          host = "10.200.1.2";
+          basic = {};
         };
-        "qbittorrent" = {
-          locations."/" = {
-            proxyPass = "http://10.200.1.2:8081";
-            proxyWebsockets = true;
-            recommendedProxySettings = true;
-          };
+        qbittorrent = {
+          port = srv.qbittorrent.port;
+          host = "10.200.1.2";
+          basic = {};
         };
       };
   };

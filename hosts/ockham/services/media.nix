@@ -21,19 +21,16 @@
       openFirewall = true;
       package = pkgs.unstable.plex;
     };
-    sonarr = {
+    tautulli = {
       enable = true;
       group = "media";
-      package = pkgs.unstable.sonarr;
+      package = pkgs.unstable.tautulli;
     };
-    radarr = {
+    ombi = {
       enable = true;
       group = "media";
-      package = pkgs.unstable.radarr;
-    };
-    prowlarr = {
-      enable = true;
-      package = pkgs.unstable.prowlarr;
+      package = pkgs.unstable.ombi;
+      openFirewall = true;
     };
     unpackerr = {
       enable = true;
@@ -61,22 +58,6 @@
         };
       };
     };
-    ombi = {
-      enable = true;
-      group = "media";
-      package = pkgs.unstable.ombi;
-      openFirewall = true;
-    };
-    flaresolverr = {
-      enable = true;
-      package = pkgs.unstable.flaresolverr;
-    };
-    qbittorrent = {
-      enable = true;
-      group = "media";
-      package = pkgs.unstable.qbittorrent-nox;
-      port = 8081;
-    };
     vopono = {
       enable = true;
       group = "media";
@@ -93,6 +74,30 @@
         flaresolverr = [];
         qbittorrent = [];
       };
+    };
+    radarr = {
+      enable = true;
+      group = "media";
+      package = pkgs.unstable.radarr;
+    };
+    sonarr = {
+      enable = true;
+      group = "media";
+      package = pkgs.unstable.sonarr;
+    };
+    prowlarr = {
+      enable = true;
+      package = pkgs.unstable.prowlarr;
+    };
+    flaresolverr = {
+      enable = true;
+      package = pkgs.unstable.flaresolverr;
+    };
+    qbittorrent = {
+      enable = true;
+      group = "media";
+      package = pkgs.unstable.qbittorrent-nox;
+      port = 8081;
     };
   };
 

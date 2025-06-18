@@ -4,28 +4,47 @@
   inputs,
   pkgs,
   ...
-}:
-with lib; let
-  cfg = config.services.homeManagement;
-  username = "hmmngmnt";
+}: let
+  cfg = config.services.home-management;
 in {
   options = {
-    services.homeManagement = {
-      enable = mkEnableOption ''
+    services.home-management = {
+      enable = lib.mkEnableOption ''
         Home management server
       '';
+      user = lib.mkOption {
+        type = lib.types.str;
+        default = "hmmngmnt";
+        description = ''
+          User account under which the home management server runs.
+        '';
+      };
+      group = lib.mkOption {
+        type = lib.types.str;
+        default = "hmmngmnt";
+        description = ''
+          Group under which the home management server runs.
+        '';
+      };
+      port = lib.mkOption {
+        type = lib.types.port;
+        default = 43434;
+        description = ''
+          Port on which the home management server listens.
+        '';
+      };
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = inputs.home-management.packages.x86_64-linux.home-management;
+        defaultText = lib.literalExpression "inputs.home-management.packages.x86_64-linux.home-management";
+        description = ''
+          The home management server package to use.
+        '';
+      };
     };
   };
 
-  config = mkIf cfg.enable {
-    users.users.${username} = {
-      isSystemUser = true;
-      description = "Home management daemon user";
-      createHome = false;
-      group = username;
-    };
-    users.groups.${username} = {};
-
+  config = lib.mkIf cfg.enable {
     networking.firewall.allowedTCPPorts = [8080 8443];
     networking.firewall.allowedUDPPortRanges = [
       {
@@ -64,21 +83,33 @@ in {
       iptables -A nixos-fw -p udp -m set --match-set upnp dst,dst -j nixos-fw-accept
     '';
 
-    systemd.services.homeManagement = {
+    systemd.services.home-management = {
       description = "Home management daemon";
       wantedBy = ["multi-user.target"];
       after = ["network.target"];
       wants = ["network.target"];
 
-      serviceConfig = {
-        User = username;
-        WorkingDirectory = "${inputs.home-management.packages.x86_64-linux.home-management}/lib/node_modules/.bin";
-        Restart = "on-failure";
-        Environment = ["SERVER_PORT=43434"];
-        ExecStart = "${inputs.home-management.packages.x86_64-linux.home-management}/lib/node_modules/.bin/home-management-server";
+      environment = {
+        SERVER_PORT = toString cfg.port;
       };
-      preStart = ''
-      '';
+      serviceConfig = {
+        User = cfg.user;
+        Group = cfg.group;
+        WorkingDirectory = "${cfg.package}/lib/node_modules/.bin";
+        Restart = "on-failure";
+        ExecStart = "${cfg.package}/lib/node_modules/.bin/home-management-server";
+      };
+    };
+
+    users.users = lib.mkIf (cfg.user == "hmmngmnt") {
+      hmmngmnt = {
+        group = cfg.group;
+        isSystemUser = true;
+        description = "Home management daemon user";
+      };
+    };
+    users.groups = lib.mkIf (cfg.group == "hmmngmnt") {
+      hmmngmnt = {};
     };
   };
 }

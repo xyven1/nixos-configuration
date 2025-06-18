@@ -61,7 +61,7 @@ in {
   };
 
   services = {
-    homeManagement.enable = true;
+    home-management.enable = true;
     vscode-server.enable = true;
   };
 
