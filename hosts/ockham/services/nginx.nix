@@ -157,8 +157,8 @@ in {
           port = srv.tautulli.port;
           basic = {};
         };
-        ombi = {
-          port = srv.ombi.port;
+        overseerr = {
+          port = srv.overseerr.port;
           basic = {};
         };
         unpackerr = {

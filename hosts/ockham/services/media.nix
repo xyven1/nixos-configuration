@@ -1,9 +1,11 @@
 {
   config,
-  pkgs,
+  inputs,
   lib,
+  pkgs,
   ...
 }: {
+  imports = ["${inputs.nixpkgs-overseer}/nixos/modules/services/misc/overseerr.nix"];
   nixpkgs.allowUnfreePackages = ["plexmediaserver" "unrar"];
 
   sops.secrets =
@@ -26,11 +28,9 @@
       group = "media";
       package = pkgs.unstable.tautulli;
     };
-    ombi = {
+    overseerr = {
       enable = true;
-      group = "media";
-      package = pkgs.unstable.ombi;
-      openFirewall = true;
+      package = inputs.nixpkgs-overseer.legacyPackages.${pkgs.system}.overseerr;
     };
     unpackerr = {
       enable = true;

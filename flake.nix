@@ -44,6 +44,7 @@
     # ockham
     home-management.url = "github:xyven1/home-management";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
+    nixpkgs-overseer.url = "github:jf-uu/nixpkgs/overseerr";
 
     # work
     nixgl.url = "github:nix-community/nixGL";

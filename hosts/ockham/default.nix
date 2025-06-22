@@ -44,10 +44,7 @@ in {
     useXkbConfig = true;
     hwRender = true;
   };
-  virtualisation = {
-    libvirtd.enable = true;
-    docker.enable = true;
-  };
+
   networking.firewall.allowedTCPPorts = [54321];
 
   environment.enableAllTerminfo = true;
