@@ -1,16 +1,14 @@
 {pkgs, ...}: {
-  services.xserver = {
-    enable = true;
-    xkb.layout = "us";
-    xkb.variant = "";
-    xkb.options = "caps:swapescape";
+  services = {
+    xserver = {
+      enable = true;
+      xkb.layout = "us";
+      xkb.variant = "";
+      xkb.options = "caps:swapescape";
+      excludePackages = with pkgs; [xterm];
+    };
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
-    excludePackages = with pkgs; [xterm];
-  };
-  xdg.terminal-exec = {
-    enable = true;
-    settings.GNOME = ["wezterm.desktop"];
   };
 
   services.gnome.core-apps.enable = false;
@@ -28,6 +26,8 @@
     totem # video player
     loupe # image viewer
     snapshot # screenshot tool
+
+    ghostty # terminal emulator
   ];
 
   console.useXkbConfig = true; # applies xkb config to tty terminals
