@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   programs.ghostty = {
     enable = true;
     enableFishIntegration = true;
@@ -31,6 +31,12 @@
       theme = "vscode";
       background-opacity = 0.9;
       gtk-titlebar = false;
+      gtk-custom-css = "${pkgs.writeText "ghostty-gtk-custom-css.css" ''
+        .top-bar {
+          background: #1f1f1fe6;
+          box-shadow: none;
+        }
+      ''}";
     };
   };
 }
