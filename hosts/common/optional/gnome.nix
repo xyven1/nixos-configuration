@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   services = {
     xserver = {
       enable = true;
@@ -13,6 +17,9 @@
 
   services.gnome.core-apps.enable = false;
 
+  environment.sessionVariables = {
+    TERMINAL = "ghostty";
+  };
   environment.systemPackages = with pkgs; [
     baobab # disk usage analyzer
     # decibels # audio playback
@@ -28,6 +35,9 @@
     snapshot # screenshot tool
 
     ghostty # terminal emulator
+    (pkgs.writeShellScriptBin "xdg-terminal-exec" ''
+      ${lib.getExe pkgs.ghostty} -e "$@"
+    '')
   ];
 
   console.useXkbConfig = true; # applies xkb config to tty terminals
