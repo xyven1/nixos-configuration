@@ -15,7 +15,19 @@
       group = config.users.users.unpackerr.group;
     });
   users.groups.media = {};
-  # allow
+  virtualisation.podman.enable = true;
+  virtualisation.oci-containers.containers.profilarr = {
+    image = "santiagosayshey/profilarr:latest";
+    pull = "newer";
+    ports = ["127.0.0.1:6868:6868"];
+    volumes = ["/var/lib/profilarr:/config"];
+    environment = {
+      TZ = "EST";
+    };
+  };
+  systemd.services."${config.virtualisation.oci-containers.backend}-profilarr".serviceConfig = {
+    StateDirectory = "profilarr";
+  };
   services = {
     plex = {
       enable = true;

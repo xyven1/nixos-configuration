@@ -165,6 +165,10 @@ in {
           port = 5656;
           basic = {};
         };
+        profilarr = {
+          port = 6868;
+          basic = {};
+        };
         radarr = {
           port = srv.radarr.settings.server.port;
           host = "10.200.1.2";
