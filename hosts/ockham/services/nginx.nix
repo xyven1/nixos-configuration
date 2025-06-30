@@ -25,6 +25,10 @@ in {
     enable = true;
     appendHttpConfig = ''
       proxy_headers_hash_bucket_size 128;
+      geo $internal_traffic {
+        default 0;
+        10.200.0.0/16 1;
+      }
     '';
     virtualHosts =
       lib.mapAttrs'
@@ -36,10 +40,17 @@ in {
             else if subdomain == ""
             then fqdn
             else "${subdomain}.${fqdn}";
-          value =
+          value = let
+            public = cfg ? public && lib.isBool cfg.public && cfg.public == true;
+          in
             {
               forceSSL = true;
               useACMEHost = "${fqdn}";
+              extraConfig = lib.mkIf (!public) ''
+                if ($internal_traffic = 0) {
+                  return 444;
+                }
+              '';
             }
             // (
               if cfg ? basic && lib.isAttrs cfg.basic
@@ -128,6 +139,7 @@ in {
         };
         plex = {
           port = 32400;
+          public = true;
           basic = {
             extraConfig = ''
               gzip on;
@@ -159,6 +171,7 @@ in {
         };
         overseerr = {
           port = srv.overseerr.port;
+          public = true;
           basic = {};
         };
         unpackerr = {
