@@ -35,6 +35,16 @@
       openFirewall = true;
       package = pkgs.unstable.plex;
     };
+    jellyfin = {
+      enable = true;
+      group = "media";
+      package = pkgs.unstable.jellyfin;
+    };
+    jellyseerr = {
+      enable = true;
+      port = 5056;
+      package = pkgs.unstable.jellyseerr;
+    };
     tautulli = {
       enable = true;
       group = "media";

@@ -87,8 +87,8 @@ in {
             '';
           };
         };
-        unifi = {
-          locations."/" = {
+        unifi.locations = {
+          "/" = {
             proxyPass = "https://127.0.0.1:8443/";
             recommendedProxySettings = true;
             extraConfig = ''
@@ -103,7 +103,7 @@ in {
             '';
             priority = 100;
           };
-          locations."/inform" = {
+          "/inform" = {
             proxyPass = "https://127.0.0.1:8080/";
             recommendedProxySettings = true;
             extraConfig = ''
@@ -118,7 +118,7 @@ in {
             '';
             priority = 100;
           };
-          locations."/wss" = {
+          "/wss" = {
             proxyPass = "https://127.0.0.1:8443/";
             recommendedProxySettings = true;
             extraConfig = ''
@@ -164,6 +164,20 @@ in {
               proxy_buffering off;
             '';
           };
+        };
+        jellyfin = {
+          port = 8096;
+          public = true;
+          basic = {
+            extraConfig = ''
+              proxy_buffering off;
+            '';
+          };
+        };
+        jellyseerr = {
+          port = srv.jellyseerr.port;
+          public = true;
+          basic = {};
         };
         tautulli = {
           port = srv.tautulli.port;
