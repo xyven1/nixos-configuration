@@ -21,7 +21,7 @@ in {
     ../xyven/generic.nix
     ../common/gnome.nix
     ../common/helix.nix
-    ../common/wezterm
+    ../common/ghostty.nix
   ];
 
   nixpkgs = {
@@ -35,26 +35,18 @@ in {
 
   home = {
     packages = with pkgs.unstable; [
-      (nixGLWrap neovide)
-      libreoffice-qt
-      scc
-      vscode
-      wike
-      xclip
-      firefox
       google-chrome
       docker
-      glab
     ];
-    sessionVariables.TERMINFO_DIRS = "${pkgs.wezterm.passthru.terminfo}/share/terminfo";
+    # sessionVariables.TERMINFO_DIRS = "${pkgs.ghostty.passthru.terminfo}/share/terminfo";
   };
 
   programs = {
-    wezterm.package = lib.mkForce (nixGLWrap pkgs.unstable.wezterm);
-    fish.package = pkgs.fish.override {
-      # fix for using fish as login shell
-      fishEnvPreInit = source: source "/etc/profile.d/nix.sh";
-    };
+    # ghostty.package = lib.mkForce (nixGLWrap pkgs.unstable.ghostty);
+    # fish.package = pkgs.fish.override {
+    #   # fix for using fish as login shell
+    #   fishEnvPreInit = source: source "/etc/profile.d/nix.sh";
+    # };
   };
 
   dconf.settings = {
@@ -63,5 +55,5 @@ in {
     };
   };
 
-  home.stateVersion = "24.05";
+  home.stateVersion = "25.05";
 }
