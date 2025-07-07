@@ -22,11 +22,12 @@
   };
   environment.systemPackages = with pkgs; [
     baobab # disk usage analyzer
-    # decibels # audio playback
+    decibels # audio playback
     evince # document viewer
     eyedropper # color picker
     gnome-connections # remote desktop viewer
     file-roller # archive manager
+    gnome-disk-utility # disk manager
     gnome-logs # log viewer
     gnome-system-monitor # system monitor
     nautilus # file manager
