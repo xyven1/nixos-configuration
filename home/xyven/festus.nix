@@ -33,47 +33,43 @@
 
   fonts.fontconfig.enable = true;
   home = {
-    packages =
-      (with pkgs; [
-        wpi-wireless-install # for installing wifi certs
-      ])
-      ++ (with pkgs.unstable; [
-        bottles
-        gnome-obfuscate
-        libreoffice-qt
-        magic-wormhole-rs
-        metadata-cleaner
-        mousai # music recognition
-        neovide
-        scc
-        spotify
-        spotify-player # terminal spotify client
-        switcheroo # image converter
-        video-trimmer
-        vscode
-        wike # wikipedia reader
-        wl-clipboard # for clip board support in neovim
-        zotero
-        gpclient
+    packages = with pkgs.unstable; [
+      bottles
+      gnome-obfuscate
+      libreoffice-qt
+      magic-wormhole-rs
+      metadata-cleaner
+      mousai # music recognition
+      neovide
+      scc
+      spotify
+      spotify-player # terminal spotify client
+      switcheroo # image converter
+      video-trimmer
+      vscode
+      wike # wikipedia reader
+      wl-clipboard # for clip board support in neovim
+      zotero
+      gpclient
 
-        # unfree
-        jetbrains.datagrip
-        slack
-        obsidian
-        (google-chrome.override {
-          commandLineArgs = [
-            "--enable-features=AcceleratedVideoDecodeLinuxGL"
-            "--ozone-platform=wayland"
-          ];
-        })
-        discord
-        zoom-us
-        plex-desktop
+      # unfree
+      jetbrains.datagrip
+      slack
+      obsidian
+      (google-chrome.override {
+        commandLineArgs = [
+          "--enable-features=AcceleratedVideoDecodeLinuxGL"
+          "--ozone-platform=wayland"
+        ];
+      })
+      discord
+      zoom-us
+      plex-desktop
 
-        # fonts
-        jetbrains-mono
-        nerd-fonts.symbols-only
-      ]);
+      # fonts
+      jetbrains-mono
+      nerd-fonts.symbols-only
+    ];
     sessionVariables.NEOVIDE_FRAME = "none";
   };
 

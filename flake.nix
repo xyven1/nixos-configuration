@@ -38,9 +38,6 @@
     backgrounds.flake = false;
 
     # host specific
-    # festus
-    wpi-wireless-install.url = "github:xyven1/wpi-wireless-install";
-
     # ockham
     home-management.url = "github:xyven1/home-management";
     vscode-server.url = "github:nix-community/nixos-vscode-server";

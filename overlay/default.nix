@@ -10,6 +10,4 @@
   };
 
   additions = final: _prev: import ../pkgs {pkgs = final;};
-
-  wpi-wireless-install = inputs.wpi-wireless-install.overlays.default;
 }
