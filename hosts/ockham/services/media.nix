@@ -6,7 +6,7 @@
   ...
 }: {
   imports = ["${inputs.nixpkgs-overseer}/nixos/modules/services/misc/overseerr.nix"];
-  nixpkgs.allowUnfreePackages = ["plexmediaserver" "unrar"];
+  nixpkgs.allowUnfreePackages = ["plexmediaserver"];
 
   sops.secrets =
     lib.genAttrs ["unpackerr/radarr_api_key" "unpackerr/sonarr_api_key"]
