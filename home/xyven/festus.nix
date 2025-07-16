@@ -53,7 +53,6 @@
       gpclient
 
       # unfree
-      jetbrains.datagrip
       slack
       obsidian
       (google-chrome.override {
@@ -104,5 +103,5 @@
     };
   };
 
-  home.stateVersion = "22.11";
+  home.stateVersion = "25.11";
 }
