@@ -22,12 +22,9 @@
     pkgs.bash
     pkgs.git
     pkgs.home-manager
-    (pkgs.writeScriptBin
-      "rb"
-      ''
-        #!/usr/bin/env bash
-        sudo nixos-rebuild switch "$@"
-      '')
+    (pkgs.writeShellScriptBin "rb" ''
+      sudo nixos-rebuild switch "$@"
+    '')
   ];
   # enable overlays defined in overlay/default.nix
   nixpkgs.myOverlays.enable = lib.mkDefault true;
