@@ -87,7 +87,7 @@ in {
         set -eo pipefail
         [ -z "$SUDO_USER" ] && (echo "run with sudo"; exit 1)
         unset SUDO_USER
-        runuser -u ${cfg.user} -- ${lib.getExe cfg.package} sync --protocol ${cfg.protocol} ${cfg.provider}
+        ${lib.getExe cfg.package} sync --protocol ${cfg.protocol} ${cfg.provider}
       '')
     ];
 
