@@ -19,7 +19,6 @@ in {
     };
   };
   services.nginx = let
-    e' = "''";
     srv = config.services;
   in {
     enable = true;
@@ -87,50 +86,39 @@ in {
             '';
           };
         };
-        unifi.locations = {
+        unifi.locations = let
+          extraConfig = ssl_no_verify: ''
+            proxy_set_header Referer \'\';
+            proxy_set_header Origin \'\';
+            proxy_buffering off;
+            proxy_hide_header Authorization;
+            ${
+              if ssl_no_verify
+              then ''
+                proxy_ssl_verify off;
+                proxy_ssl_session_reuse on;
+              ''
+              else ""
+            }
+          '';
+        in {
           "/" = {
             proxyPass = "https://127.0.0.1:8443/";
             recommendedProxySettings = true;
-            extraConfig = ''
-              proxy_ssl_verify off;
-              proxy_ssl_session_reuse on;
-              proxy_buffering off;
-              proxy_set_header Upgrade $http_upgrade;
-              proxy_set_header Connection "upgrade";
-              proxy_hide_header Authorization;
-              proxy_set_header Referer ${e'};
-              proxy_set_header Origin ${e'};
-            '';
-            priority = 100;
+            proxyWebsockets = true;
+            extraConfig = extraConfig true;
           };
           "/inform" = {
             proxyPass = "https://127.0.0.1:8080/";
             recommendedProxySettings = true;
-            extraConfig = ''
-              proxy_ssl_verify off;
-              proxy_ssl_session_reuse on;
-              proxy_buffering off;
-              proxy_set_header Upgrade $http_upgrade;
-              proxy_set_header Connection "upgrade";
-              proxy_hide_header Authorization;
-              proxy_set_header Referer ${e'};
-              proxy_set_header Origin ${e'};
-            '';
-            priority = 100;
+            proxyWebsockets = true;
+            extraConfig = extraConfig true;
           };
           "/wss" = {
             proxyPass = "https://127.0.0.1:8443/";
             recommendedProxySettings = true;
-            extraConfig = ''
-              proxy_http_version 1.1;
-              proxy_set_header Upgrade $http_upgrade;
-              proxy_set_header Connection "upgrade";
-              proxy_set_header Referer ${e'};
-              proxy_set_header Origin ${e'};
-              proxy_buffering off;
-              proxy_hide_header Authorization;
-            '';
-            priority = 100;
+            proxyWebsockets = true;
+            extraConfig = extraConfig: false;
           };
         };
         monitor = {
