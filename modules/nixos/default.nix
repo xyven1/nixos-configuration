@@ -3,5 +3,4 @@
   clear-linux = import ./clear-linux.nix;
   vopono = import ./vopono.nix;
   unpackerr = import ./unpackerr.nix;
-  qbittorrent = import ./qbittorrent.nix;
 }

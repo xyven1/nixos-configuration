@@ -59,7 +59,7 @@
       group = "media";
       package = pkgs.unstable.unpackerr;
       settings = let
-        downloads = "${config.services.qbittorrent.dataDir}/qBittorrent/downloads";
+        downloads = "${config.services.qbittorrent.profileDir}/qBittorrent/downloads";
       in {
         radarr = [
           {
@@ -119,7 +119,7 @@
       enable = true;
       group = "media";
       package = pkgs.unstable.qbittorrent-nox;
-      port = 8081;
+      webuiPort = 8081;
     };
   };
 

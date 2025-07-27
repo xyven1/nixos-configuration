@@ -205,7 +205,7 @@ in {
           basic = {};
         };
         qbittorrent = {
-          port = srv.qbittorrent.port;
+          port = srv.qbittorrent.webuiPort;
           host = "10.200.1.2";
           basic = {};
         };
