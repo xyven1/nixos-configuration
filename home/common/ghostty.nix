@@ -31,6 +31,7 @@
       theme = "vscode";
       background-opacity = 0.9;
       gtk-titlebar = false;
+      clipboard-read = "allow";
       gtk-custom-css = "${pkgs.writeText "ghostty-gtk-custom-css.css" ''
         .top-bar {
           background: #1f1f1fe6;

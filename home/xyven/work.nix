@@ -17,8 +17,10 @@ in {
 
   rbh.profile = "xyven@work";
 
-  nixGL.packages = inputs.nixgl.packages;
-
+  nixGL = {
+    packages = inputs.nixgl.packages;
+    installScripts = ["mesa"];
+  };
   home = {
     username = lib.mkForce "blake";
     packages = with pkgs.unstable; [
