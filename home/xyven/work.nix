@@ -43,6 +43,7 @@ in {
       enable = true;
       package = config.lib.nixGL.wrap pkgs.unstable.vscode;
     };
+    neovim.package = lib.mkForce pkgs.unstable.neovim-unwrapped;
   };
 
   gtk = {
