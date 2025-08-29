@@ -5,7 +5,6 @@
   pkgs,
   ...
 }: {
-  imports = ["${inputs.nixpkgs-overseer}/nixos/modules/services/misc/overseerr.nix"];
   nixpkgs.allowUnfreePackages = ["plexmediaserver"];
 
   sops.secrets =
