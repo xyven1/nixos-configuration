@@ -32,7 +32,7 @@ in {
         echo "Cannot access mcrcon password file"
         exit 1
       fi
-      ${lib.getExe pkgs.mcrcon} -p "$PASS" "$@"
+      ${lib.getExe pkgs.rlwrap} ${lib.getExe pkgs.mcrcon} -p "$PASS" "$@"
     '')
   ];
 
