@@ -48,6 +48,9 @@
       wallpaper-slideshow = {
         enable = lib.mkEnableOption "Enable Wallpaper Slideshow";
       };
+      headset-control = {
+        enable = lib.mkEnableOption "Enable Headset Control";
+      };
     };
     background = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
@@ -103,9 +106,6 @@
       "org/gnome/desktop/peripherals/keyboard" = {
         delay = lib.hm.gvariant.mkUint32 225;
       };
-      "org/gnome/shell" = {
-        disable-user-extensions = false;
-      };
       "org/gnome/desktop/background" = lib.mkIf (cfg.background != null) {
         picture-uri = lib.mkDefault "${inputs.backgrounds}/${cfg.background}";
         picture-uri-dark = lib.mkDefault "${inputs.backgrounds}/${cfg.background}";
@@ -134,25 +134,64 @@
       "org/gnome/shell/extensions/user-theme" = lib.mkIf ext-cfg.floating-topbar.enable {
         name = "floating-topbar";
       };
-      # Extensions
-      "org/gnome/shell" = {
-        enabled-extensions =
-          []
-          ++ lib.optionals ext-cfg.paperwm.enable ["paperwm@paperwm.github.com"]
-          ++ lib.optionals ext-cfg.window-title.enable ["window-title-is-back@fthx"]
-          ++ lib.optionals ext-cfg.spotify-tray.enable ["sp-tray@sp-tray.esenliyim.github.com"]
-          ++ lib.optionals ext-cfg.freon.enable ["freon@UshakovVasilii_Github.yahoo.com"]
-          ++ lib.optionals ext-cfg.gsconnect.enable ["gsconnect@andyholmes.github.io"]
-          ++ lib.optionals ext-cfg.tailscale-status.enable ["tailscale-status@maxgallup.github.com"]
-          ++ lib.optionals ext-cfg.wallpaper-slideshow.enable ["azwallpaper@azwallpaper.gitlab.com"]
-          ++ lib.optionals ext-cfg.blur-my-shell.enable ["blur-my-shell@aunetx"]
-          ++ lib.optionals ext-cfg.openbar.enable ["openbar@neuromorph"]
-          ++ lib.optionals ext-cfg.openbar.enable ["openbar@neuromorph"]
-          ++ lib.optionals ext-cfg.floating-topbar.enable ["user-theme@gnome-shell-extensions.gcampax.github.com"]
-          ++ lib.optionals ext-cfg.rounded-corners.enable ["rounded-window-corners@fxgn"]
-          ++ lib.optionals ext-cfg.astra-monitor.enable ["monitor@astraext.github.io"];
+      "org/gnome/shell/extensions/HeadsetControl" = lib.mkIf ext-cfg.headset-control.enable {
+        headsetcontrol-executable = "${lib.getExe pkgs.headsetcontrol}";
       };
     };
+    programs.gnome-shell.enable = true;
+    programs.gnome-shell.extensions = lib.concatMap (ext:
+      if ext-cfg.${ext.name}.enable
+      then [{package = ext.pkg;}]
+      else []) [
+      {
+        name = "paperwm";
+        pkg = gnome-exts.paperwm;
+      }
+      {
+        name = "window-title";
+        pkg = gnome-exts.window-title-is-back;
+      }
+      {
+        name = "spotify-tray";
+        pkg = gnome-exts.spotify-tray;
+      }
+      {
+        name = "freon";
+        pkg = gnome-exts.freon;
+      }
+      {
+        name = "gsconnect";
+        pkg = gnome-exts.gsconnect;
+      }
+      {
+        name = "tailscale-status";
+        pkg = gnome-exts.tailscale-status;
+      }
+      {
+        name = "wallpaper-slideshow";
+        pkg = gnome-exts.wallpaper-slideshow;
+      }
+      {
+        name = "blur-my-shell";
+        pkg = gnome-exts.blur-my-shell;
+      }
+      {
+        name = "floating-topbar";
+        pkg = gnome-exts.user-themes;
+      }
+      {
+        name = "openbar";
+        pkg = gnome-exts.open-bar;
+      }
+      {
+        name = "rounded-corners";
+        pkg = gnome-exts.rounded-window-corners-reborn;
+      }
+      {
+        name = "headset-control";
+        pkg = gnome-exts.headsetcontrol;
+      }
+    ];
     home.packages =
       [
         (pkgs.stdenv.mkDerivation rec {
@@ -166,24 +205,12 @@
           '';
         })
       ]
-      ++ lib.optionals ext-cfg.paperwm.enable [gnome-exts.paperwm]
-      ++ lib.optionals ext-cfg.window-title.enable [gnome-exts.window-title-is-back]
-      ++ lib.optionals ext-cfg.spotify-tray.enable [gnome-exts.spotify-tray]
-      ++ lib.optionals ext-cfg.freon.enable [gnome-exts.freon]
-      ++ lib.optionals ext-cfg.gsconnect.enable [gnome-exts.gsconnect]
-      ++ lib.optionals ext-cfg.tailscale-status.enable [gnome-exts.tailscale-status]
-      ++ lib.optionals ext-cfg.wallpaper-slideshow.enable [gnome-exts.wallpaper-slideshow]
-      ++ lib.optionals ext-cfg.blur-my-shell.enable [gnome-exts.blur-my-shell]
-      ++ lib.optionals ext-cfg.openbar.enable [gnome-exts.open-bar]
-      ++ lib.optionals ext-cfg.floating-topbar.enable [gnome-exts.user-themes]
-      ++ lib.optionals ext-cfg.rounded-corners.enable [gnome-exts.rounded-window-corners-reborn]
       ++ lib.optionals ext-cfg.astra-monitor.enable [
-        gnome-exts.astra-monitor
         pkgs.iotop
         pkgs.iw
       ];
-    home.sessionVariables = lib.mkIf ext-cfg.astra-monitor.enable {
-      GI_TYPELIB_PATH = "${pkgs.libgtop}/lib/girepository-1.0";
+    home.sessionVariables = {
+      GI_TYPELIB_PATH = lib.mkIf ext-cfg.astra-monitor.enable "${pkgs.libgtop}/lib/girepository-1.0";
     };
     xdg.configFile."paperwm/user.css" = lib.mkIf ext-cfg.paperwm.enable {
       text = ''
