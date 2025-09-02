@@ -7,6 +7,7 @@
     ./hardware-configuration.nix
     ./nvidia.nix
     ./unifi.nix
+    ./minecraft.nix
 
     ../common/global
     ../common/users/xyven
@@ -53,6 +54,8 @@
     ];
   };
 
+  services.udev.packages = [pkgs.headsetcontrol];
+
   # Services
   services.fwupd.enable = true;
   services.fstrim.enable = true;
@@ -68,6 +71,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
   };
+
   services.power-profiles-daemon.enable = false;
   services.thermald.enable = true;
 

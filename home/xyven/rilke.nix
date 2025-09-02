@@ -11,12 +11,24 @@
     config.allowUnfree = true;
   };
 
-  gnome.extensions = {
-    paperwm.enable = true;
-    window-title.enable = true;
-    spotify-tray.enable = true;
-    astra-monitor.enable = true;
+  gnome = {
+    background = "forest.jpg";
+    extensions = {
+      paperwm.enable = true;
+      window-title.enable = true;
+      spotify-tray.enable = true;
+      astra-monitor.enable = true;
+      blur-my-shell.enable = true;
+      headset-control.enable = true;
+      floating-topbar = {
+        enable = true;
+        margin = 6;
+      };
+    };
   };
+  programs.gnome-shell.extensions = with pkgs.gnomeExtensions; [
+    {package = headsetcontrol;}
+  ];
 
   home = {
     packages = with pkgs.unstable; [
