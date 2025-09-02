@@ -20,6 +20,7 @@
       astra-monitor.enable = true;
       blur-my-shell.enable = true;
       headset-control.enable = true;
+      tailscale-status.enable = true;
       floating-topbar = {
         enable = true;
         margin = 6;

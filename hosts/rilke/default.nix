@@ -28,6 +28,7 @@
   };
 
   time.timeZone = "America/Denver";
+  services.tailscale.enable = true;
 
   virtualisation = {
     libvirtd = {
