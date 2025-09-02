@@ -6,7 +6,6 @@
   imports = [
     ./hardware-configuration.nix
     ./nvidia.nix
-    ./unifi.nix
     ./minecraft.nix
 
     ../common/global
