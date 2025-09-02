@@ -1,10 +1,13 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }: let
   username = "minecraft";
 in {
+  sops.secrets.mcrcon_pass = {};
+
   users.users.${username} = {
     isSystemUser = true;
     useDefaultShell = true;
@@ -22,13 +25,15 @@ in {
     description = "Minecraft daemon";
     wantedBy = ["multi-user.target"];
     after = ["network.target"];
-    path = [pkgs.jre];
+    path = [pkgs.jdk21_headless];
 
     serviceConfig = {
       Restart = "always";
-      ExecStart = "/var/lib/${username}/startserver.sh";
-      ExecStop = "${lib.getExe pkgs.mcrcon} stop";
-      TimeoutStopSec = "20";
+      ExecStart = "${lib.getExe pkgs.bash} /var/lib/${username}/startserver-java9.sh";
+      ExecStop = ''
+        ${lib.getExe pkgs.bash} -c "${lib.getExe pkgs.mcrcon} -p $(cat ${config.sops.secrets.mcrcon_pass.path}) stop"
+      '';
+      TimeoutStopSec = "60";
       User = username;
       WorkingDirectory = "/var/lib/${username}";
     };

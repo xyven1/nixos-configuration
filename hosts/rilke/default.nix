@@ -27,6 +27,8 @@
     hostName = "rilke";
   };
 
+  time.timeZone = "America/Denver";
+
   virtualisation = {
     libvirtd = {
       enable = true;

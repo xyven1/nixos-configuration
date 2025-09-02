@@ -61,6 +61,7 @@
       parsec-bin
       plex-desktop
       # games
+      prismlauncher
     ];
     # sessionVariables.NIXOS_OZONE_WL = "1";
     sessionVariables.NEOVIDE_FRAME = "none";

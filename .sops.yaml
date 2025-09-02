@@ -4,6 +4,7 @@ keys:
   - &hosts
     - &festus age1hh7j26fwfl8mchs2x7htwd6zeheetxdvvfjtwnhr23v5txjeuvqq7cal6a
     - &ockham age1xfkc9k40tmcplldvrq6lsrpx5uskvw6vnvhw7avtf4p4hxvl756q492dve
+    - &rilke age1pnzg8v3aanca2uv63z0cnzjf8u9376gunt0qn83pmym6l656lpmq3pjtmm
 creation_rules:
   - path_regex: hosts/festus/secrets.ya?ml$
     key_groups:
@@ -14,4 +15,9 @@ creation_rules:
     key_groups:
     - age:
       - *ockham
+      - *xyven
+  - path_regex: hosts/rilke/secrets.ya?ml$
+    key_groups:
+    - age:
+      - *rilke
       - *xyven

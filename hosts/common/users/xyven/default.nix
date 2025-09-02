@@ -20,6 +20,7 @@ in {
         "docker"
         "libvirtd"
         "dialout"
+        "minecraft"
       ];
   };
 }

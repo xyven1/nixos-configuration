@@ -922,22 +922,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-overseer": {
-      "locked": {
-        "lastModified": 1753184613,
-        "narHash": "sha256-KFKmqlZHyH001+fazZe/o+Dzk09wiPA9MYmrQqMFGsw=",
-        "owner": "jf-uu",
-        "repo": "nixpkgs",
-        "rev": "50b7400d9343a1bd52e3f8b3f63318441111c403",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jf-uu",
-        "ref": "overseerr",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1730741070,
@@ -1165,7 +1149,6 @@
         "nix-index-database": "nix-index-database",
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs_4",
-        "nixpkgs-overseer": "nixpkgs-overseer",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "sops-nix": "sops-nix",
         "vscode-server": "vscode-server",
