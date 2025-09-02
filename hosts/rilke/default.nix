@@ -21,7 +21,7 @@
   };
 
   hardware.enableRedistributableFirmware = true;
-  services.xserver.displayManager.gdm.wayland = false;
+  services.displayManager.gdm.wayland = false;
 
   networking = {
     hostName = "rilke";

@@ -6,7 +6,11 @@
 }: let
   username = "minecraft";
 in {
-  sops.secrets.mcrcon_pass = {};
+  sops.secrets.mcrcon_pass = {
+    owner = config.users.users.${username}.name;
+    group = config.users.users.${username}.group;
+    mode = "0440";
+  };
 
   users.users.${username} = {
     isSystemUser = true;
@@ -20,6 +24,17 @@ in {
 
   networking.firewall.allowedTCPPorts = [25565];
   networking.firewall.allowedUDPPorts = [25565];
+
+  environment.defaultPackages = [
+    (pkgs.writeShellScriptBin "mcrcon" ''
+      PASS=$(cat ${config.sops.secrets.mcrcon_pass.path})
+      if [ -z "$PASS" ]; then
+        echo "Cannot access mcrcon password file"
+        exit 1
+      fi
+      ${lib.getExe pkgs.mcrcon} -p "$PASS" "$@"
+    '')
+  ];
 
   systemd.services.minecraft = {
     description = "Minecraft daemon";
