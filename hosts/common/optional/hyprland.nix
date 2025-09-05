@@ -8,11 +8,4 @@
     enable = true;
     wlr.enable = true;
   };
-  services.xserver = {
-    enable = true;
-    layout = "us";
-    xkbVariant = "";
-    xkbOptions = "caps:swapescape";
-  };
-  console.useXkbConfig = true;
 }

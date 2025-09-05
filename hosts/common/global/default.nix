@@ -12,6 +12,7 @@
       inputs.disko.nixosModules.disko
       inputs.lanzaboote.nixosModules.lanzaboote
       inputs.flake-utils-plus.nixosModules.autoGenFromInputs
+      ./input.nix
       ./locale.nix
       ./sops.nix
       ./nix.nix

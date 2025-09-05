@@ -24,11 +24,6 @@ in {
     device = "/dev/mapper/media-volume";
     fsType = "ext4";
   };
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-    options = "caps:swapescape";
-  };
   services.kmscon = {
     enable = true;
     fonts = [
@@ -41,7 +36,6 @@ in {
         package = pkgs.nerd-fonts.symbols-only;
       }
     ];
-    useXkbConfig = true;
     hwRender = true;
   };
 

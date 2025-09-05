@@ -4,13 +4,7 @@
   ...
 }: {
   services = {
-    xserver = {
-      enable = true;
-      xkb.layout = "us";
-      xkb.variant = "";
-      xkb.options = "caps:swapescape";
-      excludePackages = with pkgs; [xterm];
-    };
+    xserver.excludePackages = with pkgs; [xterm];
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
   };
@@ -40,6 +34,4 @@
       ${lib.getExe pkgs.ghostty} -e "$@"
     '')
   ];
-
-  console.useXkbConfig = true; # applies xkb config to tty terminals
 }
