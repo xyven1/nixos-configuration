@@ -21,7 +21,7 @@
     ports = ["127.0.0.1:6868:6868"];
     volumes = ["/var/lib/profilarr:/config"];
     environment = {
-      TZ = "EST";
+      TZ = "America/New_York";
     };
   };
   systemd.services."${config.virtualisation.oci-containers.backend}-profilarr".serviceConfig = {
