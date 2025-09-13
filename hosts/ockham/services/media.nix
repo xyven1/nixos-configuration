@@ -51,7 +51,7 @@
     };
     overseerr = {
       enable = true;
-      package = inputs.nixpkgs-overseer.legacyPackages.${pkgs.system}.overseerr;
+      package = pkgs.unstable.overseerr;
     };
     unpackerr = {
       enable = true;

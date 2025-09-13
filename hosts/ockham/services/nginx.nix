@@ -88,8 +88,8 @@ in {
         };
         unifi.locations = let
           extraConfig = ssl_no_verify: ''
-            proxy_set_header Referer \'\';
-            proxy_set_header Origin \'\';
+            proxy_set_header Referer ''';
+            proxy_set_header Origin ''';
             proxy_buffering off;
             proxy_hide_header Authorization;
             ${
