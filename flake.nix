@@ -22,10 +22,6 @@
     # CachyOS kernel
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
-    # to be removed
-    flake-utils.url = "github:numtide/flake-utils";
-    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
-
     # overlays
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     wezterm.url = "github:wez/wezterm?dir=nix";
@@ -49,34 +45,51 @@
   outputs = {
     self,
     nixpkgs,
-    flake-utils,
     home-manager,
     ...
   } @ inputs: let
     inherit (self) outputs;
-    forAllSystems = nixpkgs.lib.genAttrs flake-utils.lib.defaultSystems;
-    forAllPkgs = f: forAllSystems (system: f nixpkgs.legacyPackages.${system});
-    hosts = builtins.attrNames (nixpkgs.lib.filterAttrs
-      (n: v:
-        (n != "common")
-        && v == "directory"
-        && builtins.hasAttr "default.nix" (builtins.readDir ./hosts/${n}))
-      (builtins.readDir ./hosts));
-    homes =
-      builtins.concatMap
-      (user:
-        builtins.map
-        (hostFile: {
-          inherit user;
-          host = nixpkgs.lib.removeSuffix ".nix" hostFile;
-          config_path = ./home/${user}/${hostFile};
-        })
-        (builtins.attrNames (nixpkgs.lib.filterAttrs
-          (n: v: v == "regular")
-          (builtins.readDir ./home/${user}))))
-      (builtins.attrNames (nixpkgs.lib.filterAttrs
-        (n: v: v == "directory" && n != "common")
-        (builtins.readDir ./home)));
+    l = nixpkgs.lib;
+
+    forAllPkgs = f:
+      l.genAttrs
+      ["aarch64-linux" "aarch64-darwin" "x86_64-darwin" "x86_64-linux"]
+      (system: f nixpkgs.legacyPackages.${system});
+    is-dir = n: v: v == "directory";
+    is-file = n: v: v == "regular";
+    not-common = n: v: n != "common";
+
+    hosts = let
+      has-default = n: v: builtins.hasAttr "default.nix" (builtins.readDir ./hosts/${n});
+    in
+      l.pipe ./hosts [
+        builtins.readDir
+        (l.filterAttrs is-dir)
+        (l.filterAttrs not-common)
+        (l.filterAttrs has-default)
+        builtins.attrNames
+      ];
+
+    homes = let
+      user-configs = user:
+        nixpkgs.lib.pipe ./home/${user} [
+          builtins.readDir
+          (nixpkgs.lib.filterAttrs is-file)
+          builtins.attrNames
+          (builtins.map (hostFile: {
+            inherit user;
+            host = nixpkgs.lib.removeSuffix ".nix" hostFile;
+            config_path = ./home/${user}/${hostFile};
+          }))
+        ];
+    in
+      nixpkgs.lib.pipe ./home [
+        builtins.readDir
+        (nixpkgs.lib.filterAttrs is-dir)
+        (nixpkgs.lib.filterAttrs not-common)
+        builtins.attrNames
+        (builtins.concatMap user-configs)
+      ];
   in {
     lib = import ./lib {
       inherit inputs outputs;

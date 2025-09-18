@@ -46,7 +46,6 @@ in {
   security.polkit.enable = true;
 
   boot.loader = {
-    systemd-boot.enable = true;
     systemd-boot.graceful = true;
     efi.canTouchEfiVariables = true;
   };
@@ -56,9 +55,10 @@ in {
     vscode-server.enable = true;
   };
 
+  hardware.enableRedistributableFirmware = true;
+
   networking = {
     useDHCP = lib.mkForce false;
-    hostName = "ockham";
     domain = "viselaya.com";
     interfaces.eno1.ipv4.addresses = [
       {

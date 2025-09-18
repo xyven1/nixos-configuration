@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }: {
   nix = {
@@ -27,5 +28,17 @@
     generateNixPathFromInputs = true;
     generateRegistryFromInputs = true;
     linkInputs = true;
+    nix.registry = lib.pipe inputs [
+      (lib.filterAttrs (name: value: value ? outputs))
+      (lib.mapAttrs (name: v: {flake = v;}))
+    ];
+    environment.etc =
+      lib.mapAttrs'
+      (name: value: {
+        name = "nix/inputs/${name}";
+        value = {source = value.outPath;};
+      })
+      inputs;
+    nix.nixPath = ["/etc/nix/inputs"];
   };
 }

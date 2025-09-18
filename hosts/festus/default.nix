@@ -50,27 +50,14 @@
     HibernateMode=platform
   '';
 
-  services.resolved.enable = true;
-  networking = {
-    hostName = "festus";
-    networkmanager.enable = true;
-    firewall = rec {
-      allowedTCPPortRanges = [
-        {
-          from = 1714;
-          to = 1764;
-        }
-      ];
-      allowedUDPPortRanges = allowedTCPPortRanges;
-    };
-  };
-
   virtualisation.libvirtd.enable = true;
   virtualisation.docker.enable = true;
 
-  # Services
+  # Enable split tunnel dns
+  services.resolved.enable = true;
+
+  # Enable firmware updates
   services.fwupd.enable = true;
-  services.fstrim.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -83,31 +70,8 @@
     alsa.support32Bit = true;
   };
 
-  # allow gnome to manage system time
-  time.timeZone = null;
-
   # Power management
   services.thermald.enable = true;
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-
-      PLATFORM_PROFILE_ON_AC = "performance";
-      PLATFORM_PROFILE_ON_BAT = "low-power";
-
-      CPU_BOOST_ON_AC = 1;
-      CPU_BOOST_ON_BAT = 0;
-
-      CPU_HWP_DYN_BOOST_ON_AC = 1;
-      CPU_HWP_DYN_BOOST_ON_BAT = 0;
-    };
-  };
-  services.power-profiles-daemon.enable = false;
 
   # Enable evolution data server with ews support
   programs.evolution = {
@@ -115,5 +79,5 @@
     plugins = [pkgs.evolution-ews];
   };
 
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.05";
 }

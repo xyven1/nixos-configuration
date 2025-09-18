@@ -15,16 +15,11 @@
 
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
-    loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
   };
 
   hardware.enableRedistributableFirmware = true;
   services.displayManager.gdm.wayland = false;
-
-  networking = {
-    hostName = "rilke";
-  };
 
   time.timeZone = "America/Denver";
   services.tailscale.enable = true;
