@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }: {
   nix = {
@@ -24,8 +25,17 @@
       automatic = true;
       dates = "weekly";
     };
-    generateNixPathFromInputs = true;
-    generateRegistryFromInputs = true;
-    linkInputs = true;
+    registry = lib.pipe inputs [
+      (lib.filterAttrs (name: value: value ? outputs))
+      (lib.mapAttrs (name: v: {flake = v;}))
+    ];
+    nixPath = ["/etc/nix/inputs"];
   };
+  environment.etc =
+    lib.mapAttrs'
+    (name: value: {
+      name = "nix/inputs/${name}";
+      value = {source = value.outPath;};
+    })
+    inputs;
 }

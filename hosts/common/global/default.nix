@@ -1,6 +1,7 @@
 {
   inputs,
   outputs,
+  config,
   host,
   pkgs,
   lib,
@@ -11,7 +12,6 @@
       inputs.home-manager.nixosModules.home-manager
       inputs.disko.nixosModules.disko
       inputs.lanzaboote.nixosModules.lanzaboote
-      inputs.flake-utils-plus.nixosModules.autoGenFromInputs
       ./input.nix
       ./locale.nix
       ./sops.nix
@@ -27,6 +27,15 @@
       sudo nixos-rebuild switch "$@"
     '')
   ];
+  networking.hostName = host;
+  # Use more modern implementations for various things
+  system.rebuild.enableNg = true;
+  boot = {
+    initrd.systemd.enable = true;
+    loader.systemd-boot.enable = lib.mkIf (!config.boot.lanzaboote.enable) true;
+  };
+  networking.networkmanager.wifi.backend = "iwd";
+  services.dbus.implementation = "broker";
   # enable overlays defined in overlay/default.nix
   nixpkgs.myOverlays.enable = lib.mkDefault true;
   home-manager = {
