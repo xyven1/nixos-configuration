@@ -144,32 +144,8 @@
       then [{package = ext.pkg;}]
       else []) [
       {
-        name = "paperwm";
-        pkg = gnome-exts.paperwm;
-      }
-      {
-        name = "window-title";
-        pkg = gnome-exts.window-title-is-back;
-      }
-      {
-        name = "spotify-tray";
-        pkg = gnome-exts.spotify-tray;
-      }
-      {
-        name = "freon";
-        pkg = gnome-exts.freon;
-      }
-      {
-        name = "gsconnect";
-        pkg = gnome-exts.gsconnect;
-      }
-      {
-        name = "tailscale-status";
-        pkg = gnome-exts.tailscale-status;
-      }
-      {
-        name = "wallpaper-slideshow";
-        pkg = gnome-exts.wallpaper-slideshow;
+        name = "astra-monitor";
+        pkg = gnome-exts.astra-monitor;
       }
       {
         name = "blur-my-shell";
@@ -180,16 +156,44 @@
         pkg = gnome-exts.user-themes;
       }
       {
+        name = "freon";
+        pkg = gnome-exts.freon;
+      }
+      {
+        name = "gsconnect";
+        pkg = gnome-exts.gsconnect;
+      }
+      {
+        name = "headset-control";
+        pkg = gnome-exts.headsetcontrol;
+      }
+      {
         name = "openbar";
         pkg = gnome-exts.open-bar;
+      }
+      {
+        name = "paperwm";
+        pkg = gnome-exts.paperwm;
       }
       {
         name = "rounded-corners";
         pkg = gnome-exts.rounded-window-corners-reborn;
       }
       {
-        name = "headset-control";
-        pkg = gnome-exts.headsetcontrol;
+        name = "spotify-tray";
+        pkg = gnome-exts.spotify-tray;
+      }
+      {
+        name = "tailscale-status";
+        pkg = gnome-exts.tailscale-status;
+      }
+      {
+        name = "wallpaper-slideshow";
+        pkg = gnome-exts.wallpaper-slideshow;
+      }
+      {
+        name = "window-title";
+        pkg = gnome-exts.window-title-is-back;
       }
     ];
     home.packages =
