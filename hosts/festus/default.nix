@@ -29,9 +29,22 @@
       pkiBundle = "/etc/secureboot";
     };
     # For hibernation
-    resumeDevice = "/dev/dm-0";
-    kernelParams = ["resume_offset=113446912"];
+    resumeDevice = "/dev/disk/by-label/NixOS";
+    kernelParams = ["resume_offset=11436032"];
   };
+  services.logind.settings.Login = {
+    HandlePowerKey = "hibernate";
+    HandlePowerKeyLongPress = "poweroff";
+    HandleLidSwitch = "suspend-then-hibernate";
+  };
+  systemd.sleep.extraConfig = ''
+    SuspendState=mem
+    MemorySleepMode=s2idle
+    HibernateMode=platform
+    HibernateOnACPower=no
+    HibernateDelaySec=30m
+  '';
+
   environment.systemPackages = with pkgs; [sbctl];
   security.wrappers = {
     nethogs = {
@@ -46,9 +59,6 @@
   # improve boot time
   systemd.services.NetworkManager-wait-online.enable = false;
   systemd.services.docker.wantedBy = lib.mkForce [];
-  systemd.sleep.extraConfig = ''
-    HibernateMode=platform
-  '';
 
   virtualisation.libvirtd.enable = true;
   virtualisation.docker.enable = true;
