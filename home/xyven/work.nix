@@ -85,9 +85,6 @@ in {
     "org/gnome/shell" = {
       disable-user-extensions = false;
     };
-    "org/gnome/desktop/input-sources" = {
-      xkb-options = ["caps:swapescape"];
-    };
     "org/gnome/desktop/wm/preferences" = {
       button-layout = "appmenu:minimize,maximize,close";
     };
