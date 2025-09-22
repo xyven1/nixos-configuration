@@ -19,7 +19,6 @@
   };
 
   hardware.enableRedistributableFirmware = true;
-  services.displayManager.gdm.wayland = false;
 
   time.timeZone = "America/Denver";
   services.tailscale.enable = true;
