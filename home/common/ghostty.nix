@@ -30,6 +30,7 @@
     settings = {
       theme = "vscode";
       background-opacity = 0.9;
+      bell-features = "border";
       gtk-titlebar = false;
       clipboard-read = "allow";
       gtk-custom-css = "${pkgs.writeText "ghostty-gtk-custom-css.css" ''
@@ -38,6 +39,7 @@
           box-shadow: none;
         }
       ''}";
+      quit-after-last-window-closed = false;
     };
   };
 }
