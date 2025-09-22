@@ -59,6 +59,7 @@
         commandLineArgs = [
           "--enable-features=AcceleratedVideoDecodeLinuxGL"
           "--ozone-platform=wayland"
+          "--disable-features=ExtensionManifestV2Unsupported,ExtensionManifestV2Disabled"
         ];
       })
       discord
