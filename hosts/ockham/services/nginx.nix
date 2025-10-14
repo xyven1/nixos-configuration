@@ -186,22 +186,22 @@ in {
         };
         radarr = {
           port = srv.radarr.settings.server.port;
-          host = "10.200.1.2";
+          host = "127.0.0.1";
           basic = {};
         };
         sonarr = {
           port = srv.sonarr.settings.server.port;
-          host = "10.200.1.2";
+          host = "127.0.0.1";
           basic = {};
         };
         prowlarr = {
           port = srv.prowlarr.settings.server.port;
-          host = "10.200.1.2";
+          host = "127.0.0.1";
           basic = {};
         };
         flaresolverr = {
           port = srv.flaresolverr.port;
-          host = "10.200.1.2";
+          host = "127.0.0.1";
           basic = {};
         };
         qbittorrent = {

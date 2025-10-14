@@ -89,10 +89,6 @@
       namespace = "media";
       interface = "eno1";
       services = {
-        radarr = [];
-        sonarr = [];
-        prowlarr = [];
-        flaresolverr = [];
         qbittorrent = [];
       };
     };
