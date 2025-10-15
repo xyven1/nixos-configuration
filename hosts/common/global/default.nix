@@ -20,7 +20,6 @@
     ++ (builtins.attrValues outputs.nixosModules);
 
   environment.systemPackages = [
-    pkgs.bash
     pkgs.git
     pkgs.home-manager
     (pkgs.writeShellScriptBin "rb" ''
