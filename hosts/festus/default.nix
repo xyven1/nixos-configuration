@@ -30,7 +30,14 @@
     };
     # For hibernation
     resumeDevice = "/dev/disk/by-label/NixOS";
-    kernelParams = ["resume_offset=11436032"];
+    kernelParams = [
+      "resume_offset=11436032"
+      "quiet"
+      "udev.log_level=3"
+    ];
+    plymouth.enable = true;
+    consoleLogLevel = 0;
+    initrd.verbose = false;
   };
   services.logind.settings.Login = {
     HandlePowerKey = "hibernate";
