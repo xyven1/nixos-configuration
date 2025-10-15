@@ -9,7 +9,7 @@
     ../common/fish.nix
     ../common/starship.nix
     ../common/direnv.nix
-    inputs.nix-index-database.hmModules.nix-index
+    inputs.nix-index-database.homeModules.nix-index
   ];
 
   nix = {
