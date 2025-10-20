@@ -30,6 +30,7 @@
     settings = {
       theme = "vscode";
       background-opacity = 0.9;
+      background-opacity-cells = true;
       bell-features = "border";
       gtk-titlebar = false;
       clipboard-read = "allow";
