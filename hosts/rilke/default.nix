@@ -15,7 +15,6 @@
 
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
-    loader.efi.canTouchEfiVariables = true;
   };
 
   hardware.enableRedistributableFirmware = true;

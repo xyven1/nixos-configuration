@@ -28,13 +28,14 @@
   ];
   networking.hostName = host;
   # Use more modern implementations for various things
-  system.rebuild.enableNg = true;
+  system.rebuild.enableNg = lib.mkDefault true;
   boot = {
-    initrd.systemd.enable = true;
+    initrd.systemd.enable = lib.mkDefault true;
     loader.systemd-boot.enable = lib.mkIf (!config.boot.lanzaboote.enable) true;
+    loader.efi.canTouchEfiVariables = lib.mkDefault true;
   };
-  networking.networkmanager.wifi.backend = "iwd";
-  services.dbus.implementation = "broker";
+  networking.networkmanager.wifi.backend = lib.mkDefault "iwd";
+  services.dbus.implementation = lib.mkDefault "broker";
   # enable overlays defined in overlay/default.nix
   nixpkgs.myOverlays.enable = lib.mkDefault true;
   home-manager = {

@@ -21,3 +21,8 @@ creation_rules:
     - age:
       - *rilke
       - *xyven
+  - path_regex: hosts/keppler/secrets.ya?ml$
+    key_groups:
+    - age:
+      - *rilke
+      - *xyven

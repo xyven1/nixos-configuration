@@ -20,10 +20,7 @@
     kernelPackages = pkgs.linuxPackages_cachyos;
     # Setup keyfile
     initrd.secrets."/crypto_keyfile.bin" = null;
-    loader.efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
-    };
+    loader.efi.efiSysMountPoint = "/boot/efi";
     lanzaboote = {
       enable = true;
       pkiBundle = "/etc/secureboot";

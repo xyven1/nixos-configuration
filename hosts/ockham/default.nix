@@ -47,7 +47,6 @@ in {
 
   boot.loader = {
     systemd-boot.graceful = true;
-    efi.canTouchEfiVariables = true;
   };
 
   services = {
