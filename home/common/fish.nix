@@ -46,7 +46,7 @@
     interactiveShellInit = ''
     '';
     shellInitLast = ''
-      any-nix-shell fish --info-right | source
+      any-nix-shell fish | source
       fish_vi_key_bindings
       user_vi_key_bindings
       fish_vi_cursor

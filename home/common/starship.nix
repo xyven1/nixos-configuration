@@ -2,7 +2,7 @@
   programs.starship = {
     enable = true;
     settings = {
-      right_format = "$time";
+      right_format = "\${custom.nix_env}$time";
 
       fill = {
         symbol = " ";
@@ -29,7 +29,7 @@
         format = "took [$duration]($style) ";
       };
 
-      command_timeout = 50;
+      command_timeout = 100;
 
       directory = {
         format = "[$path]($style)( [$read_only]($read_only_style)) ";
@@ -56,6 +56,12 @@
       time = {
         format = "\\\[[$time]($style)\\\]";
         disabled = false;
+      };
+      custom = {
+        nix_env = {
+          command = "nix-shell-info";
+          when = true;
+        };
       };
     };
   };
