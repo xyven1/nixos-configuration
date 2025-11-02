@@ -7,7 +7,6 @@
   nix = {
     package = pkgs.unstable.lix;
     settings = {
-      auto-optimise-store = lib.mkDefault true;
       experimental-features = ["nix-command" "flakes"];
       warn-dirty = false;
       substituters = [
@@ -21,9 +20,15 @@
         "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
     };
+    optimise = {
+      automatic = true;
+      dates = ["weekly 3:45"];
+      persistent = true;
+    };
     gc = {
       automatic = true;
-      dates = "weekly";
+      dates = ["weekly 3:15"];
+      persistent = true;
     };
     registry = lib.pipe inputs [
       (lib.filterAttrs (name: value: value ? outputs))
