@@ -40,7 +40,6 @@
       magic-wormhole-rs
       metadata-cleaner
       mousai # music recognition
-      neovide
       scc
       spotify
       spotify-player # terminal spotify client
@@ -70,7 +69,6 @@
       jetbrains-mono
       nerd-fonts.symbols-only
     ];
-    sessionVariables.NEOVIDE_FRAME = "none";
   };
 
   programs.sioyek = {
