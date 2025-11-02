@@ -39,23 +39,11 @@
     };
     git = {
       enable = true;
-      userName = "xyven1";
-      userEmail = "git@xyven.dev";
-      package = pkgs.unstable.git;
-      delta = {
-        enable = true;
-        package = pkgs.unstable.delta;
-        options = {
-          syntax-theme = "Visual Studio Dark+";
-          features = "decorations";
-          decorations = {
-            hunk-header-style = "file line-number syntax italic";
-            hunk-header-decoration-style = "cyan bold ul";
-            file-style = "yellow bold";
-            file-decoration-style = "yellow bold ul";
-          };
-        };
+      settings.user = {
+        name = "xyven1";
+        email = "git@xyven.dev";
       };
+      package = pkgs.unstable.git;
     };
     bat = {
       enable = true;
@@ -70,6 +58,21 @@
         theme_background = false;
         vim_keys = true;
         update_ms = 1000;
+      };
+    };
+    delta = {
+      enable = true;
+      package = pkgs.unstable.delta;
+      enableGitIntegration = true;
+      options = {
+        syntax-theme = "Visual Studio Dark+";
+        features = "decorations";
+        decorations = {
+          hunk-header-style = "file line-number syntax italic";
+          hunk-header-decoration-style = "cyan bold ul";
+          file-style = "yellow bold";
+          file-decoration-style = "yellow bold ul";
+        };
       };
     };
     eza = {
