@@ -15,14 +15,12 @@
     "nvidia-x11"
     "nvidia-settings"
   ];
-  systemd.services.nvidia-suspend.serviceConfig.ExecStart = lib.mkForce "${lib.getExe pkgs.bash} ${config.hardware.nvidia.package.out}/bin/nvidia-sleep.sh suspend";
-  systemd.services.nvidia-hibernate.serviceConfig.ExecStart = lib.mkForce "${lib.getExe pkgs.bash} ${config.hardware.nvidia.package.out}/bin/nvidia-sleep.sh hibernate";
-  systemd.services.nvidia-resume.serviceConfig.ExecStart = lib.mkForce "${lib.getExe pkgs.bash} ${config.hardware.nvidia.package.out}/bin/nvidia-sleep.sh resume";
 
   hardware.nvidia = {
     package = config.boot.kernelPackages.nvidiaPackages.beta;
     modesetting.enable = true;
     powerManagement.enable = true;
+    powerManagement.finegrained = true;
     open = false;
     nvidiaSettings = true;
     prime = {
