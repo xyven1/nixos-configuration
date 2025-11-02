@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
     ./filesystem.nix
@@ -21,10 +17,7 @@
       Type = "oneshot";
       Path = [pkgs.ipmitool];
       ExecStart = ''
-        modprobe ipmi_devintf || true
-        modprobe ipmi_si || true
-
-        ipmitool raw 0x30 0x70 0x66 0x01 0x00 0x16
+        ipmitool raw 0x30 0x70 0x66 0x01 0x00 0x12
       '';
     };
   };

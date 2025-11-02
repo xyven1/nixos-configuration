@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   lib,
   ...
@@ -20,9 +19,7 @@ in {
       group = "nginx";
     };
   };
-  services.nginx = let
-    srv = config.services;
-  in {
+  services.nginx = {
     enable = true;
     appendHttpConfig = ''
       proxy_headers_hash_bucket_size 128;
