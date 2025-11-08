@@ -50,7 +50,7 @@
       nix_shell = {
         symbol = " ";
         format = "via [$symbol]($style)⠀";
-        heuristic = true;
+        heuristic = false;
       };
 
       time = {
