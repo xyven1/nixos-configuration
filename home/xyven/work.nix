@@ -35,7 +35,25 @@ in {
   neovim.local-config = true;
 
   programs = {
-    ghostty.package = lib.mkForce (config.lib.nixGL.wrap pkgs.unstable.ghostty);
+    ghostty.package = let
+      pkg = pkgs.unstable.ghostty;
+    in
+      lib.mkForce ((config.lib.nixGL.wrap pkg).overrideAttrs (old: {
+        buildCommand =
+          old.buildCommand
+          + ''
+            shopt -s nullglob globstar
+            for dsk in "$out"/share/**/*.service ; do
+              if ! grep -q "${pkg.out}" "$dsk"; then
+                continue
+              fi
+              src="$(readlink "$dsk")"
+              rm "$dsk"
+              sed "s|${pkg.out}|$out|g" "$src" > "$dsk"
+            done
+            shopt -u nullglob globstar
+          '';
+      }));
     fish.package = pkgs.fish.override {
       fishEnvPreInit = source: ''
         ${source "${
