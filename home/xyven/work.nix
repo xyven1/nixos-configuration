@@ -17,9 +17,13 @@ in {
 
   rbh.profile = "xyven@work";
 
-  nixGL = {
-    packages = inputs.nixgl.packages;
-    installScripts = ["mesa"];
+  targets.genericLinux = {
+    enable = true;
+    nixGL = {
+      vulkan.enable = true;
+      packages = inputs.nixgl.packages;
+      installScripts = ["mesa"];
+    };
   };
   home = {
     username = lib.mkForce "blake";
@@ -33,7 +37,14 @@ in {
   programs = {
     ghostty.package = lib.mkForce (config.lib.nixGL.wrap pkgs.unstable.ghostty);
     fish.package = pkgs.fish.override {
-      fishEnvPreInit = source: "test -f /etc/profile.d/nix.sh && ${source "/etc/profile.d/nix.sh"}";
+      fishEnvPreInit = source: ''
+        ${source "${
+          if config.nix.package == null
+          then pkgs.nix
+          else config.nix.package
+        }/etc/profile.d/nix.sh"}
+        ${source "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"}
+      '';
     };
     chromium = {
       enable = true;
@@ -45,7 +56,6 @@ in {
     };
     neovim.package = lib.mkForce pkgs.unstable.neovim-unwrapped;
   };
-
   gtk = {
     enable = true;
     theme = {
