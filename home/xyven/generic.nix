@@ -96,10 +96,13 @@
     lazygit = {
       enable = true;
       package = pkgs.unstable.lazygit;
-      settings.git.paging = {
-        colorArg = "always";
-        pager = "delta --dark --paging=never";
-      };
+      settings.git.pagers = [
+        {
+          pager = "${lib.getExe pkgs.delta} --dark --paging=never";
+          colorArg = "always";
+        }
+        {externalDiffCommand = "${lib.getExe pkgs.difftastic} --color=always";}
+      ];
     };
     nix-index.enable = true;
     nix-index-database.comma.enable = true;
