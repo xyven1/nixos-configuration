@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -16,7 +15,7 @@
   users.groups.media = {};
   virtualisation.podman.enable = true;
   virtualisation.oci-containers.containers.profilarr = {
-    image = "santiagosayshey/profilarr:latest";
+    image = "santiagosayshey/profilarr:beta";
     pull = "newer";
     ports = ["127.0.0.1:6868:6868"];
     volumes = ["/var/lib/profilarr:/config"];
