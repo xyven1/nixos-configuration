@@ -114,6 +114,14 @@
       group = "media";
       package = pkgs.unstable.qbittorrent-nox;
       webuiPort = 8081;
+      serverConfig = {
+        Preferences = {
+          WebUI = {
+            AlternativeUIEnabled = true;
+            RootFolder = "${pkgs.vuetorrent}/share/vuetorrent";
+          };
+        };
+      };
     };
   };
 
