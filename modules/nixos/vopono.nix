@@ -95,6 +95,7 @@ in {
       {
         vopono = {
           wantedBy = ["multi-user.target"];
+          wants = ["network-online.target"];
           after = ["network-online.target"];
           path = with pkgs; [
             cfg.package

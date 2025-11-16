@@ -35,8 +35,8 @@ in {
       };
       package = lib.mkOption {
         type = lib.types.package;
-        default = inputs.home-management.packages.x86_64-linux.home-management;
-        defaultText = lib.literalExpression "inputs.home-management.packages.x86_64-linux.home-management";
+        default = inputs.home-management.packages.x86_64-linux.default;
+        defaultText = lib.literalExpression "inputs.home-management.packages.x86_64-linux.home-management-server";
         description = ''
           The home management server package to use.
         '';
@@ -95,9 +95,8 @@ in {
       serviceConfig = {
         User = cfg.user;
         Group = cfg.group;
-        WorkingDirectory = "${cfg.package}/lib/node_modules/.bin";
         Restart = "on-failure";
-        ExecStart = "${cfg.package}/lib/node_modules/.bin/home-management-server";
+        ExecStart = "${lib.getExe cfg.package}";
       };
     };
 

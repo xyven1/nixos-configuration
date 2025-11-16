@@ -36,6 +36,7 @@
     # host specific
     # ockham
     home-management.url = "github:xyven1/home-management";
+    home-management.inputs.nixpkgs.follows = "nixpkgs";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
 
     # work
