@@ -90,7 +90,7 @@
   # Enable evolution data server with ews support
   programs.evolution = {
     enable = true;
-    plugins = [pkgs.evolution-ews];
+    plugins = [pkgs.unstable.evolution-ews];
   };
 
   system.stateVersion = "24.05";
