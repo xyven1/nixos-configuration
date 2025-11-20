@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   lib,
   ...
@@ -9,17 +8,17 @@
     enable32Bit = true;
   };
 
+  services.xserver.videoDrivers = ["nvidia"];
+
   nixpkgs.allowUnfreePackages = [
     "nvidia-settings"
+    "nvidia-x11"
   ];
 
   hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
-    modesetting.enable = true;
     powerManagement.enable = true;
     powerManagement.finegrained = true;
-    open = false;
-    nvidiaSettings = true;
+    open = true;
     prime = {
       offload = {
         enable = lib.mkOverride 990 true;
