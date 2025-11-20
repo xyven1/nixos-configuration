@@ -68,7 +68,6 @@
       nerd-fonts.symbols-only
     ];
   };
-  programs.btop.package = pkgs.lib.mkForce pkgs.unstable.btop-cuda;
 
   programs.sioyek = {
     enable = true;
