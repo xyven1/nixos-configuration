@@ -59,6 +59,9 @@
       permissions = "u+rx,g+x,o+x";
     };
   };
+  environment.variables = {
+    GSK_RENDERER = "ngl";
+  };
   hardware.enableRedistributableFirmware = true;
   # improve boot time
   systemd.services.NetworkManager-wait-online.enable = false;
