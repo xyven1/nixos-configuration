@@ -55,7 +55,7 @@
     forAllPkgs = f:
       l.genAttrs
       ["aarch64-linux" "aarch64-darwin" "x86_64-darwin" "x86_64-linux"]
-      (system: f nixpkgs.legacyPackages.${system});
+      (system: f (import nixpkgs {inherit system;}));
     is-dir = n: v: v == "directory";
     is-file = n: v: v == "regular";
     not-common = n: v: n != "common";
@@ -120,7 +120,7 @@
           then hostUser.user
           else "${hostUser.user}@${hostUser.host}";
         value = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          pkgs = import nixpkgs {system = "x86_64-linux";};
           extraSpecialArgs = {inherit inputs outputs;};
           modules = [{home.username = hostUser.user;} hostUser.config_path] ++ builtins.attrValues outputs.homeManagerModules;
         };
