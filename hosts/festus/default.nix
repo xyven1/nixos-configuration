@@ -48,6 +48,20 @@
     HibernateOnACPower=no
     HibernateDelaySec=30m
   '';
+  services.earlyoom = {
+    enable = true;
+    freeSwapThreshold = 80;
+    freeSwapKillThreshold = 60;
+    freeMemThreshold = 4;
+    enableNotifications = true;
+    extraArgs = [
+      "-g"
+      "--avoid"
+      "^(gdm.*|.gnome-session.*|fish)$"
+      "--prefer"
+      "^(chrome)$"
+    ];
+  };
 
   environment.systemPackages = with pkgs; [sbctl];
   security.wrappers = {
