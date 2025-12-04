@@ -15,6 +15,15 @@
     "nvidia-x11"
   ];
 
+  systemd.services = let
+    append = ["systemd-suspend-then-hibernate.service"];
+  in {
+    nvidia-suspend.before = append;
+    nvidia-suspend.requiredBy = append;
+    nvidia-resume.after = append;
+    nvidia-resume.requiredBy = append;
+  };
+
   hardware.nvidia = {
     powerManagement.enable = true;
     powerManagement.finegrained = true;
