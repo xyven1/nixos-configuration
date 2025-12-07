@@ -144,7 +144,7 @@ in {
                 "systemd-notify --ready"
             '';
             # It fails to start if there's a device left over from the last time it ran, just purge it on stop.
-            ExecStop = "${pkgs.iproute2}/bin/ip link delete ${cfg.namespace}_d || exit 0";
+            ExecStop = "${lib.getExe' pkgs.iproute2 "ip"} link delete ${cfg.namespace} || true";
           };
         };
       }
@@ -157,10 +157,9 @@ in {
           name = x;
           value = {
             after = ["vopono.service"];
-            partOf = ["vopono.service"];
+            bindsTo = ["vopono.service"];
             wantedBy = ["vopono.service"];
             serviceConfig = {
-              BindPaths = ["/etc/netns/${cfg.namespace}/resolv.conf:/etc/resolv.conf"];
               NetworkNamespacePath = "/var/run/netns/${cfg.namespace}";
             };
           };
