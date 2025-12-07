@@ -1,134 +1,40 @@
-{
-  config,
-  lib,
-  ...
-}: let
-  fqdn = "${config.networking.hostName}.${config.networking.domain}";
-in {
-  networking.firewall.allowedTCPPorts = [80 443];
+{config, ...}: {
   sops.secrets.cloudflare = {};
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "acme@xyven.dev";
-    certs."${fqdn}" = {
-      domain = fqdn;
-      extraDomainNames = ["*.${fqdn}"];
-      dnsProvider = "cloudflare";
-      environmentFile = config.sops.secrets.cloudflare.path;
-      group = "nginx";
-    };
-  };
-  services.nginx = let
-    srv = config.services;
-  in {
+  custom.nginx = {
     enable = true;
-    appendHttpConfig = ''
-      proxy_headers_hash_bucket_size 128;
-      geo $internal_traffic {
-        default 0;
-        10.200.0.0/16 1;
-      }
-    '';
-    virtualHosts =
-      lib.mapAttrs'
-      (
-        subdomain: cfg: {
-          name =
-            if subdomain == "_"
-            then "_"
-            else if subdomain == ""
-            then fqdn
-            else "${subdomain}.${fqdn}";
-          value = let
-            public = cfg ? public && lib.isBool cfg.public && cfg.public == true;
-          in
-            {
-              forceSSL = true;
-              useACMEHost = "${fqdn}";
-              extraConfig = lib.mkIf (!public) ''
-                if ($internal_traffic = 0) {
-                  return 444;
-                }
-              '';
-            }
-            // (
-              if cfg ? basic && lib.isAttrs cfg.basic
-              then {
-                locations."/" =
-                  {
-                    proxyPass = "http://${cfg.host or "127.0.0.1"}:${toString (cfg.port or 80)}";
-                    proxyWebsockets = true;
-                    recommendedProxySettings = true;
-                  }
-                  // cfg.basic;
-              }
-              else cfg
-            );
-        }
-      )
-      {
-        _ = {
-          default = true;
+    fqdn = "${config.networking.hostName}.${config.networking.domain}";
+    localSubnet = "10.200.0.0/16";
+    cloudflareCert = {
+      email = "acme@xyven.dev";
+      wildcard = true;
+      environmentFile = config.sops.secrets.cloudflare.path;
+    };
+    virtualHosts = let
+      srv = config.services;
+    in {
+      "".locations."/" = {
+        port = srv.home-management.port;
+        overrides = {
           extraConfig = ''
-            deny all;
+            proxy_pass_request_headers      on;
+            add_header Last-Modified $date_gmt;
+            add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+            if_modified_since off;
+            expires off;
+            etag off;
           '';
         };
-        "" = {
-          port = srv.home-management.port;
-          basic = {
-            extraConfig = ''
-              proxy_pass_request_headers      on;
-              add_header Last-Modified $date_gmt;
-              add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
-              if_modified_since off;
-              expires off;
-              etag off;
-            '';
-          };
-        };
-        unifi.locations = let
-          extraConfig = ssl_no_verify: ''
-            proxy_set_header Referer ''';
-            proxy_set_header Origin ''';
-            proxy_buffering off;
-            proxy_hide_header Authorization;
-            ${
-              if ssl_no_verify
-              then ''
-                proxy_ssl_verify off;
-                proxy_ssl_session_reuse on;
-              ''
-              else ""
-            }
-          '';
-        in {
-          "/" = {
-            proxyPass = "https://127.0.0.1:8443/";
-            recommendedProxySettings = true;
-            proxyWebsockets = true;
-            extraConfig = extraConfig true;
-          };
-          "/inform" = {
-            proxyPass = "https://127.0.0.1:8080/";
-            recommendedProxySettings = true;
-            proxyWebsockets = true;
-            extraConfig = extraConfig true;
-          };
-          "/wss" = {
-            proxyPass = "https://127.0.0.1:8443/";
-            recommendedProxySettings = true;
-            proxyWebsockets = true;
-            extraConfig = extraConfig false;
-          };
-        };
-        monitor = {
-          port = srv.grafana.settings.server.http_port;
-          basic = {};
-        };
-        plex = {
+      };
+      unifi.locations."/" = {
+        port = 8443;
+        proxyHttps = true;
+      };
+      monitor.locations."/".port = srv.grafana.settings.server.http_port;
+      plex = {
+        public = true;
+        locations."/" = {
           port = 32400;
-          public = true;
-          basic = {
+          overrides = {
             extraConfig = ''
               gzip on;
               gzip_vary on;
@@ -153,62 +59,41 @@ in {
             '';
           };
         };
-        jellyfin = {
+      };
+      jellyfin = {
+        public = true;
+        locations."/" = {
           port = 8096;
-          public = true;
-          basic = {
+          overrides = {
             extraConfig = ''
               proxy_buffering off;
             '';
           };
         };
-        jellyseerr = {
+      };
+      jellyseerr = {
+        public = true;
+        locations."/" = {
           port = srv.jellyseerr.port;
-          public = true;
-          basic = {};
-        };
-        tautulli = {
-          port = srv.tautulli.port;
-          basic = {};
-        };
-        overseerr = {
-          port = srv.overseerr.port;
-          public = true;
-          basic = {};
-        };
-        unpackerr = {
-          port = 5656;
-          basic = {};
-        };
-        profilarr = {
-          port = 6868;
-          basic = {};
-        };
-        radarr = {
-          port = srv.radarr.settings.server.port;
-          host = "127.0.0.1";
-          basic = {};
-        };
-        sonarr = {
-          port = srv.sonarr.settings.server.port;
-          host = "127.0.0.1";
-          basic = {};
-        };
-        prowlarr = {
-          port = srv.prowlarr.settings.server.port;
-          host = "127.0.0.1";
-          basic = {};
-        };
-        flaresolverr = {
-          port = srv.flaresolverr.port;
-          host = "127.0.0.1";
-          basic = {};
-        };
-        qbittorrent = {
-          port = srv.qbittorrent.webuiPort;
-          host = "10.200.1.2";
-          basic = {};
         };
       };
+      overseerr = {
+        public = true;
+        locations."/" = {
+          port = srv.overseerr.port;
+        };
+      };
+      tautulli.locations."/".port = srv.tautulli.port;
+      unpackerr.locations."/" .port = 5656;
+      profilarr.locations."/".port = 6868;
+      radarr.locations."/".port = srv.radarr.settings.server.port;
+      sonarr.locations."/".port = srv.sonarr.settings.server.port;
+      prowlarr.locations."/".port = srv.prowlarr.settings.server.port;
+      flaresolverr.locations."/".port = srv.flaresolverr.port;
+      qbittorrent.locations."/" = {
+        port = srv.qbittorrent.webuiPort;
+        host = "10.200.1.2";
+      };
+    };
   };
 }
