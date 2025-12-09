@@ -25,6 +25,7 @@
   };
 
   hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
     powerManagement.enable = true;
     powerManagement.finegrained = true;
     open = true;
