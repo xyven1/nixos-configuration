@@ -90,7 +90,6 @@
   };
 
   dconf.settings = {
-    "org/gnome/desktop/datetime" = {automatic-timezone = true;};
     "org/gnome/system/location" = {enabled = true;};
     "org/gnome/desktop/wm/preferences" = {
       button-layout = ":menu";
