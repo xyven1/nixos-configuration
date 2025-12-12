@@ -29,6 +29,17 @@ in {
     packages = with pkgs.unstable; [
       slack
     ];
+    file =
+      lib.mapAttrs'
+      (name: value: {
+        name = ".nix-inputs/${name}";
+        value = {source = value.outPath;};
+      })
+      inputs;
+
+    sessionVariables = {
+      NIX_PATH = "$HOME/.nix-inputs";
+    };
   };
 
   neovim.local-config = true;
