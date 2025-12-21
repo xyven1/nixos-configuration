@@ -28,7 +28,6 @@
   ];
   networking.hostName = host;
   # Use more modern implementations for various things
-  system.rebuild.enableNg = lib.mkDefault true;
   boot = {
     initrd.systemd.enable = lib.mkDefault true;
     loader.systemd-boot.enable = lib.mkIf (!config.boot.lanzaboote.enable) true;
