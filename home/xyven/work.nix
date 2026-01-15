@@ -28,6 +28,7 @@ in {
     username = lib.mkForce "blake";
     packages = with pkgs.unstable; [
       slack
+      spotify
     ];
     file =
       lib.mapAttrs'
@@ -64,16 +65,19 @@ in {
             shopt -u nullglob globstar
           '';
       }));
-    fish.package = pkgs.fish.override {
-      fishEnvPreInit = source: ''
-        ${source "${
-          if config.nix.package == null
-          then pkgs.nix
-          else config.nix.package
-        }/etc/profile.d/nix.sh"}
-        ${source "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"}
-      '';
-    };
+    fish.package =
+      (pkgs.fish.override {
+        fishEnvPreInit = source: ''
+          ${source "${
+            if config.nix.package == null
+            then pkgs.nix
+            else config.nix.package
+          }/etc/profile.d/nix.sh"}
+          ${source "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"}
+        '';
+      }).overrideAttrs {
+        doCheck = false;
+      };
     chromium = {
       enable = true;
       package = config.lib.nixGL.wrap pkgs.unstable.google-chrome;
@@ -83,6 +87,9 @@ in {
       package = config.lib.nixGL.wrap pkgs.unstable.vscode;
     };
     neovim.package = lib.mkForce pkgs.unstable.neovim-unwrapped;
+    zellij = {
+      enable = true;
+    };
   };
   gtk = {
     enable = true;
