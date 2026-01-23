@@ -1,9 +1,14 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ./filesystem.nix
     ./services/ssh.nix
     ./services/unifi.nix
+    ./services/monitoring.nix
 
     ../common/global
     ../common/users/xyven
@@ -39,6 +44,18 @@
       }
     ];
     hwRender = true;
+  };
+
+  sops.secrets.cloudflare = {};
+  custom.nginx = {
+    enable = true;
+    fqdn = "${config.networking.hostName}.adequately.run";
+    localSubnet = "10.1.0.0/16";
+    cloudflareCert = {
+      email = "acme@xyven.dev";
+      wildcard = true;
+      environmentFile = config.sops.secrets.cloudflare.path;
+    };
   };
 
   security.polkit.enable = true;
