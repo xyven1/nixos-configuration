@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: {
   imports = [
@@ -14,15 +15,17 @@
     ../common/users/xyven
   ];
 
-  boot.initrd.systemd.services."set-fan-speed" = {
+  systemd.services.set-fan-speed = {
     description = "Set fan speed via IPMI";
-    wantedBy = ["initrd.target"];
-    after = ["systemd-modules-load.service" "initrd-root-device.target"];
+    wantedBy = ["multi-user.target"];
+    after = ["systemd-modules-load.service"];
+    unitConfig = {
+      ConditionPathExists = "/dev/ipmi0";
+    };
     serviceConfig = {
       Type = "oneshot";
-      Path = [pkgs.ipmitool];
       ExecStart = ''
-        ipmitool raw 0x30 0x70 0x66 0x01 0x00 0x12
+        ${lib.getExe pkgs.ipmitool}  raw 0x30 0x70 0x66 0x01 0x00 0x12
       '';
     };
   };
