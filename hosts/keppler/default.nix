@@ -24,8 +24,12 @@
     };
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = ''
-        ${lib.getExe pkgs.ipmitool}  raw 0x30 0x70 0x66 0x01 0x00 0x12
+      ExecStart = let
+        ipmitool = lib.getExe pkgs.ipmitool;
+      in ''
+        ${ipmitool} raw 0x30 0x45 0x01 0x01
+        sleep 1
+        ${ipmitool} raw 0x30 0x70 0x66 0x01 0x00 0x12
       '';
     };
   };
@@ -52,7 +56,7 @@
   sops.secrets.cloudflare = {};
   custom.nginx = {
     enable = true;
-    fqdn = "${config.networking.hostName}.adequately.run";
+    fqdn = "${config.networking.hostName}.${config.networking.domain}";
     localSubnet = "10.1.0.0/16";
     cloudflareCert = {
       email = "acme@xyven.dev";
