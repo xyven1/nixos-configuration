@@ -34,6 +34,8 @@
     consoleLogLevel = 0;
     initrd.verbose = false;
   };
+  security.tpm2.enable = true;
+
   services.logind.settings.Login = {
     HandlePowerKey = "hibernate";
     HandlePowerKeyLongPress = "poweroff";
