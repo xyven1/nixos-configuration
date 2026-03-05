@@ -1,7 +1,6 @@
 {
   pkgs,
   config,
-  lib,
   ...
 }: {
   imports = [
@@ -18,20 +17,19 @@
   systemd.services.set-fan-speed = {
     description = "Set fan speed via IPMI";
     wantedBy = ["multi-user.target"];
-    after = ["systemd-modules-load.service"];
     unitConfig = {
       ConditionPathExists = "/dev/ipmi0";
     };
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = let
-        ipmitool = lib.getExe pkgs.ipmitool;
-      in ''
-        ${ipmitool} raw 0x30 0x45 0x01 0x01
-        sleep 1
-        ${ipmitool} raw 0x30 0x70 0x66 0x01 0x00 0x12
-      '';
+      RemainAfterExit = true;
     };
+    path = with pkgs; [coreutils ipmitool];
+    script = ''
+      ipmitool raw 0x30 0x45 0x01 0x01
+      sleep 1
+      ipmitool raw 0x30 0x70 0x66 0x01 0x00 0x12
+    '';
   };
 
   hardware.enableRedistributableFirmware = true;
