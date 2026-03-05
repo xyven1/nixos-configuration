@@ -43,7 +43,10 @@
     ];
   };
   custom.nginx.virtualHosts.monitor.locations."/".port = 2342;
-  sops.secrets."grafana/secret_key" = {};
+  sops.secrets."grafana/secret_key" = {
+    owner = "grafana";
+    group = "grafana";
+  };
   services.grafana = {
     enable = true;
     settings = {
