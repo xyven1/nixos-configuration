@@ -1,11 +1,9 @@
 {
-  inputs,
   pkgs,
   lib,
   ...
 }: {
   imports = [
-    inputs.chaotic.nixosModules.default
     ./accelerated-video.nix
     ./biometrics.nix
     ./hardware-configuration.nix
@@ -17,7 +15,7 @@
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_cachyos;
+    kernelPackages = pkgs.linuxPackages_zen;
     # Setup keyfile
     initrd.secrets."/crypto_keyfile.bin" = null;
     loader.efi.efiSysMountPoint = "/boot/efi";
