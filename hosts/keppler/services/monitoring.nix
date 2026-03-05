@@ -43,12 +43,16 @@
     ];
   };
   custom.nginx.virtualHosts.monitor.locations."/".port = 2342;
+  sops.secrets."grafana/secret_key" = {};
   services.grafana = {
     enable = true;
     settings = {
       server = {
         http_port = 2342;
         domain = "monitor.${config.networking.hostName}.${config.networking.domain}";
+      };
+      security = {
+        secret_key = "$__file{${config.sops.secrets."grafana/secret_key".path}}";
       };
     };
   };
