@@ -17,7 +17,7 @@
   virtualisation.oci-containers.containers.profilarr = {
     image = "santiagosayshey/profilarr:beta";
     pull = "newer";
-    ports = ["127.0.0.1:6868:6868"];
+    networks = ["host"];
     volumes = ["/var/lib/profilarr:/config"];
     environment = {
       TZ = "America/New_York";
