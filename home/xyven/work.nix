@@ -29,6 +29,7 @@ in {
     packages = with pkgs.unstable; [
       slack
       spotify
+      osc
     ];
     file =
       lib.mapAttrs'
@@ -65,19 +66,24 @@ in {
             shopt -u nullglob globstar
           '';
       }));
-    fish.package =
-      (pkgs.fish.override {
-        fishEnvPreInit = source: ''
-          ${source "${
-            if config.nix.package == null
-            then pkgs.nix
-            else config.nix.package
-          }/etc/profile.d/nix.sh"}
-          ${source "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"}
-        '';
-      }).overrideAttrs {
-        doCheck = false;
+    fish = {
+      shellAliases = {
+        clp = "${lib.getExe pkgs.osc} copy";
       };
+      package =
+        (pkgs.fish.override {
+          fishEnvPreInit = source: ''
+            ${source "${
+              if config.nix.package == null
+              then pkgs.nix
+              else config.nix.package
+            }/etc/profile.d/nix.sh"}
+            ${source "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"}
+          '';
+        }).overrideAttrs {
+          doCheck = false;
+        };
+    };
     chromium = {
       enable = true;
       package = config.lib.nixGL.wrap pkgs.unstable.google-chrome;
