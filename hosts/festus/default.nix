@@ -41,13 +41,13 @@
     HandlePowerKeyLongPress = "poweroff";
     HandleLidSwitch = "suspend-then-hibernate";
   };
-  systemd.sleep.extraConfig = ''
-    SuspendState=mem
-    MemorySleepMode=s2idle
-    HibernateMode=platform
-    HibernateOnACPower=no
-    HibernateDelaySec=30m
-  '';
+  systemd.sleep.settings.Sleep = {
+    SuspendState = "mem";
+    MemorySleepMode = "s2idle";
+    HibernateMode = "platform";
+    HibernateOnACPower = "no";
+    HibernateDelaySec = "30m";
+  };
   services.earlyoom = {
     enable = true;
     freeSwapThreshold = 80;
