@@ -26,7 +26,8 @@
       defaultEditor = true;
       withRuby = false;
       withPython3 = false;
-      package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      withNodeJs = false;
+      package = pkgs.unstable.neovim-unwrapped;
 
       extraPackages = with pkgs.unstable; [
         # For plugin functionality
@@ -37,12 +38,12 @@
           exec ${lib.getExe nodejs} ${vscode-extensions.github.copilot}/share/vscode/extensions/github.copilot/dist/language-server.js $@
         '')
         # LSP & Formatting Providers
+        vscode-langservers-extracted
         marksman
         lua-language-server
         nixd
         alejandra
       ];
-      extraLuaPackages = ps: with ps; [magick];
     };
     programs.git.ignores = [
       ".lazy.lua"
