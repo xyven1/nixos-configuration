@@ -4,9 +4,10 @@
   config,
   ...
 }: {
-  home.packages = [
-    pkgs.unstable.any-nix-shell
-    pkgs.unstable.fishPlugins.fzf-fish
+  home.packages = with pkgs.unstable; [
+    any-nix-shell
+    fishPlugins.fzf-fish
+    fishPlugins.async-prompt
   ];
   programs.fish = {
     enable = true;
@@ -24,17 +25,18 @@
 
       conf = "/etc/nixos";
     };
-    functions = {
+    functions = let
+      grayedLast = {
+        argumentNames = "last_prompt";
+        body = ''
+          echo -n "$last_prompt" | sed -r 's/\x1B\[[0-9;]*[JKmsu]//g' | read -zl uncolored_last_prompt
+          echo -n (set_color brblack)"$uncolored_last_prompt"(set_color normal)
+        '';
+      };
+    in {
       fish_greeting = "";
-      user_vi_key_bindings = ''
-        function fish_user_key_bindings
-          for mode in insert default visual
-            bind -M $mode \cf forward-char
-          end
-        end
-      '';
-      "nvim-update" = "env -C /etc/nixos/ nix flake update neovim-nightly-overlay neovim-config && rbh";
-      "nvim-update-config" = "env -C /etc/nixos/ nix flake update neovim-config && rbh";
+      fish_prompt_loading_indicator = grayedLast;
+      fish_right_prompt_loading_indicator = grayedLast;
     };
     shellInit = let
       sv = config.home.sessionVariables;
@@ -43,12 +45,9 @@
       set fish_vi_force_cursor 1
       set fzf_fd_opts --hidden
     '';
-    interactiveShellInit = ''
-    '';
     shellInitLast = ''
       any-nix-shell fish | source
       fish_vi_key_bindings
-      user_vi_key_bindings
       fish_vi_cursor
     '';
   };

@@ -1,6 +1,7 @@
 {...}: {
   programs.starship = {
     enable = true;
+    enableInteractive = false;
     settings = {
       right_format = "\${custom.nix_env}$time";
 
