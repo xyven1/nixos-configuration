@@ -84,7 +84,7 @@
       package = pkgs.unstable.vopono;
       protocol = "Wireguard";
       provider = "Mullvad";
-      server = "usa-us";
+      server = "usa-usbos";
       namespace = "media";
       interface = "eno1";
       services = {
@@ -115,10 +115,34 @@
       package = pkgs.unstable.qbittorrent-nox;
       webuiPort = 8081;
       serverConfig = {
+        AutoRun = {
+          enabled = true;
+          program = ''${lib.getExe (pkgs.writeShellScriptBin "qbittorrent-chmod" ''chmod -R u=rwX,g=rwX,o=rX "$1" '')} \"%F\"'';
+        };
+
+        BitTorrent = {
+          MergeTrackersEnabled = true;
+
+          Session = {
+            AddTorrentStopped = false;
+            AddTrackersFromURLEnabled = true;
+            AdditionalTrackersURL = "https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt";
+            DefaultSavePath = "/video-storage/downloads";
+            MaxActiveDownloads = 20;
+            MaxActiveTorrents = 40;
+            MaxActiveUploads = 20;
+            Preallocation = true;
+            QueueingSystemEnabled = false;
+          };
+        };
+
         Preferences = {
           WebUI = {
             AlternativeUIEnabled = true;
             RootFolder = "${pkgs.vuetorrent}/share/vuetorrent";
+            Port = 8081;
+            Username = "xyven";
+            Password_PBKDF2 = "@ByteArray(36ysjPMG/jS5//dD+J5HJA==:V1I+ijL67NjXFDjCBYondouop+FSoNqzuPHlX6zikfDeMtBtgcAWLJL6H7hPTIUiLUd/nf/FBqrZnOEEaLuxiw==)";
           };
         };
       };
