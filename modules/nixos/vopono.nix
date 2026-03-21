@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.services.vopono;
-  inherit (builtins) listToAttrs attrValues toString;
+  inherit (builtins) listToAttrs attrValues;
 in {
   options = {
     services.vopono = {
@@ -87,6 +87,7 @@ in {
         set -eo pipefail
         [ -z "$SUDO_USER" ] && (echo "run with sudo"; exit 1)
         unset SUDO_USER
+        HOME="${cfg.dataDir}"
         ${lib.getExe cfg.package} sync --protocol ${cfg.protocol} ${cfg.provider}
       '')
     ];
