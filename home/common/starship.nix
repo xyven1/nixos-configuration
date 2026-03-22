@@ -30,7 +30,7 @@
         format = "took [$duration]($style) ";
       };
 
-      command_timeout = 100;
+      command_timeout = 500;
 
       directory = {
         format = "[$path]($style)( [$read_only]($read_only_style)) ";
