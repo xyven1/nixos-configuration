@@ -14,9 +14,14 @@
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = true;
 
-  environment.defaultPackages = [
-    pkgs.libqalculate
-    pkgs.gpu-screen-recorder
+  environment.defaultPackages = with pkgs; [
+    libqalculate
+    gpu-screen-recorder
+    xwayland-satellite
+    bibata-cursors
+    qt6Packages.qt6ct
+    adw-gtk3
+    material-symbols
   ];
 
   services.upower.enable = true;
