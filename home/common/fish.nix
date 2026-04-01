@@ -7,7 +7,15 @@
   home.packages = with pkgs.unstable; [
     any-nix-shell
     fishPlugins.fzf-fish
-    fishPlugins.async-prompt
+    # https://github.com/acomagu/fish-async-prompt/issues/75#issuecomment-3920509320
+    (fishPlugins.async-prompt.overrideAttrs (final: prev: {
+      version = "git-fcf12e9";
+      src = fetchFromGitHub {
+        inherit (prev.src) owner repo;
+        rev = "fcf12e9f20af4724c3981ea012a47dd8dca8d6ef";
+        hash = "sha256-JxoOKodbS5sTNROFWayG+c5AYl+89otbPrfhIEkFl+o=";
+      };
+    }))
   ];
   programs.fish = {
     enable = true;
