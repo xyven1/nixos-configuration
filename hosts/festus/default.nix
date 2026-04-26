@@ -11,7 +11,7 @@
 
     ../common/global
     ../common/users/xyven
-    ../common/optional/niri.nix
+    ../common/optional/gnome.nix
   ];
 
   boot = {
