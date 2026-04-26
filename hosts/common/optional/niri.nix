@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   programs.niri.enable = true;
 
   services.displayManager.dms-greeter.enable = true;
