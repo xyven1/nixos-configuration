@@ -28,7 +28,8 @@
       withPython3 = false;
       withNodeJs = false;
       package = pkgs.unstable.neovim-unwrapped;
-
+      # allow custom init.lua
+      sideloadInitLua = true;
       extraPackages = with pkgs.unstable; [
         # For plugin functionality
         ripgrep
