@@ -31,7 +31,7 @@ in {
   config.nixpkgs = {
     config.allowUnfreePredicate = pkg: let
       pkgName = lib.getName pkg;
-      matchPackges = reg: ! builtins.isNull (builtins.match reg pkgName);
+      matchPackges = reg: ! isNull (builtins.match reg pkgName);
     in
       builtins.any matchPackges config.nixpkgs.allowUnfreePackages;
 

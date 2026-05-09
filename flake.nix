@@ -19,10 +19,6 @@
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-    # overlays
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    wezterm.url = "github:wez/wezterm?dir=nix";
-
     # config
     neovim-config.url = "github:xyven1/neovim-config";
     neovim-config.flake = false;
@@ -35,6 +31,7 @@
     home-management.url = "github:xyven1/home-management";
     home-management.inputs.nixpkgs.follows = "nixpkgs";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
+    vscode-server.inputs.nixpkgs.follows = "nixpkgs";
 
     # work
     nixgl.url = "github:nix-community/nixGL";
@@ -74,7 +71,7 @@
           builtins.readDir
           (nixpkgs.lib.filterAttrs is-file)
           builtins.attrNames
-          (builtins.map (hostFile: {
+          (map (hostFile: {
             inherit user;
             host = nixpkgs.lib.removeSuffix ".nix" hostFile;
             config_path = ./home/${user}/${hostFile};
@@ -100,7 +97,12 @@
     devShell = forAllPkgs (pkgs: import ./shell.nix {inherit pkgs;});
     formatter = forAllPkgs (pkgs: pkgs.alejandra);
 
-    nixosConfigurations = builtins.listToAttrs (builtins.map
+    test = nixpkgs.lib.packagesFromDirectoryRecursive {
+      callPackage = (import nixpkgs {system = "x86_64-linux";}).python3Packages.callPackage;
+      directory = ./pkgs/python-modules;
+    };
+
+    nixosConfigurations = builtins.listToAttrs (map
       (host: {
         name = host;
         value = nixpkgs.lib.nixosSystem {
@@ -110,7 +112,7 @@
       })
       hosts);
 
-    homeConfigurations = builtins.listToAttrs (builtins.map
+    homeConfigurations = builtins.listToAttrs (map
       (hostUser: {
         name =
           if hostUser.host == "generic"

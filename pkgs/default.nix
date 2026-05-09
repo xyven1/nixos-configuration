@@ -1,10 +1,16 @@
-{pkgs ? import <nixpkgs> {}}:
-import ./top-level/all-packages.nix (
-  pkgs.lib.makeScope pkgs.lib.callPackageWith (self:
-    pkgs
-    // {
-      python3Packages = pkgs.python3Packages.override {
-        overrides = import ./top-level/python-packages.nix;
-      };
-    })
-) {}
+{pkgs ? import <nixpkgs> {}}: let
+  pythonExtension = self: super:
+    pkgs.lib.packagesFromDirectoryRecursive {
+      callPackage = self.callPackage;
+      directory = ./python-modules;
+    };
+
+  pkgs' = pkgs.extend (self: super: {
+    pythonPackagesExtensions =
+      super.pythonPackagesExtensions
+      ++ [pythonExtension];
+  });
+in (pkgs.lib.packagesFromDirectoryRecursive {
+  callPackage = pkgs'.callPackage;
+  directory = ./applications;
+})

@@ -2,12 +2,12 @@
   inputs,
   config,
 }: {
-  unstable = final: prev: {
+  unstable = self: super: {
     unstable = import inputs.nixpkgs-unstable {
-      system = prev.stdenv.hostPlatform.system;
+      system = super.stdenv.hostPlatform.system;
       config = config.nixpkgs.config;
     };
   };
 
-  additions = final: _prev: import ../pkgs {pkgs = final;};
+  additions = self: super: import ../pkgs {pkgs = super;};
 }
