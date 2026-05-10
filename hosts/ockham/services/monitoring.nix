@@ -37,4 +37,5 @@
       };
     };
   };
+  custom.nginx.virtualHosts.monitor.locations."/".port = config.services.grafana.settings.server.http_port;
 }
