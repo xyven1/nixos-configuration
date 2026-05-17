@@ -26,6 +26,7 @@
   systemd.services."${config.virtualisation.oci-containers.backend}-profilarr".serviceConfig = {
     StateDirectory = "profilarr";
   };
+  systemd.services.seerr.serviceConfig.StateDirectory = lib.mkForce "overseerr";
   services = {
     plex = {
       enable = true;
@@ -38,19 +39,15 @@
       group = "media";
       package = pkgs.unstable.jellyfin;
     };
-    jellyseerr = {
-      enable = true;
-      port = 5056;
-      package = pkgs.unstable.jellyseerr;
-    };
     tautulli = {
       enable = true;
       group = "media";
       package = pkgs.unstable.tautulli;
     };
-    overseerr = {
+    seerr = {
       enable = true;
-      package = pkgs.unstable.overseerr;
+      package = pkgs.unstable.seerr;
+      configDir = "/var/lib/overseerr/";
     };
     unpackerr = {
       enable = true;
@@ -202,8 +199,12 @@
       };
       overseerr = {
         public = true;
+        overrides.globalRedirect = "seerr.${config.custom.nginx.fqdn}";
+      };
+      seerr = {
+        public = true;
         locations."/" = {
-          port = srv.overseerr.port;
+          port = srv.seerr.port;
         };
       };
       tautulli.locations."/".port = srv.tautulli.port;
