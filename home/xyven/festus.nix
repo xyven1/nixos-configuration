@@ -28,7 +28,7 @@
   };
   neovim = {
     local-config = true;
-    use-nix-parsers = true;
+    use-nix-parsers = false;
   };
 
   fonts.fontconfig.enable = true;
