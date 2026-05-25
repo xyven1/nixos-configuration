@@ -20,7 +20,7 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     # config
-    neovim-config.url = "github:xyven1/neovim-config";
+    neovim-config.url = "github:xyven1/neovim-config?ref=modern";
     neovim-config.flake = false;
 
     backgrounds.url = "github:xyven1/nixos-backgrounds";

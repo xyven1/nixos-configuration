@@ -56,13 +56,23 @@
         recursive = true;
         source = inputs.neovim-config;
       };
-      "nvim/lua/plugins/treesitter-parsers.lua" = lib.mkIf cfg.use-nix-parsers {
-        text = ''
-          vim.opt.runtimepath:append("${pkgs.symlinkJoin {
+      "nvim/lua/plugins/zzz-treesitter-from-nix.lua" = lib.mkIf cfg.use-nix-parsers {
+        text = let
+          joined = pkgs.symlinkJoin {
             name = "treesitter-parsers";
             paths = pkgs.vimPlugins.nvim-treesitter.withAllGrammars.dependencies;
-          }}")
-          return {}
+          };
+        in ''
+          return {
+            {
+              'romus204/tree-sitter-manager.nvim',
+              opts = {
+                ensure_installed = {},
+                parser_dir = "${joined}/parser",
+                query_dir = "${joined}/queries",
+              },
+            }
+          }
         '';
       };
     };
