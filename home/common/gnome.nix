@@ -13,9 +13,6 @@
       window-title = {
         enable = lib.mkEnableOption "Enable Window Title";
       };
-      spotify-tray = {
-        enable = lib.mkEnableOption "Enable Spotify Tray";
-      };
       freon = {
         enable = lib.mkEnableOption "Enable Freon";
       };
@@ -178,10 +175,6 @@
       {
         name = "rounded-corners";
         pkg = gnome-exts.rounded-window-corners-reborn;
-      }
-      {
-        name = "spotify-tray";
-        pkg = gnome-exts.spotify-tray;
       }
       {
         name = "tailscale-status";

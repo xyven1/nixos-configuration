@@ -15,7 +15,6 @@
     extensions = {
       paperwm.enable = true;
       window-title.enable = true;
-      spotify-tray.enable = true;
       gsconnect.enable = true;
       astra-monitor.enable = true;
       wallpaper-slideshow.enable = true;
@@ -26,10 +25,8 @@
       };
     };
   };
-  neovim = {
-    local-config = true;
-    use-nix-parsers = false;
-  };
+
+  neovim.local-config = true;
 
   fonts.fontconfig.enable = true;
   home = {

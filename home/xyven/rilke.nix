@@ -16,7 +16,6 @@
     extensions = {
       paperwm.enable = true;
       window-title.enable = true;
-      spotify-tray.enable = true;
       astra-monitor.enable = true;
       blur-my-shell.enable = true;
       headset-control.enable = true;
@@ -44,7 +43,6 @@
       scc
       spotify
       spotify-player # terminal spotify client
-      spotify-tray # shows current track and controls in notification area
       switcheroo # image converter
       texliveFull
       video-trimmer
