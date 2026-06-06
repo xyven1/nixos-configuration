@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -13,8 +13,7 @@
   ];
 
   hardware.nvidia = {
-    modesetting.enable = true;
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
     open = false;
-    nvidiaSettings = true;
   };
 }
