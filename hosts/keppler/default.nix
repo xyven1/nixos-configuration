@@ -32,7 +32,11 @@
 
       GOOD_COUNT=0
       while [ $GOOD_COUNT -lt $NUM_GOOD ]; do
-        FAN_SPD=$(ipmitool sensor reading "FAN1" | awk '{ print $3 }')
+        if ! FAN_SPD=$(ipmitool sensor reading "FAN1" | awk '{ print $3 }') || [ -z "$FAN_SPD" ]; then
+          echo "Failed to read fan speed, retrying..."
+          sleep 1
+          continue
+        fi
         if [ "$FAN_SPD" -gt "$TARGET_FAN_SPD" ]; then
           echo "Fan speed is too high ($FAN_SPD > $TARGET_FAN_SPD), setting..."
           ipmitool raw 0x30 0x45 0x01 0x01
