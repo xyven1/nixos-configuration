@@ -191,12 +191,6 @@
           };
         };
       };
-      jellyseerr = {
-        public = true;
-        locations."/" = {
-          port = srv.jellyseerr.port;
-        };
-      };
       overseerr = {
         public = true;
         overrides.globalRedirect = "seerr.${config.custom.nginx.fqdn}";
