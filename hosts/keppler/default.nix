@@ -12,6 +12,7 @@
 
     ../common/global
     ../common/users/xyven
+    ../common/optional/kmscon.nix
   ];
 
   systemd.services.set-fan-speed = {
@@ -51,21 +52,6 @@
   hardware.enableRedistributableFirmware = true;
 
   networking.domain = "adequately.run";
-
-  services.kmscon = {
-    enable = true;
-    fonts = [
-      {
-        name = "JetBrains Mono";
-        package = pkgs.jetbrains-mono;
-      }
-      {
-        name = "Symbols Nerd Font";
-        package = pkgs.nerd-fonts.symbols-only;
-      }
-    ];
-    hwRender = true;
-  };
 
   sops.secrets.cloudflare = {};
   custom.nginx = {

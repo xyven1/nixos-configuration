@@ -1,6 +1,5 @@
 {
   inputs,
-  pkgs,
   lib,
   ...
 }: let
@@ -18,25 +17,12 @@ in {
     ../common/global
     ../common/users/xyven
     ../common/users/gob
+    ../common/optional/kmscon.nix
   ];
 
   fileSystems."/video-storage" = {
     device = "/dev/mapper/media-volume";
     fsType = "ext4";
-  };
-  services.kmscon = {
-    enable = true;
-    fonts = [
-      {
-        name = "JetBrains Mono";
-        package = pkgs.jetbrains-mono;
-      }
-      {
-        name = "Symbols Nerd Font";
-        package = pkgs.nerd-fonts.symbols-only;
-      }
-    ];
-    hwRender = true;
   };
 
   networking.firewall.allowedTCPPorts = [54321];

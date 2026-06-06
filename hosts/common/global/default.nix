@@ -41,7 +41,7 @@
     extraSpecialArgs = {inherit inputs outputs;};
     sharedModules = builtins.attrValues outputs.homeManagerModules;
     users = builtins.listToAttrs (
-      builtins.map
+      map
       (v: {
         name = v.user;
         value = import v.config_path;

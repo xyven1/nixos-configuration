@@ -111,6 +111,7 @@
       enable = true;
       enableFishIntegration = true;
       package = pkgs.unstable.yazi;
+      shellWrapperName = "y";
     };
     zoxide = {
       enable = true;
