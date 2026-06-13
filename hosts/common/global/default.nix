@@ -29,12 +29,12 @@
   networking.hostName = host;
   # Use more modern implementations for various things
   boot = {
-    initrd.systemd.enable = lib.mkDefault true;
     loader.systemd-boot.enable = lib.mkIf (!config.boot.lanzaboote.enable) true;
     loader.efi.canTouchEfiVariables = lib.mkDefault true;
   };
+  # technically implied by NM config below
+  networking.wireless.iwd.enable = lib.mkDefault true;
   networking.networkmanager.wifi.backend = lib.mkDefault "iwd";
-  services.dbus.implementation = lib.mkDefault "broker";
   # enable overlays defined in overlay/default.nix
   nixpkgs.myOverlays.enable = lib.mkDefault true;
   home-manager = {
