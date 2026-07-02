@@ -25,8 +25,6 @@ in {
     fsType = "ext4";
   };
 
-  networking.firewall.allowedTCPPorts = [54321];
-
   environment.enableAllTerminfo = true;
 
   security.polkit.enable = true;
