@@ -55,7 +55,7 @@
       };
 
       time = {
-        format = "\\\[[$time]($style)\\\]";
+        format = "\\[[$time]($style)\\]";
         disabled = false;
       };
       custom = {
