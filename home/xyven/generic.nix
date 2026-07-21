@@ -95,6 +95,16 @@
         }
         {externalDiffCommand = "${lib.getExe pkgs.difftastic} --color=always";}
       ];
+      settings.customCommands = [
+        {
+          key = "P";
+          command = "git push {{.SelectedRemote.Name}} {{.SelectedLocalCommit.Sha}}:{{.SelectedLocalBranch.Name}}";
+          context = "commits";
+          loadingText = "Pushing commit...";
+          description = "Push a specific commit (and any preceding)";
+          output = "log";
+        }
+      ];
     };
     nix-index.enable = true;
     nix-index-database.comma.enable = true;
