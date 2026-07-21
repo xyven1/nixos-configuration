@@ -23,7 +23,7 @@
       #!/usr/bin/env bash
       set -e
       PATH="$oldpath"
-      $2 \$@
+      $2 "\$@"
       EOT
         chmod +x "$alias_file"
       }
