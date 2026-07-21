@@ -14,6 +14,11 @@ in {
   nixpkgs = {
     config.allowUnfree = true;
   };
+  nix.registry =
+    lib.mapAttrs (_name: value: {
+      flake = value;
+    })
+    inputs;
 
   rbh.profile = "xyven@work";
 
@@ -45,6 +50,7 @@ in {
   };
 
   neovim.local-config = true;
+  neovim.use-nix-parsers = false;
 
   programs = {
     ghostty.package = let
