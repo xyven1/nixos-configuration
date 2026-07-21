@@ -17,6 +17,7 @@
       };
     }))
   ];
+  programs.fzf.enableFishIntegration = false;
   programs.fish = {
     enable = true;
     shellAbbrs = {
