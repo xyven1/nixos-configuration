@@ -9,6 +9,7 @@
     ./services/ssh.nix
     ./services/unifi.nix
     ./services/monitoring.nix
+    ./services/a-free-internet.nix
 
     ../common/global
     ../common/users/xyven

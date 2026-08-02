@@ -31,9 +31,12 @@
     home-management.url = "github:xyven1/home-management";
     home-management.inputs.nixpkgs.follows = "nixpkgs";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
-    vscode-server.inputs.nixpkgs.follows = "nixpkgs";
     unifi-os-server.url = "github:rcambrj/unifi-os-server";
     unifi-os-server.inputs.nixpkgs.follows = "nixpkgs";
+
+    # keppler
+    freenet-core.url = "github:freenet/freenet-core";
+    freenet-core.inputs.nixpkgs.follows = "nixpkgs";
 
     # work
     nixgl.url = "github:nix-community/nixGL";
