@@ -11,6 +11,8 @@
   boolFlag = name: value: lib.optional value name;
   optFlag = name: value: lib.optional (value != null) "${name}=${toString value}";
 
+  stateDir = "%S/freenet";
+
   args =
     [cfg.mode]
     ++ optFlag "--network-address" cfg.networkAddress
@@ -21,7 +23,7 @@
     ++ optFlag "--ws-api-address" cfg.wsApiAddress
     ++ optFlag "--ws-api-port" cfg.wsApiPort
     ++ optFlag "--log-level" cfg.logLevel
-    ++ ["--data-dir" "%S/freenet" "--config-dir" "%S/freenet"]
+    ++ ["--data-dir" stateDir "--config-dir" stateDir]
     ++ cfg.extraArgs;
 in {
   options.services.freenet-core = {
@@ -149,6 +151,9 @@ in {
       after = ["network-online.target"];
       wants = ["network-online.target"];
       wantedBy = ["multi-user.target"];
+      environment = {
+        FREENET_WEBAPP_CACHE_DIR = "${stateDir}/webapp-cache";
+      };
 
       serviceConfig = {
         Type = "simple";

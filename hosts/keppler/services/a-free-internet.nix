@@ -18,6 +18,10 @@ in {
     enable = true;
     openFirewall = true;
     networkPort = 47194;
+    extraArgs = [
+      "--allowed-host"
+      "freenet.${config.custom.nginx.fqdn}"
+    ];
   };
   custom.nginx.virtualHosts.freenet.locations."/".port = config.services.freenet-core.wsApiPort;
 }
