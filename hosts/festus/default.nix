@@ -89,6 +89,17 @@
 
   # Enable firmware updates
   services.fwupd.enable = true;
+  # patch for lanzeboote
+  services.fwupd.package = pkgs.fwupd.overrideAttrs (old: {
+    mesonFlags =
+      map (
+        flag:
+          if lib.hasPrefix "-Defi_app_location=" flag
+          then "-Defi_app_location=/run/fwupd-efi"
+          else flag
+      )
+      old.mesonFlags;
+  });
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
