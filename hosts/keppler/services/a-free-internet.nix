@@ -6,6 +6,7 @@ in {
     openFirewall = true;
     relay.enable = true;
     relay.role = "bridge";
+    controlSocket.enable = true;
     settings.ORPort = 34650;
     settings.ContactInfo = "tor@xyven.dev";
     settings.Nickname = "AdequatelyRun";
@@ -14,6 +15,7 @@ in {
   networking.firewall.allowedTCPPorts = [
     bridgePort
   ];
+  users.users.xyven.extraGroups = ["tor"];
   services.freenet-core = {
     enable = true;
     openFirewall = true;
