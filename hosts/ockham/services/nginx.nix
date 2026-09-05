@@ -10,4 +10,5 @@
       environmentFile = config.sops.secrets.cloudflare.path;
     };
   };
+  security.acme.defaults.extraLegoFlags = ["--dns.propagation-wait" "30s"];
 }
