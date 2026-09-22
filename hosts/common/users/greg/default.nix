@@ -1,0 +1,23 @@
+{
+  pkgs,
+  config,
+  ...
+}: let
+  ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
+in {
+  users.users.greg = {
+    isNormalUser = true;
+    shell = pkgs.bash;
+    extraGroups =
+      [
+        "wheel"
+      ]
+      ++ ifTheyExist [
+        "networkmanager"
+        "docker"
+        "libvirtd"
+        "dialout"
+        "minecraft"
+      ];
+  };
+}
