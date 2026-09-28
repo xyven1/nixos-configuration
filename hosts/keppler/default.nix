@@ -10,6 +10,7 @@
     ./services/unifi.nix
     ./services/monitoring.nix
     ./services/a-free-internet.nix
+    ./services/loudrectangle.nix
 
     ../common/global
     ../common/users/xyven
