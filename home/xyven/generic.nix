@@ -88,12 +88,15 @@
     lazygit = {
       enable = true;
       package = pkgs.unstable.lazygit;
-      settings.git.pagers = [
+      settings.git.diffRenderers = [
         {
-          pager = "${lib.getExe pkgs.delta} --dark --paging=never";
+          command = "${lib.getExe pkgs.delta} --dark --paging=never";
           colorArg = "always";
         }
-        {externalDiffCommand = "${lib.getExe pkgs.difftastic} --color=always";}
+        {
+          command = "${lib.getExe pkgs.difftastic} --display inline --color=always --context={{diffContext}}";
+          type = "extDiff";
+        }
       ];
       settings.customCommands = [
         {
