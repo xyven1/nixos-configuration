@@ -19,6 +19,8 @@
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
+    multiverse.url = "github:fzakaria/nixpkgs-multiverse";
+
     # config
     neovim-config.url = "github:xyven1/neovim-config?ref=modern";
     neovim-config.flake = false;

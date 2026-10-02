@@ -98,7 +98,7 @@ in {
       enable = true;
       package = config.lib.nixGL.wrap pkgs.unstable.vscode;
     };
-    neovim.package = lib.mkForce pkgs.unstable.neovim-unwrapped;
+    neovim.package = lib.mkForce (pkgs.mv.version "neovim-unwrapped" "0.11.6");
     zellij = {
       enable = true;
     };

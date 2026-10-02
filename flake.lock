@@ -252,6 +252,21 @@
         "type": "github"
       }
     },
+    "multiverse": {
+      "locked": {
+        "lastModified": 1790886253,
+        "narHash": "sha256-+rC1pY4SagHKKjsYLbHuBg4pO4JceQLJhH0+V500I/g=",
+        "owner": "fzakaria",
+        "repo": "nixpkgs-multiverse",
+        "rev": "592e223937ba624e61e0fbcb6ebca27c71cadc21",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fzakaria",
+        "repo": "nixpkgs-multiverse",
+        "type": "github"
+      }
+    },
     "neovim-config": {
       "flake": false,
       "locked": {
@@ -388,6 +403,7 @@
         "home-management": "home-management",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
+        "multiverse": "multiverse",
         "neovim-config": "neovim-config",
         "nix-index-database": "nix-index-database",
         "nixgl": "nixgl",
