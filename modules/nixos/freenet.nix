@@ -31,7 +31,7 @@ in {
 
     package = mkOption {
       type = types.package;
-      default = inputs.freenet-core.packages.${pkgs.system}.freenet;
+      default = inputs.freenet-core.packages.${pkgs.system}.freenet-node;
       example =
         literalExpression
         "inputs.freenet-core.packages.\${pkgs.system}.default";
@@ -146,49 +146,53 @@ in {
       allowedUDPPorts = [cfg.networkPort];
     };
 
-    systemd.services.freenet = {
+    systemd.services.freenet-node = {
       description = "Freenet node";
       after = ["network-online.target"];
       wants = ["network-online.target"];
       wantedBy = ["multi-user.target"];
-      environment = {
-        FREENET_WEBAPP_CACHE_DIR = "${stateDir}/webapp-cache";
-      };
-
+      # Load-bearing: freenet-node runs its own crash-loop limiter, and a
+      # systemd start limit on top of it can park the unit in `failed` forever.
+      startLimitIntervalSec = 0;
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${lib.getExe cfg.package} ${lib.escapeShellArgs args}";
+        ExecStart = "${lib.getExe' cfg.package "freenet-node"} ${lib.escapeShellArgs args}";
 
         DynamicUser = true;
         StateDirectory = "freenet";
         StateDirectoryMode = "0700";
         RuntimeDirectory = "freenet";
 
-        Restart = "on-failure";
-        RestartSec = "5s";
-        # See the top-of-file note: 42 means "I need a new version", which
-        # a Nix-managed binary can't fulfil at runtime. Fail loudly instead
-        # of restart-looping.
-        RestartPreventExitStatus = [42];
+        Restart = "always";
+        RestartSec = 30;
 
         # Hardening.
+        CapabilityBoundingSet = "";
+        LockPersonality = true;
+        MemoryDenyWriteExecute = false;
         NoNewPrivileges = true;
-        PrivateTmp = true;
         PrivateDevices = true;
-        ProtectSystem = "strict";
-        ProtectHome = true;
-        ProtectKernelTunables = true;
-        ProtectKernelModules = true;
+        PrivateTmp = true;
+        PrivateUsers = true;
+        ProtectClock = true;
         ProtectControlGroups = true;
-        RestrictSUIDSGID = true;
+        ProtectHome = true;
+        ProtectHostname = true;
+        ProtectKernelLogs = true;
+        ProtectKernelModules = true;
+        ProtectKernelTunables = true;
+        ProtectProc = "invisible";
+        ProtectSystem = "strict";
+        RemoveIPC = true;
+        RestrictAddressFamilies = [
+          "AF_INET"
+          "AF_INET6"
+        ];
         RestrictNamespaces = true;
         RestrictRealtime = true;
-        LockPersonality = true;
-        # wasm jit
-        MemoryDenyWriteExecute = false;
+        RestrictSUIDSGID = true;
         SystemCallArchitectures = "native";
         SystemCallFilter = ["@system-service"];
-        CapabilityBoundingSet = "";
         UMask = "0077";
       };
     };
