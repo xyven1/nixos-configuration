@@ -72,23 +72,19 @@ in {
             shopt -u nullglob globstar
           '';
       }));
+    bash = {
+      enable = true;
+      initExtra = ''
+        if [[ -z $IN_NIX_SHELL && $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != fish && -z ''${BASH_EXECUTION_STRING} && $TERM != dumb ]]; then
+          shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+          SHELL="${config.home.profileDirectory}/bin/fish" exec "$SHELL" $LOGIN_OPTION
+        fi
+      '';
+    };
     fish = {
       shellAliases = {
         clp = "${lib.getExe pkgs.osc} copy";
       };
-      package =
-        (pkgs.fish.override {
-          fishEnvPreInit = source: ''
-            ${source "${
-              if config.nix.package == null
-              then pkgs.nix
-              else config.nix.package
-            }/etc/profile.d/nix.sh"}
-            ${source "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"}
-          '';
-        }).overrideAttrs {
-          doCheck = false;
-        };
     };
     chromium = {
       enable = true;
