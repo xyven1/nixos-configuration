@@ -81,6 +81,11 @@ in {
         fi
       '';
     };
+    starship.settings.shell = {
+      disabled = false;
+      fish_indicator = "";
+      format = "[$indicator]($style)";
+    };
     fish = {
       shellAliases = {
         clp = "${lib.getExe pkgs.osc} copy";
