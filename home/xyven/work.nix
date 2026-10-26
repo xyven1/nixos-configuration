@@ -47,6 +47,7 @@ in {
     sessionVariables = {
       NIX_PATH = "$HOME/.nix-inputs";
     };
+    sessionPath = ["$HOME/.local/bin" "$HOME/bin"];
   };
 
   neovim.local-config = true;
