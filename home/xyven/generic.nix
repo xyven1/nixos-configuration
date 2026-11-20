@@ -101,7 +101,10 @@
       settings.customCommands = [
         {
           key = "P";
-          command = "git push {{.SelectedRemote.Name}} {{.SelectedLocalCommit.Sha}}:{{.SelectedLocalBranch.Name}}";
+          # Use the checked-out branch's upstream, not the Branches/Remotes panel
+          # cursor selections (SelectedLocalBranch/SelectedRemote), which may point
+          # at an unrelated branch.
+          command = "git push {{.CheckedOutBranch.UpstreamRemote}} {{.SelectedLocalCommit.Sha}}:refs/heads/{{.CheckedOutBranch.UpstreamBranch}}";
           context = "commits";
           loadingText = "Pushing commit...";
           description = "Push a specific commit (and any preceding)";
