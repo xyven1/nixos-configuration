@@ -8,7 +8,6 @@ in {
   imports = [
     inputs.vscode-server.nixosModules.default
     ./hardware-configuration.nix
-    ./nvidia.nix
     ./ssh.nix
     ./services
     (import ./disko.nix {
