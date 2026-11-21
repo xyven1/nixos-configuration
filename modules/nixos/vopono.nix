@@ -87,7 +87,7 @@ in {
         set -eo pipefail
         [ -z "$SUDO_USER" ] && (echo "run with sudo"; exit 1)
         unset SUDO_USER
-        HOME="${cfg.dataDir}"
+        XDG_CONFIG_HOME="${cfg.dataDir}/.config"
         ${lib.getExe cfg.package} sync --protocol ${cfg.protocol} ${cfg.provider}
       '')
     ];
@@ -113,7 +113,7 @@ in {
           };
           environment = {
             RUST_LOG = "trace";
-            HOME = cfg.dataDir;
+            XDG_CONFIG_HOME = "${cfg.dataDir}/.config";
           };
           serviceConfig = let
             ports = unique (flatten (attrValues cfg.services));
